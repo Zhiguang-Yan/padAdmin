@@ -8,7 +8,16 @@
 </template>
 
 <script setup lang="ts">
-function logout() {}
+import { useUserStore } from '@/store/modules/user'
+import { useRoute, useRouter } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+const appStore = useUserStore()
+function logout() {
+  appStore.logout().then(() => {
+    router.push(`/login?redirect=${route.fullPath}`)
+  })
+}
 </script>
 
 <style scoped lang="scss">

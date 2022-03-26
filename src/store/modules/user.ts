@@ -1,14 +1,17 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
+import { resetRouter } from '@/routes'
+import { removeToken, setToken, getToken } from '@/utils/auth'
 interface UserState {
   roles: string[]
+  token: string
 }
-
 export const useUserStore = defineStore({
   id: 'user',
   state: (): UserState => {
     return {
       roles: [],
+      token: getToken(),
     }
   },
   getters: {
@@ -17,6 +20,7 @@ export const useUserStore = defineStore({
     // },
   },
   actions: {
+    login() {},
     getInfo() {
       return new Promise((resolve) => {
         const roles = [
@@ -31,7 +35,25 @@ export const useUserStore = defineStore({
         resolve({ roles })
       })
     },
-    resetToken() {},
+    resetToken() {
+      return new Promise((resolve) => {
+        this.token = ''
+        this.roles = []
+        removeToken()
+        resolve(true)
+      })
+    },
+    logout() {
+      return new Promise((resolve) => {
+        this.token = ''
+        this.roles = []
+        removeToken()
+        resetRouter()
+        console.log('sasa')
+
+        resolve(true)
+      })
+    },
   },
 })
 

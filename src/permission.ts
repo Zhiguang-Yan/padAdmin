@@ -5,7 +5,7 @@ import { getToken } from './utils/auth'
 import type { RouteRecordRaw } from 'vue-router'
 import type { AppRouteModule } from '@/routes/types'
 import { ElMessage } from 'element-plus'
-const WHITE_NAME_LIST: string[] = []
+import { WHITE_NAME_LIST } from '@/utils/const'
 
 const user = useUserStoreWithOut()
 const permission = usePermissionStoreWithOut()
@@ -27,13 +27,11 @@ router.beforeEach(async (to, form, next) => {
           accessRoutes.forEach((route: AppRouteModule) => {
             router.addRoute(route as unknown as RouteRecordRaw)
           })
-
           next({ ...to, replace: true })
         } catch (error) {
           user.resetToken()
           ElMessage.error(error as string)
-
-          next(`/login?redirect=${to.path}`)
+          next(`/login`)
         }
       }
     }
@@ -41,7 +39,9 @@ router.beforeEach(async (to, form, next) => {
     if (WHITE_NAME_LIST.includes(to.path)) {
       next()
     } else {
-      next(`/login?redirect=${to.path}`)
+      console.log(41444)
+
+      next(`/login`)
     }
   }
 })

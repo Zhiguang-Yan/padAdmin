@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { App } from 'vue'
 import Layout from '@/layout/index.vue'
 import { nested } from './modules/nested'
+import { WHITE_NAME_LIST } from '@/utils/const'
 export const constantRoutes: AppRouteModule[] = [
   {
     path: '/',
@@ -81,6 +82,16 @@ const router = createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
+
+// 重置路由
+export const resetRouter = () => {
+  router.getRoutes().forEach((route) => {
+    const { name } = route
+    if (name && WHITE_NAME_LIST.includes(name as string)) {
+      router.hasRoute(name) && router.removeRoute(name)
+    }
+  })
+}
 
 export function setupRouter(app: App<Element>) {
   app.use(router)

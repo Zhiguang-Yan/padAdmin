@@ -12,6 +12,7 @@
     "element-plus": "2.0.1",
     "pinia": " 2.0.12",
     "vue": "3.2.25",
+    "js-cookie": "3.0.1",
     "vue-router": "4.0.12",
     "path": "0.12.7",
     "path-to-regexp": "6.2.0"
