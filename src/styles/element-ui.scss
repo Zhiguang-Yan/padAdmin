@@ -1,0 +1,12 @@
+@import url('element-plus/dist/index.css');
+
+.pad-tabs .el-tabs__nav {
+    width: calc(100% - 16px);
+    padding: 0 8px;
+    display: flex;
+}
+
+.pad-tabs .el-tabs__item {
+    flex: 1;
+    text-align: center;
+}

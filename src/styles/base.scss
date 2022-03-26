@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#app,
+.el-container,
+.el-menu {
+    height: 100%;
+
+}
+
+svg {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+div.pad-popover.el-popover {
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.clearfix {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
