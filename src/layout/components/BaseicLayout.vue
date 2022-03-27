@@ -27,7 +27,11 @@
 import { computed } from 'vue'
 import { useAppStore } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
+
 import { NavHeader } from './index'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 const permission = usePermissionStore()
 const collapse = computed(() => useAppStore().isCollapsed)
 const menuList = computed(() => permission.menu_list)

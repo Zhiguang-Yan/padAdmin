@@ -6,14 +6,13 @@ import type { RouteRecordRaw } from 'vue-router'
 import type { AppRouteModule } from '@/routes/types'
 import { ElMessage } from 'element-plus'
 import { WHITE_NAME_LIST } from '@/utils/const'
-
 const user = useUserStoreWithOut()
 const permission = usePermissionStoreWithOut()
 router.beforeEach(async (to, form, next) => {
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
-      next({ path: '/' })
+      next()
     } else {
       const hasRoles = user.roles && user.roles.length > 0
       if (hasRoles) {
@@ -31,7 +30,7 @@ router.beforeEach(async (to, form, next) => {
         } catch (error) {
           user.resetToken()
           ElMessage.error(error as string)
-          next(`/login`)
+          next(`/login?redirect=${to.path}`)
         }
       }
     }
@@ -39,11 +38,11 @@ router.beforeEach(async (to, form, next) => {
     if (WHITE_NAME_LIST.includes(to.path)) {
       next()
     } else {
-      console.log(41444)
-
-      next(`/login`)
+      next(`/login?redirect=${to.path}`)
     }
   }
 })
 
-router.afterEach(() => {})
+router.afterEach(() => {
+  console.log(8888888, router.getRoutes())
+})

@@ -5,7 +5,16 @@ import Trend from './Trend'
 import Notificition from './Notificition'
 import List from './List'
 import Menu from './Menu'
-const components = [ChooseIcon, ChooseArea, Trend, Notificition, List, Menu]
+import Btn from './Btn'
+const components = [
+  ChooseIcon,
+  ChooseArea,
+  Trend,
+  Notificition,
+  List,
+  Menu,
+  Btn,
+]
 
 export default {
   install(app: App) {

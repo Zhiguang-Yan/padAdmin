@@ -1,1 +1,1 @@
-export const WHITE_NAME_LIST: string[] = []
+export const WHITE_NAME_LIST: string[] = ['/login']

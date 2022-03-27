@@ -3,7 +3,6 @@ import type { MenuItem } from '@/components/Menu/src/type'
 export function toLine(value: string) {
   return value.replace(/[A-Z]g/, '$1').toLocaleLowerCase()
 }
-
 /**
  * 递归生成访问路径
  * @param menuList
@@ -24,6 +23,7 @@ export function resolvePath(
     if (list.children && list.children.length) {
       resolvePath(list.children, curPath)
     }
+    console.log(11111111, curPath)
     list.path = curPath
     return list
   })

@@ -7,7 +7,7 @@ export type Component<T = any> =
 
 // @ts-ignore
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
-  name?: string
+  name: string
   code?: string
   hidden?: boolean
   component: Component | string

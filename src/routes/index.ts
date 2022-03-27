@@ -9,6 +9,7 @@ export const constantRoutes: AppRouteModule[] = [
   {
     path: '/',
     component: Layout,
+    name: 'admin',
     redirect: { name: 'Dashboard' },
     children: [
       {
@@ -86,8 +87,8 @@ const router = createRouter({
 // 重置路由
 export const resetRouter = () => {
   router.getRoutes().forEach((route) => {
-    const { name } = route
-    if (name && WHITE_NAME_LIST.includes(name as string)) {
+    const { name, path } = route
+    if (name && !WHITE_NAME_LIST.includes(path as string)) {
       router.hasRoute(name) && router.removeRoute(name)
     }
   })
