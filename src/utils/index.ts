@@ -23,7 +23,6 @@ export function resolvePath(
     if (list.children && list.children.length) {
       resolvePath(list.children, curPath)
     }
-    console.log(11111111, curPath)
     list.path = curPath
     return list
   })
@@ -54,4 +53,28 @@ export function generateMenuList(menuList: AppRouteModule[]): MenuItem[] {
     }
     return item
   })
+}
+
+interface Isource {
+  [key: string]: any
+}
+/**
+ *
+ * @param source
+ * @returns
+ */
+export function cloneDeep(source: Isource) {
+  if (!source && typeof source !== 'object') {
+    return source
+  }
+  const targetObj: Isource = source.constructor === Array ? [] : {}
+  Object.keys(source).forEach((key) => {
+    if (source[key] && typeof source[key] !== 'object') {
+      targetObj[key] = cloneDeep(source[key])
+    } else {
+      targetObj[key] = source[key]
+    }
+  })
+
+  return targetObj
 }

@@ -342,6 +342,11 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@types/lodash@4.14.180":
+  version "4.14.180"
+  resolved "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
+  integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
+
 "@types/node@^17.0.23":
   version "17.0.23"
   resolved "https://registry.npmmirror.com/@types/node/-/node-17.0.23.tgz#3b41a6e643589ac6442bdbd7a4a3ded62f33f7da"

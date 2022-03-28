@@ -4,7 +4,7 @@ import { useUserStoreWithOut } from './store/modules/user'
 import { getToken } from './utils/auth'
 import type { RouteRecordRaw } from 'vue-router'
 import type { AppRouteModule } from '@/routes/types'
-import { ElMessage } from 'element-plus'
+
 import { WHITE_NAME_LIST } from '@/utils/const'
 const user = useUserStoreWithOut()
 const permission = usePermissionStoreWithOut()
@@ -12,7 +12,7 @@ router.beforeEach(async (to, form, next) => {
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
-      next()
+      next({ path: '/' })
     } else {
       const hasRoles = user.roles && user.roles.length > 0
       if (hasRoles) {
@@ -28,8 +28,8 @@ router.beforeEach(async (to, form, next) => {
           })
           next({ ...to, replace: true })
         } catch (error) {
+          console.log(error)
           user.resetToken()
-          ElMessage.error(error as string)
           next(`/login?redirect=${to.path}`)
         }
       }
@@ -43,6 +43,4 @@ router.beforeEach(async (to, form, next) => {
   }
 })
 
-router.afterEach(() => {
-  console.log(8888888, router.getRoutes())
-})
+router.afterEach(() => {})

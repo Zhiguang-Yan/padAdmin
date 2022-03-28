@@ -42,7 +42,6 @@ export default defineComponent({
           return (
             <el-menu-item index={item.path}>
               <item.i />
-              {item.path}
               <span class="pad-menu-title">{item.title}</span>
             </el-menu-item>
           )

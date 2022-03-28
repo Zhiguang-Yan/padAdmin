@@ -84,10 +84,8 @@ const submitForm = async (formEl: FormInstance) => {
     if (!valid) return
     useStore.login(loginForm).then((res) => {
       if (res) {
-        console.log(redirect.value)
-
         router.push({
-          path: redirect.value || '',
+          path: redirect.value || '/',
           query: otherQuery.value,
         })
       }

@@ -3,6 +3,7 @@ import { store } from '../index'
 import { AppRouteModule } from '@/routes/types'
 import { constantRoutes, asyncRoutes } from '@/routes/index'
 import { resolvePath, generateMenuList } from '@/utils'
+import { cloneDeep } from 'lodash'
 interface PermissionState {
   routes: AppRouteModule[]
   addRoutes: AppRouteModule[]
@@ -27,9 +28,9 @@ export const usePermissionStore = defineStore({
       return state.routes
     },
     menu_list(state) {
-      // 递归生成路径
+      // 递归生成路径  使用深度拷贝避免影响到原来的路由
       return generateMenuList(
-        resolvePath(state.routes).filter((v) => !v.hidden)
+        resolvePath(cloneDeep(state.routes)).filter((v) => !v.hidden)
       )
     },
   },

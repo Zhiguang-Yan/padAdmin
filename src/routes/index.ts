@@ -76,6 +76,13 @@ export const asyncRoutes: AppRouteModule[] = [
     ],
   },
   nested,
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    code: 'noFound',
+    hidden: true,
+    component: () => import('@/views/noFound/index.vue'),
+  },
 ]
 
 const router = createRouter({
@@ -86,9 +93,9 @@ const router = createRouter({
 
 // 重置路由
 export const resetRouter = () => {
-  router.getRoutes().forEach((route) => {
-    const { name, path } = route
-    if (name && !WHITE_NAME_LIST.includes(path as string)) {
+  asyncRoutes.forEach((route) => {
+    const { name } = route
+    if (name) {
       router.hasRoute(name) && router.removeRoute(name)
     }
   })
