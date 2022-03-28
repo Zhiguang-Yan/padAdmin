@@ -4,7 +4,6 @@ import { useUserStoreWithOut } from './store/modules/user'
 import { getToken } from './utils/auth'
 import type { RouteRecordRaw } from 'vue-router'
 import type { AppRouteModule } from '@/routes/types'
-
 import { WHITE_NAME_LIST } from '@/utils/const'
 const user = useUserStoreWithOut()
 const permission = usePermissionStoreWithOut()

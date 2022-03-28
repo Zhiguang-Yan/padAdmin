@@ -1,6 +1,10 @@
 <template>
   <div>
-    <pac-menu mode="horizontal" router :menu-list="menuList"></pac-menu>
+    <pac-menu
+      mode="horizontal"
+      :router="false"
+      :menu-list="menuList"
+    ></pac-menu>
   </div>
 </template>
 

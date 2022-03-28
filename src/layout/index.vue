@@ -9,8 +9,3 @@ import { HorizontalLayout, BasicLayout } from './components'
 const appStore = useAppStore()
 const mode = computed(() => appStore.mode)
 </script>
-
-<style scoped lang="scss">
-.pad-view {
-}
-</style>

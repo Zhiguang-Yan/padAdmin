@@ -21,6 +21,7 @@
             show-password
             class="pad-input"
             v-model="loginForm.password"
+            @keyup.enter="submitForm(loginRef)"
             placeholder="password"
           ></el-input>
         </el-form-item>
