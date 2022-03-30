@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+// @ts-ignore
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
