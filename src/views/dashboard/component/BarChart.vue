@@ -1,104 +1,94 @@
 <template>
-  <div
-    ref="chartRef"
-    :class="className"
-    :style="{ height: height, width: width }"
-  />
+  <div ref="chartRef" :class="className" :style="{ height: height, width: width }" />
 </template>
-
 <script setup lang="ts">
-import * as echarts from 'echarts'
-import { PropType, ref, onMounted, nextTick, onBeforeUnmount } from 'vue'
+import type { EChartOption } from "echarts";
+import { PropType, ref, watch } from "vue";
+import { useEchrts } from "@/hooks/useEchrts";
 const props = defineProps({
   className: {
     type: String,
-    default: 'chart',
+    default: "chart",
   },
   width: {
     type: String,
-    default: '100%',
+    default: "100%",
   },
   height: {
     type: String,
-    default: '300px',
+    default: "300px",
   },
-})
-
-const chart = ref<any>()
-const chartRef = ref<HTMLElement>()
-const animationDuration = 300
-function initChart() {
-  chart.value = echarts.init(chartRef.value!)
-  chart.value.setOption({
-    tooltip: {
-      trigger: 'item',
+});
+const data_1 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
+const data_2 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
+const data_3 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
+const animationDuration = 300;
+const option = ref<EChartOption>({
+  tooltip: {
+    trigger: "item",
+  },
+  grid: {
+    top: 10,
+    left: "2%",
+    right: "2%",
+    bottom: "3%",
+    containLabel: true,
+  },
+  xAxis: [
+    {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      axisTick: {
+        alignWithLabel: true,
+      },
     },
-    grid: {
-      top: 10,
-      left: '2%',
-      right: '2%',
-      bottom: '3%',
-      containLabel: true,
+  ],
+  yAxis: [
+    {
+      type: "value",
+      axisTick: {
+        show: false,
+      },
     },
-    xAxis: [
-      {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        axisTick: {
-          alignWithLabel: true,
-        },
-      },
-    ],
-    yAxis: [
-      {
-        type: 'value',
-        axisTick: {
-          show: false,
-        },
-      },
-    ],
-    series: [
-      {
-        name: 'pageA',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [79, 52, 200, 334, 390, 330, 220],
-        animationDuration,
-      },
-      {
-        name: 'pageB',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [80, 52, 200, 334, 390, 330, 220],
-        animationDuration,
-      },
-      {
-        name: 'pageC',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [30, 52, 200, 334, 390, 330, 220],
-        animationDuration,
-      },
-    ],
-  })
-}
-onMounted(() => {
-  nextTick(() => {
-    initChart()
-  })
-})
-
-onBeforeUnmount(() => {
-  if (!chart.value) {
-    return
+  ],
+  series: [
+    {
+      name: "pageA",
+      type: "bar",
+      stack: "vistors",
+      barWidth: "60%",
+      data: data_1.value,
+      animationDuration,
+    },
+    {
+      name: "pageB",
+      type: "bar",
+      stack: "vistors",
+      barWidth: "60%",
+      data: data_2.value,
+      animationDuration,
+    },
+    {
+      name: "pageC",
+      type: "bar",
+      stack: "vistors",
+      barWidth: "60%",
+      data: data_3.value,
+      animationDuration,
+    },
+  ],
+});
+const chartRef = ref<HTMLElement>();
+const { setOption } = useEchrts(chartRef, option.value as EChartOption);
+watch(
+  () => option.value,
+  (newValue) => {
+    setOption(newValue as EChartOption);
+  },
+  {
+    deep: true,
   }
-  chart.value.dispose()
-  chart.value = null
-})
+);
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

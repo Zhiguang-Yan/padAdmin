@@ -3,8 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
-import { PropType, ref, onMounted, nextTick, onBeforeUnmount } from "vue";
+import type { EChartOption } from "echarts";
+import { ref, watch } from "vue";
+import { useEchrts } from "@/hooks/useEchrts";
 const props = defineProps({
   className: {
     type: String,
@@ -19,54 +20,41 @@ const props = defineProps({
     default: "300px",
   },
 });
-const chart = ref<any>();
 const chartRef = ref<HTMLElement>();
-function initChart() {
-  chart.value = echarts.init(chartRef.value!);
-  chart.value.setOption({
-    tooltip: {
-      trigger: "item",
-      formatter: "{a} <br/>{b} : {c} ({d}%)",
+const option = ref<EChartOption>({
+  tooltip: {
+    trigger: "item",
+    formatter: "{a} <br/>{b} : {c} ({d}%)",
+  },
+  legend: {
+    left: "center",
+    bottom: "10",
+    data: ["Industries", "Technology", "Forex", "Gold", "Forecasts"],
+  },
+  series: [
+    {
+      name: "WEEKLY WRITE ARTICLES",
+      type: "pie",
+      roseType: "radius",
+      radius: [15, 95],
+      center: ["50%", "38%"],
+      data: [
+        { value: 320, name: "Industries" },
+        { value: 240, name: "Technology" },
+        { value: 149, name: "Forex" },
+        { value: 100, name: "Gold" },
+        { value: 59, name: "Forecasts" },
+      ],
+      animationEasing: "cubicInOut",
+      animationDuration: 2600,
     },
-    legend: {
-      left: "center",
-      bottom: "10",
-      data: ["Industries", "Technology", "Forex", "Gold", "Forecasts"],
-    },
-    series: [
-      {
-        name: "WEEKLY WRITE ARTICLES",
-        type: "pie",
-        roseType: "radius",
-        radius: [15, 95],
-        center: ["50%", "38%"],
-        data: [
-          { value: 320, name: "Industries" },
-          { value: 240, name: "Technology" },
-          { value: 149, name: "Forex" },
-          { value: 100, name: "Gold" },
-          { value: 59, name: "Forecasts" },
-        ],
-        animationEasing: "cubicInOut",
-        animationDuration: 2600,
-      },
-    ],
-  });
-}
-
-onMounted(() => {
-  nextTick(() => {
-    initChart();
-  });
+  ],
 });
-
-onBeforeUnmount(() => {
-  if (!chart.value) {
-    return;
-  }
-  chart.value.dispose();
-  chart.value = null;
-});
+const { setOption } = useEchrts(chartRef, option.value as EChartOption);
+watch(
+  () => option.value,
+  (newValue) => setOption(newValue as EChartOption)
+);
 </script>
 
 <style scoped></style>

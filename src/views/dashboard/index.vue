@@ -1,8 +1,14 @@
 <template>
   <div ref="demoRef">
+    <el-radio-group v-model="radio">
+      <el-radio-button label="newVisitis"></el-radio-button>
+      <el-radio-button label="messages"></el-radio-button>
+      <el-radio-button label="purchases"></el-radio-button>
+      <el-radio-button label="shoppings"></el-radio-button>
+    </el-radio-group>
     <el-row>
       <el-col :span="24">
-        <LineChart :chart-data="lineChartData.newVisitis" />
+        <LineChart :chart-data="chartData" />
       </el-col>
     </el-row>
     <el-row :gutter="30">
@@ -22,15 +28,11 @@
     <el-button @click="htmlToPdf">打印</el-button>
   </el-row>
 </template>
-
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { LineChart, BarChart, RaddarChart, PieChart } from "./component";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-import { content } from "html2canvas/dist/types/css/property-descriptors/content";
-import { position } from "html2canvas/dist/types/css/property-descriptors/position";
-import { log } from "console";
 const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -49,6 +51,17 @@ const lineChartData = {
     actualData: [120, 82, 91, 154, 162, 140, 130],
   },
 };
+const chartData = ref<any>();
+const radio = ref<string>("newVisitis");
+watch(
+  () => radio.value,
+  (value) => {
+    value && (chartData.value = lineChartData[value as keyof typeof lineChartData]);
+  },
+  {
+    immediate: true,
+  }
+);
 const demoRef = ref<HTMLElement | null>(null);
 const text = ref<HTMLElement | null>(null);
 async function htmlCanvas() {

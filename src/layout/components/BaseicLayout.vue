@@ -27,17 +27,17 @@
   </el-container>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { usePermissionStore } from '@/store/modules/permission'
-import { Logo } from './index'
-import { NavHeader } from './index'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useAppStore } from "@/store/modules/app";
+import { usePermissionStore } from "@/store/modules/permission";
+import { Logo } from "./index";
+import { NavHeader } from "./index";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
-const permission = usePermissionStore()
-const collapse = computed(() => useAppStore().isCollapsed)
-const menuList = computed(() => permission.menu_list)
+const route = useRoute();
+const permission = usePermissionStore();
+const collapse = computed(() => useAppStore().isCollapsed);
+const menuList = computed(() => permission.menu_list);
 </script>
 
 <style scoped lang="scss">
