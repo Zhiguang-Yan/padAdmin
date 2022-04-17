@@ -6,6 +6,8 @@ import Notificition from './Notificition'
 import List from './List'
 import Menu from './Menu'
 import Btn from './Btn'
+import Progress from './Progress'
+import ChooseTime from './ChooseTime'
 const components = [
   ChooseIcon,
   ChooseArea,
@@ -14,6 +16,8 @@ const components = [
   List,
   Menu,
   Btn,
+  Progress,
+  ChooseTime,
 ]
 
 export default {

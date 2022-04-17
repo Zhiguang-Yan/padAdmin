@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 import type { EChartOption } from "echarts";
-import { PropType, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useEchrts } from "@/hooks/useEchrts";
 const props = defineProps({
   className: {
@@ -91,4 +91,5 @@ watch(
 );
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

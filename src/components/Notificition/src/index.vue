@@ -1,11 +1,6 @@
 <template>
   <div class="container_badge">
-    <el-popover
-      placement="bottom"
-      popper-class="pad-popover"
-      width="300px"
-      trigger="click"
-    >
+    <el-popover placement="bottom" popper-class="pad-popover" width="300px" trigger="click">
       <template #default>
         <slot></slot>
       </template>
@@ -44,5 +39,11 @@ const props = defineProps({
 .container_badge {
   display: inline-block;
   cursor: pointer;
+
+  svg {
+    width: 1em;
+    height: 1em;
+
+  }
 }
 </style>

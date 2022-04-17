@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { App } from 'vue'
 import Layout from '@/layout/index.vue'
 import { nested } from './modules/nested'
+import { components } from './modules/components'
 import { WHITE_NAME_LIST } from '@/utils/const'
 export const constantRoutes: AppRouteModule[] = [
   {
@@ -30,52 +31,8 @@ export const constantRoutes: AppRouteModule[] = [
 ]
 
 export const asyncRoutes: AppRouteModule[] = [
-  {
-    path: '/components',
-    name: 'components',
-    code: 'components',
-    component: Layout,
-    meta: { title: '组件', icon: 'Eleme' },
-    redirect: { name: 'ChooseIcon' },
-    children: [
-      {
-        path: 'chooseIcon',
-        name: 'ChooseIcon',
-        code: 'chooseIcon',
-        component: () => import('../views/chooseIcon/index.vue'),
-        meta: { title: '图标选择器', icon: 'Eleme' },
-      },
-      {
-        path: 'chooseArea',
-        name: 'ChooseArea',
-        code: 'chooseArea',
-        component: () => import('../views/chooseArea/index.vue'),
-        meta: { title: '省市区选择器', icon: 'Eleme' },
-      },
-      {
-        path: 'trend',
-        name: 'Trend',
-        code: 'trend',
-        component: () => import('../views/trend/index.vue'),
-        meta: { title: '趋势组件', icon: 'Eleme' },
-      },
-      {
-        path: 'notificition',
-        name: 'Notificition',
-        code: 'notificition',
-        component: () => import('../views/notificition/index.vue'),
-        meta: { title: '提示组件', icon: 'Eleme' },
-      },
-      {
-        path: 'menu',
-        name: 'Menu',
-        code: 'menu',
-        component: () => import('../views/menu/index.vue'),
-        meta: { title: '递归菜单', icon: 'Eleme' },
-      },
-    ],
-  },
   nested,
+  components,
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

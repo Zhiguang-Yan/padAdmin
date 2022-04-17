@@ -15,5 +15,9 @@ const props = defineProps({
 const emits = defineEmits(['update:collapse'])
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+svg {
+  width: 1.2em;
+  height: 1.2em;
+}
 </style>

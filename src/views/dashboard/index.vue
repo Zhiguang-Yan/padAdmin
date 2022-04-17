@@ -22,6 +22,9 @@
         <BarChart />
       </el-col>
     </el-row>
+    <el-row>
+      <DataSetChart />
+    </el-row>
   </div>
   <div ref="text"></div>
   <el-row>
@@ -30,7 +33,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { LineChart, BarChart, RaddarChart, PieChart } from "./component";
+import { LineChart, BarChart, RaddarChart, PieChart, DataSetChart } from "./component";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 const lineChartData = {
@@ -92,4 +95,5 @@ async function htmlToPdf() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

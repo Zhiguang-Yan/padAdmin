@@ -2,6 +2,7 @@ import { defineComponent, PropType, useAttrs } from 'vue'
 import { useRoute } from 'vue-router'
 import * as Icons from '@element-plus/icons'
 import { MenuItem } from './type'
+import './index.scss'
 export default defineComponent({
   name: 'Menu',
   props: {
