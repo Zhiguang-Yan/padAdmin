@@ -14,6 +14,4 @@ export function checkPermission(value: (string | number)[]): boolean {
 export function setAuth(app: App<Element>) {
   app.config.globalProperties.$auth = checkPermission
 }
-
-// eslint-disable-next-line no-unused-vars
 export type IAuth = (value: (string | number)[]) => boolean

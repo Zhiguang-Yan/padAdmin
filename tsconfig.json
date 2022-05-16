@@ -10,27 +10,20 @@
     "baseUrl": "./",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "paths": {
-      "/@/*": [
-        "src/*"
-      ],
-      "@/*": [
-        "src/*"
-      ],
-      "~/*": [
-        "typings/*"
-      ]
+      "/@/*": ["src/*"],
+      "@/*": ["src/*"],
+      "~/*": ["types/*"]
     }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts"
   ],
   "references": [
     {
