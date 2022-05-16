@@ -1,10 +1,10 @@
 import { defineComponent, PropType, useAttrs } from 'vue'
 import { useRoute } from 'vue-router'
-import * as Icons from '@element-plus/icons'
 import { MenuItem } from './type'
 import './index.scss'
+
 export default defineComponent({
-  name: 'Menu',
+  name: 'AcMenu',
   props: {
     menuList: {
       type: Array as PropType<MenuItem[]>,
@@ -15,12 +15,15 @@ export default defineComponent({
       default: true,
     },
   },
-  setup: (props, ctx) => {
+  setup: (props) => {
     const attrs = useAttrs()
     const route = useRoute()
     const renderMenu = (data: MenuItem[]) => {
       return data.map((item: MenuItem) => {
-        item.i = (Icons as any)[item.icon!]
+        item.icon &&
+          (item.i = (
+            <svg-icon name={item.icon} className="pad-icon"></svg-icon>
+          ) as any)
         const slots = {
           title: () => {
             return (
@@ -38,15 +41,14 @@ export default defineComponent({
               {renderMenu(item.children)}
             </el-sub-menu>
           )
-        } else {
-          // 正常渲染菜单
-          return (
-            <el-menu-item index={item.path}>
-              <item.i />
-              <span class="pad-menu-title">{item.title}</span>
-            </el-menu-item>
-          )
         }
+        // 正常渲染菜单
+        return (
+          <el-menu-item index={item.path}>
+            <item.i />
+            <span class="pad-menu-title">{item.title}</span>
+          </el-menu-item>
+        )
       })
     }
     return () => {

@@ -13,5 +13,4 @@ import { useMenu } from '@/hooks/useMenu'
 const menuList = useMenu()
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

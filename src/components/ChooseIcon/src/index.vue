@@ -25,7 +25,7 @@
 import { computed } from 'vue'
 import * as ELIcons from '@element-plus/icons'
 import { toLine } from '@/utils'
-import { useCopy } from '@/hooks/useCopy/index'
+import { useCopy } from '@/hooks/useCopy'
 const props = defineProps<{
   title: string
   visible: boolean

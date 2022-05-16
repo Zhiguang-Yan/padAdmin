@@ -1,3 +1,8 @@
-import Hamburger from './src/index.vue'
+import type { App } from 'vue'
+import Component from './src/index.vue'
 
-export default Hamburger
+export default {
+  install(app: App) {
+    app.component('pac-hamburger', Component)
+  },
+}

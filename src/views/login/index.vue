@@ -21,13 +21,13 @@
             show-password
             class="pad-input"
             v-model="loginForm.password"
-            @keyup.enter="submitForm(loginRef)"
+            @keyup.enter="submitForm"
             placeholder="password"
           ></el-input>
         </el-form-item>
       </el-form>
       <div class="submit-container">
-        <pad-btn class="btn" @click="submitForm(loginRef)">登陆</pad-btn>
+        <pac-btn class="btn" @click="submitForm">登陆</pac-btn>
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@ import { reactive, ref, watch } from 'vue'
 import type { FormInstance } from 'element-plus'
 import { useRoute, useRouter, LocationQueryRaw } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
+import { validELForm } from '@/utils/validate'
 const rules = {
   username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],
   password: [{ required: true, trigger: 'blur', message: '请输入密码' }],
@@ -79,19 +80,19 @@ function getOtherQuery(query: object) {
 }
 
 // 提交表单
-const submitForm = async (formEl: FormInstance) => {
-  if (!formEl) return
-  await formEl.validate((valid: boolean) => {
-    if (!valid) return
-    useStore.login(loginForm).then((res) => {
-      if (res) {
+const submitForm = async () => {
+  try {
+    const res = await validELForm(loginRef.value)
+    if (res)
+      useStore.login(loginForm).then(() => {
         router.push({
           path: redirect.value || '/',
           query: otherQuery.value,
         })
-      }
-    })
-  })
+      })
+  } catch (error) {
+    console.error(error)
+  }
 }
 </script>
 
@@ -139,13 +140,19 @@ h2 {
   }
   color: #03e9f4;
 }
-
-.pad-input input.el-input__inner {
-  font-size: 16px;
+.pad-input div.el-input__wrapper {
   background: transparent;
-  border: transparent;
+  box-shadow: none;
+  padding: 0;
   border-bottom: 1px solid #03e9f4;
   border-radius: 0;
+}
+.el-form-item.is-error .el-input__wrapper {
+  box-shadow: none;
+  border-bottom: 1px solid var(--el-color-danger);
+}
+.pad-input input.el-input__inner {
+  font-size: 16px;
   color: #fff;
   &::placeholder {
     color: #03e9f4;

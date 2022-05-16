@@ -23,13 +23,17 @@ function logout() {
 <style scoped lang="scss">
 .el-dropdown-link {
   color: var(--el-color-primary);
-  display: flex;
   cursor: pointer;
-  align-items: center;
   font-size: 14px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 }
 .logout {
   transform: rotate(90deg);
   margin-left: 5px;
+  display: inline-block;
+  height: 1.2em;
+  width: 1.2em;
 }
 </style>

@@ -4,7 +4,7 @@ export const nested: AppRouteModule = {
   path: '/nested',
   name: 'Nested',
   code: 'nested',
-  meta: { title: 'nested' },
+  meta: { title: 'nested', icon: 'dashboard' },
   component: Layout,
   children: [
     {

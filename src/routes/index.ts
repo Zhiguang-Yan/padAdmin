@@ -17,8 +17,8 @@ export const constantRoutes: AppRouteModule[] = [
         path: 'dashboard',
         name: 'Dashboard',
         code: 'dashboard',
-        component: () => import('../views/dashboard/index.vue'),
-        meta: { title: '首页', icon: 'Eleme' },
+        component: () => import('@/views/dashboard/index.vue'),
+        meta: { title: '首页', icon: 'dashboard' },
       },
     ],
   },
@@ -26,7 +26,7 @@ export const constantRoutes: AppRouteModule[] = [
     path: '/login',
     name: 'login',
     hidden: true,
-    component: () => import('../views/login/index.vue'),
+    component: () => import('@/views/login/index.vue'),
   },
 ]
 

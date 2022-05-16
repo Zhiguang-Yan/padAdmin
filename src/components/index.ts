@@ -1,25 +1,11 @@
 import { App } from 'vue'
-import ChooseIcon from './ChooseIcon'
-import ChooseArea from './ChooseArea'
-import Trend from './Trend'
-import Notificition from './Notificition'
-import List from './List'
-import Menu from './Menu'
-import Btn from './Btn'
-import Progress from './Progress'
-import ChooseTime from './ChooseTime'
-const components = [
-  ChooseIcon,
-  ChooseArea,
-  Trend,
-  Notificition,
-  List,
-  Menu,
-  Btn,
-  Progress,
-  ChooseTime,
-]
-
+const modules = import.meta.globEager('../components/*/*.ts')
+const components: any[] = []
+Object.keys(modules).forEach((key) => {
+  const mod = modules[key].default || {}
+  const modList = Array.isArray(mod) ? [...mod] : [mod]
+  components.push(...modList)
+})
 export default {
   install(app: App) {
     components.map((component) => {

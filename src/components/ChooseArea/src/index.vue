@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch, reactive } from 'vue'
+import { watch, reactive, PropType } from 'vue'
 // @ts-ignore
 import dataJson from '../lib/data.json'
 interface IArea {
@@ -81,9 +81,11 @@ type Istate = {
   area: string
   province: string
 }
-const props = defineProps<{
-  select: Iselect
-}>()
+const props = defineProps({
+  select: {
+    type: Object as PropType<Iselect>,
+  },
+})
 const emits = defineEmits(['update:select'])
 const state = reactive<Istate>({
   provinceOptions: dataJson,
@@ -143,5 +145,4 @@ function handleChange() {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

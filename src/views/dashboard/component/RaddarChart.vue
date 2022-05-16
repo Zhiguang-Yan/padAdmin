@@ -1,66 +1,70 @@
 <template>
-  <div ref="chartRef" :class="className" :style="{ height: height, width: width }" />
+  <div
+    ref="chartRef"
+    :class="className"
+    :style="{ height: height, width: width }"
+  />
 </template>
 
 <script setup lang="ts">
-import type { EChartOption } from "echarts";
-import { ref } from "vue";
-import { useEchrts } from "@/hooks/useEchrts"
+import type { EChartsOption } from 'echarts'
+import { ref } from 'vue'
+import { useEcharts } from '@/hooks/useEcharts'
 const props = defineProps({
   className: {
     type: String,
-    default: "chart",
+    default: 'chart',
   },
   width: {
     type: String,
-    default: "100%",
+    default: '100%',
   },
   height: {
     type: String,
-    default: "300px",
+    default: '300px',
   },
-});
-const chartRef = ref<HTMLElement>();
+})
+const chartRef = ref<HTMLElement>()
 const option = ref<any>({
   tooltip: {
-    trigger: "item",
+    trigger: 'item',
   },
   radar: {
-    radius: "66%",
-    center: ["50%", "42%"],
+    radius: '66%',
+    center: ['50%', '42%'],
     splitNumber: 8,
     splitArea: {
       areaStyle: {
-        color: "rgba(127,95,132,.3)",
+        color: 'rgba(127,95,132,.3)',
         opacity: 1,
         shadowBlur: 45,
-        shadowColor: "rgba(0,0,0,.5)",
+        shadowColor: 'rgba(0,0,0,.5)',
         shadowOffsetX: 0,
         shadowOffsetY: 15,
       },
     },
     indicator: [
-      { name: "Sales", max: 10000 },
-      { name: "Administration", max: 20000 },
-      { name: "Information Technology", max: 20000 },
-      { name: "Customer Support", max: 20000 },
-      { name: "Development", max: 20000 },
-      { name: "Marketing", max: 20000 },
+      { name: 'Sales', max: 10000 },
+      { name: 'Administration', max: 20000 },
+      { name: 'Information Technology', max: 20000 },
+      { name: 'Customer Support', max: 20000 },
+      { name: 'Development', max: 20000 },
+      { name: 'Marketing', max: 20000 },
     ],
   },
   legend: {
-    left: "center",
-    bottom: "10",
-    data: ["Allocated Budget", "Expected Spending", "Actual Spending"],
+    left: 'center',
+    bottom: '10',
+    data: ['Allocated Budget', 'Expected Spending', 'Actual Spending'],
   },
   series: [
     {
-      type: "radar",
+      type: 'radar',
       symbolSize: 0,
       areaStyle: {
         normal: {
           shadowBlur: 13,
-          shadowColor: "rgba(0,0,0,.2)",
+          shadowColor: 'rgba(0,0,0,.2)',
           shadowOffsetX: 0,
           shadowOffsetY: 10,
           opacity: 1,
@@ -69,22 +73,21 @@ const option = ref<any>({
       data: [
         {
           value: [5000, 7000, 12000, 11000, 15000, 14000],
-          name: "Allocated Budget",
+          name: 'Allocated Budget',
         },
         {
           value: [4000, 9000, 15000, 15000, 13000, 11000],
-          name: "Expected Spending",
+          name: 'Expected Spending',
         },
         {
           value: [5500, 11000, 12000, 15000, 12000, 12000],
-          name: "Actual Spending",
+          name: 'Actual Spending',
         },
       ],
     },
   ],
 })
-const { setOption } = useEchrts(chartRef, option.value as EChartOption)
+const { setOption } = useEcharts(option.value as EChartsOption, chartRef)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

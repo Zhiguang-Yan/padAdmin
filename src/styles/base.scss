@@ -1,38 +1,66 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Alibaba PuHuiTi, Alibaba PuHuiTi-Medium;
 }
-
 html,
-body,
-#app,
-.el-container,
-.el-menu {
+body {
+  min-width: 1440px;
+  height: 100%;
+  & #app,
+  .el-container {
     height: 100%;
-
-}
-
-div.pad-popover.el-popover {
-    padding: 0;
-    box-sizing: border-box;
+  }
 }
 
 .fr {
-    float: right;
+  float: right;
 }
 
 .fl {
-    float: left;
+  float: left;
 }
-
+.flex-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .clearfix {
-    &:after {
-        visibility: hidden;
-        display: block;
-        font-size: 0;
-        content: " ";
-        clear: both;
-        height: 0;
-    }
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ' ';
+    clear: both;
+    height: 0;
+  }
+}
+.t-primary {
+  color: $primary;
+  &:hover,
+  &:focus {
+    color: $primary;
+  }
+}
+.t-danger {
+  color: $danger;
+  &:hover,
+  &:focus {
+    color: $danger;
+  }
+}
+.t-warning {
+  color: $warning;
+  &:hover,
+  &:focus {
+    color: $warning;
+  }
+}
+.t-success {
+  color: $success;
+  &:hover,
+  &:focus {
+    color: $success;
+  }
 }

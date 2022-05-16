@@ -1,7 +1,7 @@
 import type { App } from 'vue'
-import Menu from './src'
+import Component from './src'
 export default {
   install: (app: App<Element>) => {
-    app.component('pac-menu', Menu)
+    app.component('pac-menu', Component)
   },
 }

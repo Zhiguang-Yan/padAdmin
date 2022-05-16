@@ -1,8 +1,10 @@
 <template>
-  <div class="header-container clearfix">
-    <div class="left-menu">
-      <Hamburger v-model:collapse="collapse" />
+  <div class="header-container">
+    <div class="left-menu flex-c">
+      <pac-hamburger v-model:collapse="collapse" />
+      <pac-breadcrumb />
     </div>
+
     <div class="right-menu">
       <pac-notificition class="right-menu-item" :value="value">
         <template #default>
@@ -14,7 +16,7 @@
           ></pac-list>
         </template>
       </pac-notificition>
-      <Logout class="right-menu-item" />
+      <pac-logout class="right-menu-item" />
     </div>
   </div>
 </template>
@@ -22,8 +24,6 @@
 <script setup lang="ts">
 import { list, actions } from '@/views/notificition/data'
 import { ListOptions } from '@/components/list/src/type'
-import Hamburger from '@/components/Hamburger'
-import Logout from '@/components/Logout'
 import { useAppStore } from '@/store/modules/app'
 import { ref, computed } from 'vue'
 const dataList = ref<ListOptions[]>(list as ListOptions[])
@@ -58,40 +58,34 @@ const collapse = computed({
 })
 </script>
 
-
 <style scoped lang="scss">
 .header-container {
   position: relative;
-  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
   .expand {
     cursor: pointer;
   }
   .left-menu {
-    float: left;
   }
   .right-menu {
-    float: right;
-    height: 100%;
     display: flex;
     align-items: center;
   }
   .mr {
     margin-right: 60px;
   }
+  .right-menu-item + .right-menu-item {
+    margin-left: 32px;
+  }
   .right-menu-item {
     display: inline-block;
-    padding: 0 16px;
     height: 100%;
     font-size: 18px;
     color: #5a5e66;
     vertical-align: text-bottom;
-    &.hover-effect {
-      cursor: pointer;
-      transition: background 0.3s;
-      &:hover {
-        background: rgba(0, 0, 0, 0.025);
-      }
-    }
   }
 }
 </style>

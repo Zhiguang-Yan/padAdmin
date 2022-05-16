@@ -1,35 +1,38 @@
 <template>
-  <div ref="chartRef" :class="className" :style="{ height: height, width: width }" />
+  <div
+    ref="chartRef"
+    :class="className"
+    :style="{ height: height, width: width }"
+  />
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts";
-import type { EChartOption } from "echarts";
-import { ref, PropType, onMounted, nextTick, watch } from "vue";
-import { useEchrts } from "@/hooks/useEchrts";
+import type { EChartsOption } from 'echarts'
+import { ref, watch } from 'vue'
+import { useEcharts } from '@/hooks/useEcharts'
 const props = defineProps({
   className: {
     type: String,
-    default: "chart",
+    default: 'chart',
   },
   width: {
     type: String,
-    default: "100%",
+    default: '100%',
   },
   height: {
     type: String,
-    default: "350px",
+    default: '350px',
   },
   chartData: {
     type: Object,
     required: true,
   },
-});
-const chartRef = ref<HTMLElement>();
-function setData(data: any): EChartOption {
+})
+const chartRef = ref<HTMLElement>()
+function setData(data: any) {
   return {
     xAxis: {
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       boundaryGap: false,
       axisTick: {
         show: false,
@@ -43,7 +46,7 @@ function setData(data: any): EChartOption {
       containLabel: true,
     },
     tooltip: {
-      trigger: "item",
+      trigger: 'item',
     },
     yAxis: {
       axisTick: {
@@ -51,57 +54,59 @@ function setData(data: any): EChartOption {
       },
     },
     legend: {
-      data: ["expected", "actual"],
+      data: ['expected', 'actual'],
     },
     series: [
       {
-        name: "expected",
+        name: 'expected',
         itemStyle: {
           normal: {
-            color: "#FF005A",
+            color: '#FF005A',
             lineStyle: {
-              color: "#FF005A",
+              color: '#FF005A',
               width: 2,
             },
           },
         },
         smooth: true,
-        type: "line",
+        type: 'line',
         data: data.expectedData,
         animationDuration: 2800,
-        animationEasing: "cubicInOut",
+        animationEasing: 'cubicInOut',
       },
       {
-        name: "actual",
+        name: 'actual',
         smooth: true,
-        type: "line",
+        type: 'line',
         itemStyle: {
           normal: {
-            color: "#3888fa",
+            color: '#3888fa',
             lineStyle: {
-              color: "#3888fa",
+              color: '#3888fa',
               width: 2,
             },
             areaStyle: {
-              color: "#f3f8ff",
+              color: '#f3f8ff',
             },
           },
         },
         data: data.actualData,
         animationDuration: 2800,
-        animationEasing: "quadraticOut",
+        animationEasing: 'quadraticOut',
       },
     ],
-  };
+  }
 }
-const { setOption } = useEchrts(chartRef, setData(props.chartData));
+const { setOption } = useEcharts(
+  setData(props.chartData) as EChartsOption,
+  chartRef
+)
 watch(
   () => props.chartData,
   (newValue) => {
-    setOption(setData(newValue));
+    setOption(setData(newValue) as EChartsOption)
   }
-);
+)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

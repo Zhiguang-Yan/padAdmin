@@ -32,10 +32,16 @@
   </el-row>
 </template>
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import { LineChart, BarChart, RaddarChart, PieChart, DataSetChart } from "./component";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+import { ref, watch } from 'vue'
+import {
+  LineChart,
+  BarChart,
+  RaddarChart,
+  PieChart,
+  DataSetChart,
+} from './component'
+import { jsPDF } from 'jspdf'
+import html2canvas from 'html2canvas'
 const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -53,47 +59,47 @@ const lineChartData = {
     expectedData: [130, 140, 141, 142, 145, 150, 160],
     actualData: [120, 82, 91, 154, 162, 140, 130],
   },
-};
-const chartData = ref<any>();
-const radio = ref<string>("newVisitis");
+}
+const chartData = ref<any>()
+const radio = ref<string>('newVisitis')
 watch(
   () => radio.value,
   (value) => {
-    value && (chartData.value = lineChartData[value as keyof typeof lineChartData]);
+    value &&
+      (chartData.value = lineChartData[value as keyof typeof lineChartData])
   },
   {
     immediate: true,
   }
-);
-const demoRef = ref<HTMLElement | null>(null);
-const text = ref<HTMLElement | null>(null);
+)
+const demoRef = ref<HTMLElement | null>(null)
+const text = ref<HTMLElement | null>(null)
 async function htmlCanvas() {
   const canvas = await html2canvas(demoRef.value as HTMLElement, {
     useCORS: true,
     allowTaint: true,
     imageTimeout: 0,
   }).then((res) => {
-    return res;
-  });
-  return canvas;
+    return res
+  })
+  return canvas
 }
 function canvasToPdf(htmlCanvas: any) {
-  const canvasWidth = htmlCanvas.width;
-  const canvasHeight = htmlCanvas.height;
-  const imgBase64 = htmlCanvas.toDataURL("image/jpeg", 1.0);
-  const imgWidth = 595.28 - 40;
-  const imgHeight = (595.28 / canvasWidth) * canvasHeight;
-  let pageHeight = imgHeight; // pdf转化后页面总高度
-  const doc = new jsPDF("p", "pt", "a4");
-  doc.addImage(imgBase64, "JPEG", 20, 20, imgWidth, imgHeight);
-  doc.save("报表.pdf");
+  const canvasWidth = htmlCanvas.width
+  const canvasHeight = htmlCanvas.height
+  const imgBase64 = htmlCanvas.toDataURL('image/jpeg', 1.0)
+  const imgWidth = 595.28 - 40
+  const imgHeight = (595.28 / canvasWidth) * canvasHeight
+  let pageHeight = imgHeight // pdf转化后页面总高度
+  const doc = new jsPDF('p', 'pt', 'a4')
+  doc.addImage(imgBase64, 'JPEG', 20, 20, imgWidth, imgHeight)
+  doc.save('报表.pdf')
 }
 
 async function htmlToPdf() {
-  const canvas = await htmlCanvas();
-  canvasToPdf(canvas);
+  const canvas = await htmlCanvas()
+  canvasToPdf(canvas)
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

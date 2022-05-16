@@ -1,7 +1,7 @@
 <template>
   <div>
-    <pad-progress type="circle" :percentage="60"></pad-progress>
-    <pad-progress type="circle" :percentage="100" isAnimation></pad-progress>
+    <pac-progress type="circle" :percentage="60"></pac-progress>
+    <pac-progress type="circle" :percentage="100" isAnimation></pac-progress>
   </div>
 </template>
 

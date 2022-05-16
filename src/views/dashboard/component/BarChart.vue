@@ -1,43 +1,47 @@
 <template>
-  <div ref="chartRef" :class="className" :style="{ height: height, width: width }" />
+  <div
+    ref="chartRef"
+    :class="className"
+    :style="{ height: height, width: width }"
+  />
 </template>
 <script setup lang="ts">
-import type { EChartOption } from "echarts";
-import { ref, watch } from "vue";
-import { useEchrts } from "@/hooks/useEchrts";
+import type { EChartsOption } from 'echarts'
+import { ref, watch } from 'vue'
+import { useEcharts } from '@/hooks/useEcharts'
 const props = defineProps({
   className: {
     type: String,
-    default: "chart",
+    default: 'chart',
   },
   width: {
     type: String,
-    default: "100%",
+    default: '100%',
   },
   height: {
     type: String,
-    default: "300px",
+    default: '300px',
   },
-});
-const data_1 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
-const data_2 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
-const data_3 = ref<number[]>([79, 52, 200, 334, 390, 330, 220]);
-const animationDuration = 300;
-const option = ref<EChartOption>({
+})
+const data_1 = ref<number[]>([79, 52, 200, 334, 390, 330, 220])
+const data_2 = ref<number[]>([79, 52, 200, 334, 390, 330, 220])
+const data_3 = ref<number[]>([79, 52, 200, 334, 390, 330, 220])
+const animationDuration = 300
+const option = ref<EChartsOption>({
   tooltip: {
-    trigger: "item",
+    trigger: 'item',
   },
   grid: {
     top: 10,
-    left: "2%",
-    right: "2%",
-    bottom: "3%",
+    left: '2%',
+    right: '2%',
+    bottom: '3%',
     containLabel: true,
   },
   xAxis: [
     {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
       axisTick: {
         alignWithLabel: true,
       },
@@ -45,7 +49,7 @@ const option = ref<EChartOption>({
   ],
   yAxis: [
     {
-      type: "value",
+      type: 'value',
       axisTick: {
         show: false,
       },
@@ -53,43 +57,42 @@ const option = ref<EChartOption>({
   ],
   series: [
     {
-      name: "pageA",
-      type: "bar",
-      stack: "vistors",
-      barWidth: "60%",
+      name: 'pageA',
+      type: 'bar',
+      stack: 'vistors',
+      barWidth: '60%',
       data: data_1.value,
       animationDuration,
     },
     {
-      name: "pageB",
-      type: "bar",
-      stack: "vistors",
-      barWidth: "60%",
+      name: 'pageB',
+      type: 'bar',
+      stack: 'vistors',
+      barWidth: '60%',
       data: data_2.value,
       animationDuration,
     },
     {
-      name: "pageC",
-      type: "bar",
-      stack: "vistors",
-      barWidth: "60%",
+      name: 'pageC',
+      type: 'bar',
+      stack: 'vistors',
+      barWidth: '60%',
       data: data_3.value,
       animationDuration,
     },
   ],
-});
-const chartRef = ref<HTMLElement>();
-const { setOption } = useEchrts(chartRef, option.value as EChartOption);
+})
+const chartRef = ref<HTMLElement>()
+const { setOption } = useEcharts(option.value as EChartsOption, chartRef)
 watch(
   () => option.value,
   (newValue) => {
-    setOption(newValue as EChartOption);
+    setOption(newValue as EChartsOption)
   },
   {
     deep: true,
   }
-);
+)
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
