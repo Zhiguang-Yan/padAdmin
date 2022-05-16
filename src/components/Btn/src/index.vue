@@ -1,7 +1,7 @@
 <template>
   <button
     ref="btnRef"
-    :style="{ height: SIZE[size] }"
+    :style="{ height: SIZE[size as keyof typeof SIZE] }"
     :class="{ block, 'colors-btn': true }"
   >
     <slot></slot>
@@ -14,10 +14,10 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-const enum SIZE {
-  small = '24px',
-  large = '40px',
-  default = '32px',
+const SIZE = {
+  small: '24px',
+  large: '40px',
+  default: '32px',
 }
 const props = defineProps({
   block: {

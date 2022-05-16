@@ -40,6 +40,7 @@ export function generateMenuList(menuList: AppRouteModule[]): MenuItem[] {
       icon: (list.meta?.icon as string) || '',
       title: (list.meta?.title as string) || '',
       path: list.path,
+      name: list.name,
     }
     if (list!.children?.length) {
       if (list.children!.length > 1) {
