@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { list, actions } from '@/views/notificition/data'
+import { list, actions } from '@/views/components/data'
 import { ListOptions } from '@/components/list/src/type'
 import { useAppStore } from '@/store/modules/app'
 import { ref, computed } from 'vue'

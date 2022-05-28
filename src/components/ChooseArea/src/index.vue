@@ -59,12 +59,13 @@
 import { watch, reactive, PropType } from 'vue'
 // @ts-ignore
 import dataJson from '../lib/data.json'
-interface IArea {
+
+export interface IArea {
   name: string
   code: string
   children?: IArea[]
 }
-interface Data {
+export interface Data {
   name: string
   code: string
 }
@@ -73,7 +74,7 @@ export type Iselect = {
   city: Data
   area: Data
 } | null
-type Istate = {
+export type Istate = {
   provinceOptions: IArea[]
   cityOptions: IArea[]
   areaOptions: IArea[]

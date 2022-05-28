@@ -6,7 +6,7 @@
         :rules="rules"
         ref="loginRef"
         :model="loginForm"
-        class="pad-form"
+        class="login-form"
         size="large"
       >
         <el-form-item prop="username">
@@ -72,7 +72,6 @@ watch(
 function getOtherQuery(query: object) {
   return Object.keys(query).reduce((acc, cur) => {
     if (cur !== 'redirect') {
-      // @ts-ignore
       acc[cur] = query[cur]
     }
     return acc
@@ -118,7 +117,7 @@ h2 {
   margin-bottom: 30px;
   font-family: 'Courier New', Courier, monospace;
 }
-.pad-form {
+.login-form {
   .el-form-item {
     margin-bottom: 40px;
   }
@@ -147,7 +146,7 @@ h2 {
   border-bottom: 1px solid #03e9f4;
   border-radius: 0;
 }
-.el-form-item.is-error .el-input__wrapper {
+.login-form .el-form-item.is-error .el-input__wrapper {
   box-shadow: none;
   border-bottom: 1px solid var(--el-color-danger);
 }

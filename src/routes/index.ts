@@ -5,7 +5,6 @@ import type { App } from 'vue'
 import Layout from '@/layout/index.vue'
 import { nested } from './modules/nested'
 import { components } from './modules/components'
-import { WHITE_NAME_LIST } from '@/utils/const'
 export const constantRoutes: AppRouteModule[] = [
   {
     path: '/',

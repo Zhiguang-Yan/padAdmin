@@ -50,6 +50,9 @@ export function generateMenuList(menuList: AppRouteModule[]): MenuItem[] {
         item.icon = (onlyChild.meta?.icon as string) || ''
         item.title = (onlyChild.meta?.title as string) || ''
         item.path = onlyChild.path
+        if (onlyChild.children?.length) {
+          item.children = generateMenuList(onlyChild.children)
+        }
       }
     }
     return item
@@ -78,4 +81,20 @@ export function cloneDeep(source: Isource) {
   })
 
   return targetObj
+}
+
+/**
+ * 给路由加上重定向为第一个路由
+ * @param routes
+ * @returns
+ */
+export function redirectRoutes(routes: AppRouteModule[]): AppRouteModule[] {
+  return routes.map((route) => {
+    if (route.children && route.children.length) {
+      const { name } = route.children[0]
+      route.redirect = { name }
+      redirectRoutes(route.children)
+    }
+    return route
+  })
 }

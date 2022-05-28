@@ -1,6 +1,6 @@
-import {} from '../../components/list/src/type'
+import { ListOptions } from '@/components/List/src/type'
 
-export const list = [
+export const list: ListOptions[] = [
   {
     title: '通知',
     content: [
@@ -87,10 +87,10 @@ export const list = [
 export const actions = [
   {
     text: '清空',
-    // icon: 'delete',
+    icon: 'delete',
   },
   {
     text: '查看更多',
-    // icon: 'edit',
+    icon: 'edit',
   },
 ]

@@ -2,19 +2,37 @@ import { defineStore } from 'pinia'
 import { store } from '../index'
 import { AppRouteModule } from '@/routes/types'
 import { constantRoutes, asyncRoutes } from '@/routes/index'
-import { resolvePath, generateMenuList } from '@/utils'
+import { resolvePath, generateMenuList, redirectRoutes } from '@/utils'
 import { cloneDeep } from 'lodash'
 interface PermissionState {
   routes: AppRouteModule[]
   addRoutes: AppRouteModule[]
 }
 
-export const filterAsyncRoutes = (
+const dev = true
+/**
+ * 过滤动态路由
+ * @param routes
+ * @param roles
+ * @returns
+ */
+const filterAsyncRoutes = (
   routes: AppRouteModule[],
   roles: string[]
-) => {
+): AppRouteModule[] => {
+  if (!dev) {
+    return routes.reduce((pre: AppRouteModule[], cur) => {
+      if (roles.includes(cur.code!)) {
+        cur.children?.length &&
+          (cur.children = filterAsyncRoutes(cur.children, roles))
+        return [...pre, cur]
+      }
+      return [...pre]
+    }, [])
+  }
   return routes
 }
+
 export const usePermissionStore = defineStore({
   id: 'permission',
   state: (): PermissionState => {
@@ -37,7 +55,9 @@ export const usePermissionStore = defineStore({
   actions: {
     generateRoutes(roles: string[]) {
       return new Promise((resolve) => {
-        const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+        const accessedRoutes = redirectRoutes(
+          filterAsyncRoutes(asyncRoutes, roles)
+        )
         this.routes = constantRoutes.concat(accessedRoutes)
         this.addRoutes = accessedRoutes
         resolve(accessedRoutes)

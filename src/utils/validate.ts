@@ -12,7 +12,7 @@ export function isExternal(path: string) {
  */
 export function validURL(url: string) {
   const reg =
-    /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
+    /^(((ht|f)tps?):\/\/)?([^!@#$%^&*?.\s-]([^!@#$%^&*?.\s]{0,63}[^!@#$%^&*?.\s])?\.)+[a-z]{2,6}\/?/
   return reg.test(url)
 }
 
@@ -22,11 +22,20 @@ export function validURL(url: string) {
  * @returns
  */
 export function validEmail(email: string) {
-  const reg =
-    // eslint-disable-next-line no-useless-escape
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  const reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
   return reg.test(email)
 }
+
+/**
+ * 验证手机（宽松）
+ * @param phone
+ * @returns
+ */
+export function validPhone(phone: string) {
+  const reg = /^(?:(?:\+|00)86)?1\d{10}$/
+  return reg.test(phone)
+}
+
 /**
  * 验证element表单
  * @param formEl
@@ -46,4 +55,22 @@ export function validELForm(formEl: FormInstance | undefined) {
       }
     })
   })
+}
+
+/** 获取url参数
+ * @param {String} url
+ */
+export function getParams(url: string) {
+  const params = {}
+  try {
+    url
+      .split('?')[1]
+      .split('&')
+      .forEach((str) => {
+        params[str.slice(0, str.indexOf('='))] = str.slice(str.indexOf('=') + 1)
+      })
+  } catch (error) {
+    return params
+  }
+  return params
 }

@@ -8,14 +8,6 @@ export interface ListItem {
   isRead?: boolean
 }
 
-enum TagType {
-  '',
-  'success',
-  'warning',
-  'info',
-  'danger',
-}
-
 export type ListOptions = {
   title: string
   count?: number
