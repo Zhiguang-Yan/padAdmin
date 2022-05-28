@@ -14,6 +14,33 @@ body {
   }
 }
 
+/*滚动条整体粗细样式*/
+::-webkit-scrollbar {
+  /*高宽分别对应横竖滚动条的尺寸*/
+  width: 6px;
+  height: 6px;
+}
+
+/*滚动条里面小方块*/
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  transition: 0.3s background-color;
+  background-color: rgba(144, 147, 153, 0.3);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  &:hover {
+    background-color: rgba(144, 147, 153, 0.5);
+  }
+}
+
+/*滚动条轨道*/
+::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: none;
+}
+
 .fr {
   float: right;
 }
