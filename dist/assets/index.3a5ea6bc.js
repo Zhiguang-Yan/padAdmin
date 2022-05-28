@@ -1,1 +1,0 @@
-import{k as c,i as n,b as o,c as r,g as t}from"./index.8b77f2a9.js";const s={},a={class:"trend"};function _(d,p){const e=n("pac-trend");return o(),r("div",a,[t(e,{text:"\u8425\u6536\u989D",type:"up"}),t(e,{text:"\u9500\u552E\u989D",type:"dowm"})])}var m=c(s,[["render",_]]);export{m as default};
