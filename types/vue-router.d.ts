@@ -4,5 +4,6 @@ declare module 'vue-router' {
     title?: string
     icon?: string
     breadcrumb?: boolean
+    activeMenu?: string
   }
 }

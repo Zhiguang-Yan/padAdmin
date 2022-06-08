@@ -1,0 +1,30 @@
+<template>
+  <div>
+    <el-button type="primary" @click="dialogVisible = true"
+      >图片裁剪组件</el-button
+    >
+    <el-dialog v-model="dialogVisible" width="55%">
+      <pac-cropper v-model:img-file="url" />
+    </el-dialog>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { urlToBase64 } from '@/utils/img'
+const dialogVisible = ref(false)
+const url = ref()
+
+onMounted(async () => {
+  try {
+    const base64 = await urlToBase64(
+      'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+    )
+    url.value = base64
+  } catch (error) {
+    console.log(error)
+  }
+})
+</script>
+
+<style></style>

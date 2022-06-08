@@ -77,5 +77,12 @@ export const components: AppRouteModule = {
       component: () => import('@/views/components/message.vue'),
       meta: { title: 'message组件' },
     },
+    {
+      path: 'cropper',
+      name: 'Cropper',
+      code: 'cropper',
+      component: () => import('@/views/components/cropper.vue'),
+      meta: { title: '图片裁剪组件' },
+    },
   ],
 }

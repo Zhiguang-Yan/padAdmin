@@ -12,6 +12,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   hidden?: boolean
   component: Component | string
   children?: AppRouteRecordRaw[]
+  alwaysShow?: boolean
   meta?: RouteMeta
 }
 export type AppRouteModule = AppRouteRecordRaw

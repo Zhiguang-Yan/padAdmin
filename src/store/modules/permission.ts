@@ -47,9 +47,7 @@ export const usePermissionStore = defineStore({
     },
     menu_list(state) {
       // 递归生成路径  使用深度拷贝避免影响到原来的路由
-      return generateMenuList(
-        resolvePath(cloneDeep(state.routes)).filter((v) => !v.hidden)
-      )
+      return generateMenuList(resolvePath(cloneDeep(state.routes)))
     },
   },
   actions: {
