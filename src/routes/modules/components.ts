@@ -84,5 +84,12 @@ export const components: AppRouteModule = {
       component: () => import('@/views/components/cropper.vue'),
       meta: { title: '图片裁剪组件' },
     },
+    {
+      path: 'rich',
+      name: 'Rich',
+      code: 'rich',
+      component: () => import('@/views/components/rich-text.vue'),
+      meta: { title: '富文本组件' },
+    },
   ],
 }
