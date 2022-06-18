@@ -22,7 +22,7 @@ export default defineComponent({
       return data.map((item: MenuItem) => {
         item.icon &&
           (item.i = (
-            <svg-icon name={item.icon} className="pad-icon"></svg-icon>
+            <pac-icon name={item.icon} className="pad-icon"></pac-icon>
           ) as any)
         const slots = {
           title: () => {

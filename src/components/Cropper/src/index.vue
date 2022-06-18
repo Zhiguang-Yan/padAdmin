@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import type { UploadInstance, UploadRequestOptions } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import {
   ZoomIn,
   ZoomOut,
@@ -12,20 +13,22 @@ import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { toBase64, toFile } from '@/utils/img'
 
-const props = defineProps({
-  imgFile: {
-    type: String,
-    default: '',
-  },
-  autoCropWidth: {
-    type: Number,
-    default: 750,
-  },
-  autoCropHeight: {
-    type: Number,
-    default: 375,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    visible: boolean
+    imgFile?: string
+    autoCropWidth?: number
+    autoCropHeight?: number
+    accept?: string
+    uploadApi: (query: Record<string, any>) => Promise<any> // 上传api
+  }>(),
+  {
+    imgFile: '',
+    autoCropWidth: 750,
+    autoCropHeight: 375,
+    accept: 'image/*',
+  }
+)
 
 const OPTIONS = {
   viewMode: 1,
@@ -39,16 +42,25 @@ const OPTIONS = {
   zoomable: true,
 }
 
-const emits = defineEmits(['update:imgFile'])
+const emits = defineEmits(['update:imgFile', 'update:visible', 'cropper'])
+
+const dialogVisible = computed({
+  get: () => props.visible,
+  set: (value) => {
+    emits('update:visible', value)
+  },
+})
 const uploadRef = ref<UploadInstance>()
 const handleUpload = async (params: UploadRequestOptions) => {
-  const base64 = await toBase64(params.file)
-  emits('update:imgFile', base64)
+  try {
+    const base64 = await toBase64(params.file)
+    emits('update:imgFile', base64)
+  } catch (error) {
+    console.error(error)
+  }
 }
 const myCropper = ref()
 const image = ref()
-const closeCropper = () => {}
-
 // 初始化
 const initCropper = () => {
   if (!image.value) {
@@ -57,11 +69,25 @@ const initCropper = () => {
   myCropper.value = new Cropper(image.value, OPTIONS as any)
   myCropper.value.replace(props.imgFile, false)
 }
-const sureSava = () => {
+const sureSava = async () => {
+  if (!myCropper.value.url) {
+    ElMessage.warning('请选择图片')
+    return
+  }
   const urlbase64 = myCropper.value
     .getCroppedCanvas()
     .toDataURL('image/jpeg', 0.7)
-  console.log(toFile(urlbase64))
+  try {
+    const formData = new FormData()
+    formData.append('file', toFile(urlbase64))
+    const { data } = await props.uploadApi(formData)
+    // const path = `${import.meta.env.VITE_APP_ASSETS_URL}/${data.path}`
+    const path = data.path
+    emits('cropper', path)
+    dialogVisible.value = false
+  } catch (error) {
+    console.error(error)
+  }
 }
 // 缩放
 const cropperzoom = (val: number) => {
@@ -78,16 +104,27 @@ const cropperRotate = (val: number) => {
 watch(
   () => props.imgFile,
   (newValue) => {
-    newValue && myCropper.value.replace(newValue, false)
+    newValue && myCropper.value && myCropper.value.replace(newValue, false)
   }
 )
-onMounted(() => {
-  initCropper()
-})
-</script>
 
+const handleClose = () => {
+  emits('update:imgFile', undefined)
+  myCropper.value.destroy()
+}
+const handleOpen = () => {
+  initCropper()
+}
+</script>
 <template>
-  <div>
+  <el-dialog
+    v-model="dialogVisible"
+    v-bind="$attrs"
+    title="裁剪图片"
+    width="55%"
+    @close="handleClose"
+    @opened="handleOpen"
+  >
     <div class="cropper-content">
       <!-- 剪裁框 -->
       <div class="cropper">
@@ -112,7 +149,7 @@ onMounted(() => {
         <el-upload
           ref="uploadRef"
           :show-file-list="false"
-          accept="image/*"
+          :accept="accept"
           :http-request="handleUpload"
           class="upload"
         >
@@ -159,13 +196,15 @@ onMounted(() => {
       <!-- 确认上传按钮 -->
       <div class="upload-btn">
         <!-- <el-button type="primary" @click="uploadImg('blob')">上传</el-button> -->
-        <el-button size="defalut" @click="closeCropper">取消</el-button>
+        <el-button size="defalut" @click="dialogVisible = false"
+          >取消</el-button
+        >
         <el-button size="defalut" type="primary" @click="sureSava"
           >确定</el-button
         >
       </div>
     </div>
-  </div>
+  </el-dialog>
 </template>
 
 <style lang="scss" scoped>

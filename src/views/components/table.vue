@@ -38,9 +38,9 @@ const options: FormOptions = [
   {
     type: 'input',
     value: null,
-    prop: 'usename',
-    label: '用户名',
-    placeholder: '请输入用户名',
+    label: '手机号',
+    prop: 'phone',
+    placeholder: '请输入手机号',
     attrs: {
       clearable: true,
     },
@@ -48,39 +48,9 @@ const options: FormOptions = [
   {
     type: 'input',
     value: null,
-    prop: 'usename',
-    label: '用户名',
-    placeholder: '请输入用户名',
-    attrs: {
-      clearable: true,
-    },
-  },
-  {
-    type: 'input',
-    value: null,
-    prop: 'usename',
-    label: '用户名',
-    placeholder: '请输入用户名',
-    attrs: {
-      clearable: true,
-    },
-  },
-  {
-    type: 'input',
-    value: null,
-    prop: 'usename',
-    label: '用户名',
-    placeholder: '请输入用户名',
-    attrs: {
-      clearable: true,
-    },
-  },
-  {
-    type: 'input',
-    value: null,
-    prop: 'usename',
-    label: '用户名',
-    placeholder: '请输入用户名',
+    label: '账户',
+    prop: 'account',
+    placeholder: '请输入账号',
     attrs: {
       clearable: true,
     },
@@ -88,30 +58,97 @@ const options: FormOptions = [
   {
     type: 'select',
     value: null,
-    prop: 'job',
-    placeholder: '请选择职位',
-    label: '职位',
+    label: '状态',
+    prop: 'status',
     attrs: {
       filterable: true,
-      clearable: true,
     },
     children: [
       {
         type: 'option',
+        label: '启用',
         value: 1,
-        label: '经理',
       },
       {
         type: 'option',
+        label: '禁用',
         value: 2,
-        label: '主管',
-      },
-      {
-        type: 'option',
-        value: 3,
-        label: '员工',
       },
     ],
+  },
+  {
+    type: 'select',
+    value: null,
+    prop: 'moduleId',
+    placeholder: '请选择',
+    label: '操作模块',
+    children: [
+      {
+        type: 'option',
+        label: '房态模块',
+        value: 1,
+      },
+      {
+        type: 'option',
+        label: '订单模块',
+        value: 2,
+      },
+      {
+        type: 'option',
+        label: '业务模块',
+        value: 3,
+      },
+      {
+        type: 'option',
+        label: '客户模块',
+        value: 4,
+      },
+      {
+        type: 'option',
+        label: '数据模块',
+        value: 5,
+      },
+      {
+        type: 'option',
+        label: '设置模块',
+        value: 6,
+      },
+      {
+        type: 'option',
+        label: '门店模块',
+        value: 7,
+      },
+    ],
+    attrs: {
+      filterable: true,
+    },
+  },
+  {
+    type: 'date-picker',
+    value: null,
+    label: '操作时间',
+    prop: 'date',
+    attrs: {
+      type: 'daterange',
+      startPlaceholder: '开始时间',
+      endPlaceholder: '结束时间',
+      rangeSeparator: '至',
+      shortcuts: [
+        {
+          text: '最近一周',
+          value: () => {
+            const end = new Date()
+            const start = new Date()
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+            return [start, end]
+          },
+        },
+      ],
+      valueFormat: 'YYYY-MM-DD HH:mm:ss',
+      'disabled-date': (time: Date) => {
+        return time.getTime() > Date.now()
+      },
+    },
   },
 ]
 const detail = ref<any>()

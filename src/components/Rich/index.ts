@@ -3,6 +3,6 @@ import Component from './src/index.vue'
 
 export default {
   install(app: App) {
-    app.component('pac-icon', Component)
+    app.component('pac-rich', Component)
   },
 }

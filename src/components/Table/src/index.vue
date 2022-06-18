@@ -3,16 +3,17 @@
     <pac-form
       ref="acForm"
       :options="queryOptions"
-      :label-width="labelWidth"
+      :layout="layout"
       class="query__form__header"
+      :label-width="labelWidth"
     >
       <template #submit>
-        <div class="clearfix" style="width: 100%">
-          <span class="fl">
+        <div class="action__warpper">
+          <span>
             <el-button type="primary" @click="fetchData">查询</el-button
             ><el-button @click="handleReset">重置</el-button></span
           >
-          <span v-if="$slots.action" class="fr">
+          <span v-if="$slots.action">
             <slot name="action"></slot>
           </span>
         </div>
@@ -24,21 +25,13 @@
     v-loading="fetching"
     max-height="600px"
     :data="tableData"
-    style="width: 100%"
-    :header-row-style="{
-      background: '#F6F6F6',
-      height: '52px',
-      color: '#222222',
-    }"
-    :header-cell-style="{ background: '#F6F6F6' }"
-    :row-style="{ height: '52px' }"
     v-bind="$attrs.table"
   >
     <slot></slot>
   </el-table>
   <pac-pagination
     v-if="usePagination"
-    v-model:page="query.page"
+    v-model:page="query.currentPage"
     v-model:limit="query.pageSize"
     :total="totalNum"
     @pagination="fetchData"
@@ -46,7 +39,8 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref, Ref } from 'vue'
-import type { FormOptions, Ilayout } from '../../Form/src/type'
+import type { FormOptions, Ilayout } from '@/components/Form/src/type'
+
 export interface IProps {
   layout?: Ilayout
   queryOptions?: FormOptions
@@ -54,7 +48,7 @@ export interface IProps {
   useQuery?: boolean
   labelWidth?: string
   // eslint-disable-next-line no-unused-vars
-  fetchApi: <T = any>(query: Record<string, any>) => Promise<T>
+  fetchApi: (query: Record<string, any>) => Promise<any>
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -65,7 +59,7 @@ const props = withDefaults(defineProps<IProps>(), {
   labelWidth: 'auto',
 })
 
-const DEFAULT_PAGINATION = { page: 1, pageSize: 10 }
+const DEFAULT_PAGINATION = { currentPage: 1, pageSize: 10 }
 const acForm = ref<Ref | null>(null)
 const tableData = ref<any>([])
 const totalNum = ref<number>(0)
@@ -85,14 +79,14 @@ async function fetchData() {
     tableData.value = list
     totalNum.value = total
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
   fetching.value = false
 }
 
 function handleReset() {
   acForm.value!.formRef.resetFields()
-  query.page = 1
+  query.currentPage = 1
   query.pageSize = 10
   fetchData()
 }
@@ -110,6 +104,12 @@ defineExpose({ fetchData })
   ::v-deep(div.el-form-item) {
     // margin-bottom: 0;
     // padding: 0;
+  }
+  .action__warpper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    white-space: nowrap;
   }
 }
 </style>
