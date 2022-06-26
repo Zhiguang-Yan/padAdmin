@@ -91,5 +91,12 @@ export const components: AppRouteModule = {
       component: () => import('@/views/components/rich-text.vue'),
       meta: { title: '富文本组件' },
     },
+    {
+      path: 'print',
+      name: 'Print',
+      code: 'print',
+      component: () => import('@/views/components/print.vue'),
+      meta: { title: '打印组件' },
+    },
   ],
 }

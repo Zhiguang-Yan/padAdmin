@@ -1,8 +1,7 @@
 <template>
   <div>
-    <pac-choose-icon title="选择标题" v-model:visible="visible"
-      >选择图标</pac-choose-icon
-    >
+    <pac-choose-icon title="选择标题" v-model:visible="visible">选择图标</pac-choose-icon>
+
   </div>
 </template>
 
@@ -11,4 +10,5 @@ import { ref } from 'vue'
 const visible = ref<boolean>(false)
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

@@ -8230,6 +8230,11 @@ pretty@2.0.0:
     extend-shallow "^2.0.1"
     js-beautify "^1.6.12"
 
+print-js@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmmirror.com/print-js/-/print-js-1.5.0.tgz#6f7e68c6d542ed5eeb535b2ad2469fc24fc9888c"
+  integrity sha512-Vy7UG2NGpNRMR1CcwoaK813tM3uUB0I4vTylxmFLXMb77gJb+6GB5aUmeasyT+CetddbmXUZsHr9BF+0VDN/fg==
+
 prismjs@^1.23.0:
   version "1.28.0"
   resolved "https://registry.npmmirror.com/prismjs/-/prismjs-1.28.0.tgz#0d8f561fa0f7cf6ebca901747828b149147044b6"
