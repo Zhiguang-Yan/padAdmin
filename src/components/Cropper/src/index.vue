@@ -30,6 +30,8 @@ const props = withDefaults(
   }
 )
 
+const disabled = computed(() => !props.imgFile)
+
 const OPTIONS = {
   viewMode: 1,
   preview: '.before',
@@ -117,91 +119,71 @@ const handleOpen = () => {
 }
 </script>
 <template>
-  <el-dialog
-    v-model="dialogVisible"
-    v-bind="$attrs"
-    title="裁剪图片"
-    width="55%"
-    @close="handleClose"
-    @opened="handleOpen"
-  >
+  <el-dialog v-model="dialogVisible" v-bind="$attrs" title="裁剪图片" width="55%" @close="handleClose" @opened="handleOpen">
     <div class="cropper-content">
       <!-- 剪裁框 -->
       <div class="cropper">
         <img ref="image" alt="" />
       </div>
       <!-- 预览框 -->
-      <div
-        class="show-preview"
-        :style="{
-          overflow: 'hidden',
-          margin: '0 25px',
-          display: 'flex',
-          'align-items': 'center',
-        }"
-      >
+      <div class="show-preview" :style="{
+        overflow: 'hidden',
+        margin: '0 25px',
+        display: 'flex',
+        'align-items': 'center',
+      }">
         <div class="preview before" />
       </div>
     </div>
     <div class="footer-btn">
       <!-- 缩放旋转按钮 -->
       <div class="scope-btn">
-        <el-upload
-          ref="uploadRef"
-          :show-file-list="false"
-          :accept="accept"
-          :http-request="handleUpload"
-          class="upload"
-        >
+        <el-upload ref="uploadRef" :show-file-list="false" :accept="accept" :http-request="handleUpload" class="upload">
           <template #trigger>
             <el-button type="primary" size="defalut">选择图片</el-button>
           </template>
         </el-upload>
         <el-tooltip class="item" effect="dark" content="放大" placement="top">
-          <el-button size="defalut" @click="cropperzoom(0.05)"
-            ><el-icon><ZoomIn /></el-icon
-          ></el-button>
-        </el-tooltip>
-        <el-tooltip class="item" effect="dark" content="缩小" placement="top">
-          <el-button size="defalut" @click="cropperzoom(-0.05)"
-            ><el-icon><ZoomOut /></el-icon
-          ></el-button>
-        </el-tooltip>
-        <el-tooltip
-          class="item"
-          effect="dark"
-          content="逆时针旋转"
-          placement="top"
-        >
-          <el-button size="defalut" @click="cropperRotate(-90)">
-            <el-icon><RefreshLeft /></el-icon>
+          <el-button :disabled="disabled" size="defalut" @click="cropperzoom(0.05)">
+            <el-icon>
+              <ZoomIn />
+            </el-icon>
           </el-button>
         </el-tooltip>
-        <el-tooltip
-          class="item"
-          effect="dark"
-          content="顺时针旋转"
-          placement="top"
-        >
-          <el-button size="defalut" @click="cropperRotate(90)"
-            ><el-icon><RefreshRight /></el-icon
-          ></el-button>
+        <el-tooltip class="item" effect="dark" content="缩小" placement="top">
+          <el-button :disabled="disabled" size="defalut" @click="cropperzoom(-0.05)">
+            <el-icon>
+              <ZoomOut />
+            </el-icon>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="逆时针旋转" placement="top">
+          <el-button :disabled="disabled" size="defalut" @click="cropperRotate(-90)">
+            <el-icon>
+              <RefreshLeft />
+            </el-icon>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="顺时针旋转" placement="top">
+          <el-button :disabled="disabled" size="defalut" @click="cropperRotate(90)">
+            <el-icon>
+              <RefreshRight />
+            </el-icon>
+          </el-button>
         </el-tooltip>
         <el-tooltip class="item" effect="dark" content="重置" placement="top">
-          <el-button size="defalut" @click="cropperReset"
-            ><el-icon><Refresh /></el-icon
-          ></el-button>
+          <el-button :disabled="disabled" size="defalut" @click="cropperReset">
+            <el-icon>
+              <Refresh />
+            </el-icon>
+          </el-button>
         </el-tooltip>
       </div>
       <!-- 确认上传按钮 -->
       <div class="upload-btn">
         <!-- <el-button type="primary" @click="uploadImg('blob')">上传</el-button> -->
-        <el-button size="defalut" @click="dialogVisible = false"
-          >取消</el-button
-        >
-        <el-button size="defalut" type="primary" @click="sureSava"
-          >确定</el-button
-        >
+        <el-button size="defalut" @click="dialogVisible = false">取消</el-button>
+        <el-button size="defalut" type="primary" @click="sureSava">确定</el-button>
       </div>
     </div>
   </el-dialog>
@@ -211,19 +193,23 @@ const handleOpen = () => {
 .cropper {
   border: 1px solid #fff;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC);
+
   img {
     width: 100%;
     opacity: 0;
   }
 }
+
 .cropper-content {
   display: flex;
   justify-content: flex-end;
+
   .cropper {
     flex: 1;
     height: 400px;
     overflow: hidden;
   }
+
   .show-preview {
     flex: 1;
     -webkit-flex: 1;
@@ -233,6 +219,7 @@ const handleOpen = () => {
     /* border: 1px solid #cccccc; */
     background: #cccccc;
     margin-left: 40px;
+
     .preview {
       overflow: hidden;
       border: 1px solid #468ac8;
@@ -247,15 +234,18 @@ const handleOpen = () => {
   display: -webkit-flex;
   justify-content: flex-end;
 }
+
 .footer-btn .scope-btn {
   width: 260px;
   display: flex;
 }
+
 .scope-btn {
   .upload {
     margin-right: 15px;
   }
 }
+
 .footer-btn .scope-btn span {
   display: inline-block;
   padding: 10px;
@@ -264,15 +254,18 @@ const handleOpen = () => {
   background: #fff;
   cursor: pointer;
 }
+
 .footer-btn .scope-btn span i {
   color: #333333;
 }
+
 .footer-btn .upload-btn {
   flex: 1;
   display: flex;
   justify-content: flex-end;
   margin-right: 25px;
 }
+
 .footer-btn .btn {
   outline: none;
   display: inline-block;
@@ -292,10 +285,12 @@ const handleOpen = () => {
   background-color: #67c23a;
   border-color: #67c23a;
 }
+
 .solide {
   margin-left: 25px;
   width: 200px;
 }
+
 .before {
   width: 100%;
   height: 100%;
