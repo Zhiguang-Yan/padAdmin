@@ -2,10 +2,10 @@
   <div class="flex-c">
     <div style="width: 400px">
       <pac-form ref="formRef" :options="options" :layout="layout">
-        <template #submit
-          ><el-button type="primary" @click="handleSubmit">提交</el-button>
-          <el-button @click="handleReset">重置</el-button></template
-        >
+        <template #submit>
+          <el-button type="primary" @click="handleSubmit">提交</el-button>
+          <el-button @click="handleReset">重置</el-button>
+        </template>
       </pac-form>
     </div>
   </div>
@@ -116,4 +116,5 @@ function handleReset() {
 }
 </script>
 
-<style></style>
+<style>
+</style>
