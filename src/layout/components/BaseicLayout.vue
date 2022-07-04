@@ -3,23 +3,16 @@
     <el-aside width="auto" class="pad-aside">
       <el-scrollbar>
         <logo></logo>
-        <pac-menu
-          :menu-list="menuList"
-          :default-active="$route.path"
-          :collapse="collapse"
-          class="pad-menu-vertical"
-          background-color="#001529"
-          text-color="rgba(255, 255, 255, 0.65)"
-          active-text-color="#fff"
-        ></pac-menu>
+        <pac-menu :menu-list="menuList" :default-active="$route.path" :collapse="collapse" class="pad-menu-vertical"
+          background-color="#001529" text-color="rgba(255, 255, 255, 0.65)" active-text-color="#fff"></pac-menu>
       </el-scrollbar>
     </el-aside>
     <el-container>
       <el-header class="pad-header">
         <NavHeader />
       </el-header>
-      <el-main>
-        <el-card class="pad-card">
+      <el-main class="pad_main">
+        <el-card class="pad_card">
           <router-view />
         </el-card>
       </el-main>
@@ -44,8 +37,5 @@ const menuList = computed(() => permission.menu_list)
 .pad-header {
   border-bottom: 1px solid #eee;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-}
-.pad-card {
-  min-height: 100%;
 }
 </style>

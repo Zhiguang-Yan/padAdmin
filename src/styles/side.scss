@@ -18,3 +18,11 @@
 .pad-menu-vertical {
   border-color: transparent;
 }
+
+.pad_main {
+  background-color: #f6f6f6;
+
+  .pad_card {
+    min-height: 100%;
+  }
+}
