@@ -7,16 +7,26 @@
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
+    "strictNullChecks": true,
     "baseUrl": "./",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "suppressImplicitAnyIndexErrors": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "paths": {
-      "/@/*": ["src/*"],
-      "@/*": ["src/*"],
-      "~/*": ["types/*"]
+      "/@/*": [
+        "src/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "types/*"
+      ]
     }
   },
   "include": [
@@ -26,6 +36,11 @@
     "src/**/*.vue",
     "types/**/*.d.ts",
     "types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
   ],
   "references": [
     {
