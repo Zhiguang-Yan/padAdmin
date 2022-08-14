@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { val } from 'dom7';
 import { ref } from 'vue'
 import Test from './test.vue'
 const printRef = ref()
