@@ -3,7 +3,7 @@
     <div>
       <ul class="draggable_ul">
         <transition-group name="sort">
-          <li v-for="(item, index) in list" :key="item.label" draggable="true" @dragstart="dragstart(index)"
+          <li v-for="(item, index) in list" :key="item.label" :draggable="true" @dragstart="dragstart(index)"
             @dragenter="dragenter($event, index)" @dragover="dragover($event)" @dragend="dragend">
             {{ item.label }}
           </li>
