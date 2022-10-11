@@ -98,5 +98,12 @@ export const components: AppRouteModule = {
       component: () => import('@/views/components/print.vue'),
       meta: { title: '打印组件' },
     },
+    {
+      path: 'tabs',
+      name: 'Tabs',
+      code: 'tabs',
+      component: () => import('@/views/components/tabs.vue'),
+      meta: { title: 'tabs组件' },
+    }
   ],
 }

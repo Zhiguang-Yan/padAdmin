@@ -60,15 +60,17 @@ function setData(data: any) {
       {
         name: 'expected',
         itemStyle: {
-          normal: {
-            color: '#FF005A',
-            lineStyle: {
-              color: '#FF005A',
-              width: 2,
-            },
-          },
+          borderWidth: 2,
+          borderColor: '#FFF',
+        },
+        lineStyle: {
+          shadowBlur: 12,
+          shadowColor: 'rgba(43, 184, 208, 1)',
+          shadowOffsetX: 1,
+          shadowOffsetY: 1,
         },
         smooth: true,
+        symbol: 'none',
         type: 'line',
         data: data.expectedData,
         animationDuration: 2800,
@@ -78,17 +80,16 @@ function setData(data: any) {
         name: 'actual',
         smooth: true,
         type: 'line',
+        symbol: 'none',
         itemStyle: {
-          normal: {
-            color: '#3888fa',
-            lineStyle: {
-              color: '#3888fa',
-              width: 2,
-            },
-            areaStyle: {
-              color: '#f3f8ff',
-            },
-          },
+          borderWidth: 2,
+          borderColor: '#FFF',
+        },
+        lineStyle: {
+          shadowBlur: 12,
+          shadowColor: 'rgba(92, 139, 218, 1)',
+          shadowOffsetX: 1,
+          shadowOffsetY: 1,
         },
         data: data.actualData,
         animationDuration: 2800,
