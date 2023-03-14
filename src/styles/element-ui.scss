@@ -1,14 +1,21 @@
-$--colors: ('primary': ('base': #32c2cd,
+$--colors: (
+  'primary': (
+    'base': #32c2cd,
   ),
-  'success': ('base': #3177e0,
+  'success': (
+    'base': #3177e0,
   ),
-  'warning': ('base': #ffc54a,
+  'warning': (
+    'base': #ffc54a,
   ),
-  'danger': ('base': #dd664c,
+  'danger': (
+    'base': #dd664c,
   ),
-  'error': ('base': #f56c6c,
+  'error': (
+    'base': #f56c6c,
   ),
-  'info': ('base': #909399,
+  'info': (
+    'base': #909399,
   ),
 );
 
@@ -20,9 +27,11 @@ $error: #f56c6c;
 $info: #909399;
 $black: #000000;
 $white: #fff;
-@forward 'element-plus/theme-chalk/src/common/var.scss'with ($colors: $--colors);
-@use 'element-plus/theme-chalk/src/index.scss'as *;
-
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: $--colors
+);
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+@use 'element-plus/theme-chalk/src/dark/css-vars.scss' as *;
 .el-message {
   min-width: auto;
   background: #fff;
