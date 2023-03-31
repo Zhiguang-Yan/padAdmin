@@ -1,10 +1,15 @@
+import { ConfigProvider } from 'antd'
 import { FC } from 'react'
-import { Button } from 'antd'
-
-const App: FC = () => (
-  <div className="App">
-    <Button type="primary">Button</Button>
-  </div>
-)
+import { BrowserRouter } from 'react-router-dom'
+import Router from './routes'
+const App: FC = () => {
+  return (
+    <BrowserRouter>
+      <ConfigProvider>
+        <Router></Router>
+      </ConfigProvider>
+    </BrowserRouter>
+  )
+}
 
 export default App

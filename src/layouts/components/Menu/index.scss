@@ -1,0 +1,11 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  .ant-menu-root {
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
