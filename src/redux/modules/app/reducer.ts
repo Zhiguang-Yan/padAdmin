@@ -1,13 +1,13 @@
-import { appStore } from '../../type'
+import { AppStore } from '../../type'
 import produce from 'immer'
 import * as types from '@/redux/mutation-types'
 
-const initialState: appStore = {
+const initialState: AppStore = {
   isCollapse: false,
   language: 'en'
 }
 
-const app = (state: appStore = initialState, { type, payload }) => {
+const app = (state: AppStore = initialState, { type, payload }) => {
   produce(state, (draftState) => {
     switch (type) {
       case types.UPDATE_COLLAPSE:
