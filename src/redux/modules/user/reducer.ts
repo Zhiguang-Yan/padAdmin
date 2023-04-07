@@ -8,19 +8,21 @@ const initialState: UserStore = {
   userInfo: null
 }
 
-const user = (state = initialState, { type, payload }) => {
+const user = (state = initialState, { type, payload }) =>
   produce(state, (draftState) => {
     switch (type) {
       case types.SET_TOKEN:
-        return (draftState.token = payload)
+        draftState.token = payload
+        break
       case types.SET_ROLES:
-        return (draftState.roles = payload)
+        draftState.roles = payload
+        break
       case types.SET_USERINFO:
-        return (draftState.userInfo = payload)
+        draftState.userInfo = payload
+        break
       default:
         return draftState
     }
   })
-}
 
 export default user

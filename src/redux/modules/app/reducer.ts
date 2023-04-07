@@ -7,7 +7,7 @@ const initialState: AppStore = {
   language: 'en'
 }
 
-const app = (state: AppStore = initialState, { type, payload }) => {
+const app = (state: AppStore = initialState, { type, payload }) =>
   produce(state, (draftState) => {
     switch (type) {
       case types.UPDATE_COLLAPSE:
@@ -20,6 +20,5 @@ const app = (state: AppStore = initialState, { type, payload }) => {
         return draftState
     }
   })
-}
 
 export default app

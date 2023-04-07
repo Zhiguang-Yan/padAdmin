@@ -7,17 +7,18 @@ const initialState: PermissionStore = {
   addRoutes: []
 }
 
-const permission = (state: PermissionStore = initialState, { type, payload }) => {
+const permission = (state: PermissionStore = initialState, { type, payload }) =>
   produce(state, (draftState) => {
     switch (type) {
       case types.SET_ROUTES:
-        return (draftState.routes = payload)
+        draftState.routes = payload
+        break
       case types.SET_ADD_ROUTES:
-        return (draftState.addRoutes = payload)
+        draftState.addRoutes = payload
+        break
       default:
         return draftState
     }
   })
-}
 
 export default permission
