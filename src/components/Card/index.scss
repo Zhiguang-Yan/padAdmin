@@ -1,0 +1,91 @@
+.card {
+  width: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.28s;
+  -webkit-transition: all 0.28s;
+  -moz-transition: all 0.28s;
+  -ms-transition: all 0.28s;
+  -o-transition: all 0.28s;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+  .bg {
+    height: 150px;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    background-color: #fff;
+    height: auto;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transform: translateY(-20px);
+    -webkit-transform: translateY(-20px);
+    -moz-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+  }
+  .avatar {
+    height: 120px;
+    width: 120px;
+    display: inline-block;
+    margin-left: 50%;
+    padding: 5px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border-radius: 1000px;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    -ms-border-radius: 1000px;
+    -o-border-radius: 1000px;
+    position: relative;
+    &::after {
+      right: -37px;
+      clip-path: inset(50% 50% 0 0);
+    }
+    &::before {
+      left: -37px;
+      clip-path: inset(50% 0 0 50%);
+    }
+    &::after,
+    &::before {
+      position: absolute;
+      box-sizing: border-box;
+      content: '';
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      box-shadow: 0 0 0 100px #fff; /*使用box-shadow不影响尺寸*/
+      bottom: 50%;
+    }
+  }
+  .avatar img {
+    height: 100%;
+    width: 100%;
+    border-radius: 1000px;
+    -webkit-border-radius: 1000px;
+    -moz-border-radius: 1000px;
+    -ms-border-radius: 1000px;
+    -o-border-radius: 1000px;
+  }
+  .title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+}

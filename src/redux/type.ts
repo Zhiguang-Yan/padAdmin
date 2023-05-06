@@ -15,3 +15,7 @@ export interface UserStore {
   token: string | null
   userInfo: Record<string, any> | null
 }
+
+export interface TestStore {
+  count: number
+}

@@ -15,25 +15,23 @@ export const routerArray: AppRouteModule[] = metaRouters
     []
   )
 
-export const routes: AppRouteModule[] = [
-  {
-    path: '/',
-    element: <Navigate to="/login" />
-  },
-  {
-    path: '/login',
-    element: <Login />,
-    meta: {
-      title: '登录页'
+export const routes: AppRouteModule[] = resolvePath(
+  cloneDeep([
+    {
+      path: '/login',
+      element: <Login />,
+      meta: {
+        title: '登录页'
+      }
+    },
+    ...routerArray,
+    {
+      path: '*',
+      element: <Navigate to="/404" />
     }
-  },
-  ...routerArray,
-  {
-    path: '*',
-    element: <Navigate to="/404" />
-  }
-]
+  ])
+)
 
-const Router = () => useRoutes(resolvePath(cloneDeep(routes)) as RouteObject[])
+const Router = () => useRoutes(routes as RouteObject[])
 
 export default Router

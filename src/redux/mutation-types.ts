@@ -11,3 +11,5 @@ export const SET_ADD_ROUTES = 'SET_ADD_ROUTES'
 export const SET_TOKEN = 'SET_TOKEN'
 
 export const SET_USERINFO = 'SET_USERINFO'
+
+export const UPDATE_COUNT = 'UPDATE_COUNT'

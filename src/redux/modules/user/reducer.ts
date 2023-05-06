@@ -1,9 +1,10 @@
 import { UserStore } from '@/redux/type'
 import produce from 'immer'
 import * as types from '@/redux/mutation-types'
+import { getToken } from '@/utils/auth'
 
 const initialState: UserStore = {
-  token: null,
+  token: getToken(),
   roles: [],
   userInfo: null
 }

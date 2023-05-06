@@ -5,10 +5,11 @@ export interface RouteMeta {
   icon?: string
   breadcrumb?: boolean
   activeMenu?: string
+  requiresAuth?: boolean
 }
 
 export interface AppRouteRecordRaw extends Omit<RouteObject, 'children'> {
-  path: string
+  path?: string
   component?: string | React.ReactNode
   name?: string
   code?: string

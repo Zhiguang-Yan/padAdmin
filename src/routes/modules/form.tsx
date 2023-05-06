@@ -6,11 +6,11 @@ import LazyLoad from '../lazyLoad'
 // 表单 Form 模块
 const formRouter: AppRouteModule[] = [
   {
-    element: <LayoutIndex />,
+    path: '/form',
     meta: {
       title: '表单'
     },
-    path: '/form',
+    element: <LayoutIndex />,
     children: [
       {
         path: 'basicForm',

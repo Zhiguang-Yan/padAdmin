@@ -2,11 +2,19 @@ import { ConfigProvider } from 'antd'
 import { FC } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import Router from './routes'
+import AuthRouter from './AuthRouter'
+
+const validateMessages = {
+  required: '${label}是必填字段'
+}
+
 const App: FC = () => {
   return (
     <BrowserRouter>
-      <ConfigProvider>
-        <Router></Router>
+      <ConfigProvider form={{ validateMessages }}>
+        <AuthRouter>
+          <Router></Router>
+        </AuthRouter>
       </ConfigProvider>
     </BrowserRouter>
   )
