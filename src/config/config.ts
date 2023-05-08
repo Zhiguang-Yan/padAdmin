@@ -10,6 +10,7 @@ export const TABS_BLACK_LIST: string[] = [
 
 // * 首页地址（默认）
 export const HOME_URL: string = '/dashboard'
+export const WHITE_LIST: string[] = ['/login', '/404', '/403', '/500']
 
 // * 高德地图key
 export const MAP_KEY: string = ''

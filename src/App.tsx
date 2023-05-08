@@ -13,7 +13,7 @@ const App: FC = () => {
     <BrowserRouter>
       <ConfigProvider form={{ validateMessages }}>
         <AuthRouter>
-          <Router></Router>
+          <Router />
         </AuthRouter>
       </ConfigProvider>
     </BrowserRouter>

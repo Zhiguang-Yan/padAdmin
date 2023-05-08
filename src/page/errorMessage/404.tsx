@@ -1,22 +1,18 @@
 import { Result, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { FC } from 'react'
+import { HOME_URL } from '@/config/config'
 
 const NotFound: FC = () => {
   const navigate = useNavigate()
-  function goHome() {
-    navigate({
-      pathname: '/'
-    })
-  }
   return (
     <div>
       <Result
         status="404"
         title="404"
-        subTitle="不好意思，你没有该权限，请联系领导开通"
+        subTitle="找不到页面"
         extra={
-          <Button type="primary" onClick={goHome}>
+          <Button type="primary" onClick={() => navigate(HOME_URL)}>
             Back Home
           </Button>
         }

@@ -13,7 +13,7 @@ export const getUserInfoApi = (): Promise<any> => {
     resolve({
       data: {
         username: 'jack',
-        roles: ['admin']
+        roles: ['form', 'basicForm', 'dynamicForm', 'dashboard']
       }
     })
   })

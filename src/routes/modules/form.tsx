@@ -7,6 +7,7 @@ import LazyLoad from '../lazyLoad'
 const formRouter: AppRouteModule[] = [
   {
     path: '/form',
+    code: 'form',
     meta: {
       title: '表单'
     },
@@ -14,6 +15,7 @@ const formRouter: AppRouteModule[] = [
     children: [
       {
         path: 'basicForm',
+        code: 'basicForm',
         element: LazyLoad(lazy(() => import('@/page/form/basicForm/index'))),
         meta: {
           title: '基础表单'
@@ -21,6 +23,7 @@ const formRouter: AppRouteModule[] = [
       },
       {
         path: 'dynamicForm',
+        code: 'dynamicForm',
         element: LazyLoad(lazy(() => import('@/page/form/dynamicForm/index'))),
         meta: {
           title: '动态表单'

@@ -19,6 +19,7 @@ export const routes: AppRouteModule[] = resolvePath(
   cloneDeep([
     {
       path: '/login',
+      code: 'login',
       element: <Login />,
       meta: {
         title: '登录页'

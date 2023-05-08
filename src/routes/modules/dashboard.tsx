@@ -9,6 +9,7 @@ const homeRouter: AppRouteModule[] = [
     children: [
       {
         path: 'dashboard',
+        code: 'dashboard',
         element: <Dashboard />
       }
     ]

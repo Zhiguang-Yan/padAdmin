@@ -16,6 +16,8 @@ export interface UserStore {
   userInfo: Record<string, any> | null
 }
 
-export interface TestStore {
-  count: number
+export interface Store {
+  app: AppStore
+  user: UserStore
+  permission: PermissionStore
 }
