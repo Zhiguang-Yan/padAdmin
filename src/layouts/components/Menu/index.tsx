@@ -32,9 +32,10 @@ const getItem = (
 })
 const LayoutMenu = (props) => {
   const { roles } = props
+  // 生成侧边栏菜单
   const generateMenu = (routes: AppRouteModule[], roles: string[]): IMenu[] => {
     return routes.reduce((acc: IMenu[], route) => {
-      const children = route.children
+      const children = route.children?.filter((child) => roles.includes(child.code!))
       const title = route.meta?.title || ''
       if (route.code && !route.hidden && roles.includes(route.code)) {
         const subMenu = children?.length ? generateMenu(children, roles) : []
@@ -44,7 +45,7 @@ const LayoutMenu = (props) => {
           icon: <AppstoreOutlined />,
           children: [...subMenu]
         }
-        if (route.children?.length === 1 && !route.alwaysShow) {
+        if (children?.length === 1 && !route.alwaysShow) {
           menuItem = { ...menuItem, ...menuItem.children![0] }
         }
         acc.push(menuItem)
@@ -52,25 +53,24 @@ const LayoutMenu = (props) => {
       return acc
     }, [])
   }
-
-  const showOnlyChildren = (menus: IMenu[]): MenuItem[] => {
+  /**
+   * 生成ant侧边栏
+   * @param menus
+   * @returns
+   */
+  const generateSide = (menus: IMenu[]): MenuItem[] => {
     return menus.map((menu) =>
       getItem(
         menu.title,
         menu.path,
         menu.icon,
-        menu.children?.length ? showOnlyChildren(menu.children) : undefined
+        menu.children?.length ? generateSide(menu.children) : undefined
       )
     )
   }
-  console.log(showOnlyChildren(generateMenu(routes, roles.concat(WHITE_CODE))))
-
   return (
     <div className="menu">
-      <Menu
-        mode="inline"
-        items={showOnlyChildren(generateMenu(routes, roles.concat(WHITE_CODE)))}
-      />
+      <Menu mode="inline" items={generateSide(generateMenu(routes, roles.concat(WHITE_CODE)))} />
     </div>
   )
 }
