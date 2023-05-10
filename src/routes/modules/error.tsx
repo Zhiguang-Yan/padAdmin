@@ -5,6 +5,7 @@ const errorRouter: AppRouteModule[] = [
   {
     path: '/404',
     code: '404',
+    hidden: true,
     element: LazyLoad(lazy(() => import('@/page/errorMessage/404'))),
     meta: {
       title: '404页面'
@@ -13,6 +14,7 @@ const errorRouter: AppRouteModule[] = [
   {
     path: '/403',
     code: '403',
+    hidden: true,
     element: LazyLoad(lazy(() => import('@/page/errorMessage/403'))),
     meta: {
       title: '403页面'
@@ -21,6 +23,7 @@ const errorRouter: AppRouteModule[] = [
   {
     path: '/500',
     code: '500',
+    hidden: true,
     element: LazyLoad(lazy(() => import('@/page/errorMessage/500'))),
     meta: {
       title: '500页面'

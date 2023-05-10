@@ -5,12 +5,16 @@ import Dashboard from '@/page/dashboard'
 const homeRouter: AppRouteModule[] = [
   {
     path: '/',
+    code: 'layout',
     element: <LayoutIndex />,
     children: [
       {
         path: 'dashboard',
         code: 'dashboard',
-        element: <Dashboard />
+        element: <Dashboard />,
+        meta: {
+          title: '首页'
+        }
       }
     ]
   }

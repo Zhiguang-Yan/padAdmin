@@ -23,7 +23,7 @@ export const getInfo = () => {
     })
     dispatch({
       type: types.SET_ROLES,
-      payload: data.roles
+      payload: [...data.roles]
     })
   }
 }

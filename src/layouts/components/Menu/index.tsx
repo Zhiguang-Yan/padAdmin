@@ -1,17 +1,21 @@
-import { FC, ReactNode, Key } from 'react'
+import { ReactNode, Key } from 'react'
+import { connect } from 'react-redux'
 import './index.scss'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
-
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  PieChartOutlined
-} from '@ant-design/icons'
+import type { AppRouteModule } from '@/routes/type'
+import { routes } from '@/routes'
+import { WHITE_CODE } from '@/config/config'
+import { AppstoreOutlined } from '@ant-design/icons'
 
 type MenuItem = Required<MenuProps>['items'][number]
+
+interface IMenu {
+  title: string
+  path: string
+  icon?: ReactNode
+  children?: IMenu[]
+}
 
 const getItem = (
   label: ReactNode,
@@ -26,33 +30,54 @@ const getItem = (
   label,
   type
 })
+const LayoutMenu = (props) => {
+  const { roles } = props
+  const generateMenu = (routes: AppRouteModule[], roles: string[]): IMenu[] => {
+    return routes.reduce((acc: IMenu[], route) => {
+      const children = route.children
+      const title = route.meta?.title || ''
+      if (route.code && !route.hidden && roles.includes(route.code)) {
+        const subMenu = children?.length ? generateMenu(children, roles) : []
+        let menuItem: IMenu = {
+          title: title,
+          path: route.path,
+          icon: <AppstoreOutlined />,
+          children: [...subMenu]
+        }
+        if (route.children?.length === 1 && !route.alwaysShow) {
+          menuItem = { ...menuItem, ...menuItem.children![0] }
+        }
+        acc.push(menuItem)
+      }
+      return acc
+    }, [])
+  }
 
-const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('Option 3', '3', <ContainerOutlined />),
+  const showOnlyChildren = (menus: IMenu[]): MenuItem[] => {
+    return menus.map((menu) =>
+      getItem(
+        menu.title,
+        menu.path,
+        menu.icon,
+        menu.children?.length ? showOnlyChildren(menu.children) : undefined
+      )
+    )
+  }
+  console.log(showOnlyChildren(generateMenu(routes, roles.concat(WHITE_CODE))))
 
-  getItem('Navigation One', 'sub1', <MailOutlined />, [
-    getItem('Option 5', '5'),
-    getItem('Option 6', '6'),
-    getItem('Option 7', '7'),
-    getItem('Option 8', '8')
-  ]),
-
-  getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-
-    getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')])
-  ])
-]
-
-const LayoutMenu: FC = () => {
   return (
     <div className="menu">
-      <Menu mode="inline" items={items} />
+      <Menu
+        mode="inline"
+        items={showOnlyChildren(generateMenu(routes, roles.concat(WHITE_CODE)))}
+      />
     </div>
   )
 }
 
-export default LayoutMenu
+const mapStateToProps = (state: Store) => ({
+  roles: state.user.roles
+})
+
+const mapDispatchToProps = {}
+export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu)

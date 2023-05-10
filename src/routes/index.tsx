@@ -20,6 +20,7 @@ export const routes: AppRouteModule[] = resolvePath(
     {
       path: '/login',
       code: 'login',
+      hidden: true,
       element: <Login />,
       meta: {
         title: '登录页'

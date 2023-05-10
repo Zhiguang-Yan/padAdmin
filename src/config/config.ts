@@ -12,6 +12,8 @@ export const TABS_BLACK_LIST: string[] = [
 export const HOME_URL: string = '/dashboard'
 export const WHITE_LIST: string[] = ['/login', '/404', '/403', '/500', '/dashboard']
 
+export const WHITE_CODE: string[] = ['login', '404', '403', '500', 'dashboard', 'layout']
+
 // * 高德地图key
 export const MAP_KEY: string = ''
 
