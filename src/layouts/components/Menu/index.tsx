@@ -1,4 +1,5 @@
-import { ReactNode, Key } from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ReactNode, Key, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './index.scss'
 import { Menu } from 'antd'
@@ -7,6 +8,7 @@ import type { AppRouteModule } from '@/routes/type'
 import { routes } from '@/routes'
 import { WHITE_CODE } from '@/config/config'
 import { AppstoreOutlined } from '@ant-design/icons'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -30,8 +32,13 @@ const getItem = (
   label,
   type
 })
+
 const LayoutMenu = (props) => {
-  const { roles } = props
+  const { roles, theme, uniqueOpened } = props
+  const { pathname } = useLocation()
+  const [openKeys, setOpenKeys] = useState<string[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
+  const navigate = useNavigate()
   // 生成侧边栏菜单
   const generateMenu = (routes: AppRouteModule[], roles: string[]): IMenu[] => {
     return routes.reduce((acc: IMenu[], route) => {
@@ -68,15 +75,47 @@ const LayoutMenu = (props) => {
       )
     )
   }
+  const clickMenu: MenuProps['onClick'] = (item) => {
+    navigate(item.key)
+  }
+  // 设置当前展开的 subMenu
+  const onOpenChange: MenuProps['onOpenChange'] = (keys: string[]) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
+    const keysFilter: string[] = latestOpenKey
+      ? latestOpenKey
+          .split('/')
+          .filter(Boolean)
+          .reduce((acc: string[], key) => {
+            acc.push(`${acc.length ? acc[acc.length - 1] : acc}/${key}`)
+            return acc
+          }, [])
+      : keys
+    setOpenKeys(keysFilter)
+  }
+
+  useEffect(() => {
+    setSelectedKeys([pathname])
+  }, [pathname])
   return (
     <div className="menu">
-      <Menu mode="inline" items={generateSide(generateMenu(routes, roles.concat(WHITE_CODE)))} />
+      <Menu
+        mode="inline"
+        triggerSubMenuAction="click"
+        theme={theme}
+        openKeys={openKeys}
+        selectedKeys={selectedKeys}
+        onOpenChange={uniqueOpened ? onOpenChange : (keys) => setOpenKeys(keys)}
+        items={generateSide(generateMenu(routes, roles.concat(WHITE_CODE)))}
+        onClick={clickMenu}
+      />
     </div>
   )
 }
 
 const mapStateToProps = (state: Store) => ({
-  roles: state.user.roles
+  roles: state.user.roles,
+  theme: state.app.theme,
+  isCollapse: state.app.isCollapse
 })
 
 const mapDispatchToProps = {}

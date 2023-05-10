@@ -4,7 +4,8 @@ import * as types from '@/redux/mutation-types'
 
 const initialState: AppStore = {
   isCollapse: false,
-  language: 'en'
+  language: 'en',
+  theme: 'light'
 }
 
 const app = (state: AppStore = initialState, { type, payload }) =>
@@ -15,6 +16,9 @@ const app = (state: AppStore = initialState, { type, payload }) =>
         break
       case types.SET_LANGUAGE:
         draftState.language = payload
+        break
+      case types.SET_THEME:
+        draftState.theme = payload
         break
       default:
         return draftState
