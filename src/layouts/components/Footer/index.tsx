@@ -1,7 +1,8 @@
 import { FC } from 'react'
+import { Layout } from 'antd'
+const { Footer } = Layout
 
-const Footer: FC = () => {
-  return <div>脚部</div>
+const LayoutFooter: FC = () => {
+  return <Footer style={{ textAlign: 'center' }}>PAD ADMIN ©2023 Created by YZG</Footer>
 }
-
-export default Footer
+export default LayoutFooter

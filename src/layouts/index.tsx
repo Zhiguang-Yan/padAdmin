@@ -1,24 +1,32 @@
 import { FC } from 'react'
+import { connect } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import LayoutHeader from './components/Header'
 import LayoutFooter from './components/Footer'
 import LayoutMenu from './components/Menu'
 import './index.scss'
-const Layouts: FC = () => {
-  const { Sider } = Layout
+
+const Layouts = (props) => {
+  const { Sider, Content } = Layout
+  const { isCollapse } = props
   return (
     <section className="container">
-      <Sider>
-        <LayoutMenu />
+      <Sider collapsible collapsed={isCollapse} trigger={null}>
+        <LayoutMenu uniqueOpened />
       </Sider>
       <Layout>
         <LayoutHeader />
-        <Outlet />
+        <Content>
+          <Outlet />
+        </Content>
         <LayoutFooter />
       </Layout>
     </section>
   )
 }
 
-export default Layouts
+const mapStateToProps = (state: Store) => ({
+  isCollapse: state.app.isCollapse
+})
+export default connect(mapStateToProps, null)(Layouts)

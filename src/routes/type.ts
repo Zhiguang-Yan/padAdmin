@@ -1,8 +1,8 @@
 import type { RouteObject } from 'react-router-dom'
-
+import { ReactNode } from 'react'
 export interface RouteMeta {
   title?: string
-  icon?: string
+  icon?: ReactNode | string
   breadcrumb?: boolean
   activeMenu?: string
   requiresAuth?: boolean
