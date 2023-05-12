@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { LayoutIndex } from '../constant'
 import type { AppRouteModule } from '../type'
 import LazyLoad from '../lazyLoad'
+import { AppstoreOutlined } from '@ant-design/icons'
 
 // 表单 Form 模块
 const formRouter: AppRouteModule[] = [
@@ -9,7 +10,8 @@ const formRouter: AppRouteModule[] = [
     path: '/form',
     code: 'form',
     meta: {
-      title: '表单'
+      title: '表单',
+      icon: <AppstoreOutlined />
     },
     element: <LayoutIndex />,
     children: [

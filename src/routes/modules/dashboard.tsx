@@ -2,6 +2,8 @@ import { LayoutIndex } from '../constant'
 import type { AppRouteModule } from '../type'
 import Dashboard from '@/page/dashboard'
 
+import { AppstoreOutlined } from '@ant-design/icons'
+
 const homeRouter: AppRouteModule[] = [
   {
     path: '/',
@@ -13,7 +15,8 @@ const homeRouter: AppRouteModule[] = [
         code: 'dashboard',
         element: <Dashboard />,
         meta: {
-          title: '首页'
+          title: '首页',
+          icon: <AppstoreOutlined />
         }
       }
     ]

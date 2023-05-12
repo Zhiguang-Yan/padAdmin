@@ -1,10 +1,11 @@
-import welcome from '@/assets/images/welcome01.png'
+import SvgIcon from '@/components/SvgIcon'
 import './index.scss'
 
 const Home = () => {
   return (
-    <div className="home card">
-      <img src={welcome} alt="welcome" />
+    <div>
+      <SvgIcon name="weChat" />
+      <SvgIcon name="qq" />
     </div>
   )
 }

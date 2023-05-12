@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import LazyLoad from '../lazyLoad'
 import { LayoutIndex } from '../constant'
 import type { AppRouteModule } from '../type'
+import { AppstoreOutlined } from '@ant-design/icons'
 
 const menuRouter: AppRouteModule[] = [
   {
@@ -9,7 +10,8 @@ const menuRouter: AppRouteModule[] = [
     code: 'menu',
     element: <LayoutIndex />,
     meta: {
-      title: '嵌套菜单'
+      title: '嵌套菜单',
+      icon: <AppstoreOutlined />
     },
     children: [
       {

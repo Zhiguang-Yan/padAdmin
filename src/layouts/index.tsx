@@ -8,7 +8,7 @@ import LayoutMenu from './components/Menu'
 import './index.scss'
 
 const Layouts = (props) => {
-  const { Sider } = Layout
+  const { Sider, Content } = Layout
   const { isCollapse } = props
   return (
     <section className="container">
@@ -17,7 +17,9 @@ const Layouts = (props) => {
       </Sider>
       <Layout>
         <LayoutHeader />
-        <Outlet />
+        <Content>
+          <Outlet />
+        </Content>
         <LayoutFooter />
       </Layout>
     </section>
