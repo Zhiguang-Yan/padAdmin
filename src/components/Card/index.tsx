@@ -3,7 +3,7 @@ import Heart from '@/components/Heart'
 import './index.scss'
 const Card: FC = () => {
   return (
-    <div className="card">
+    <div className="card_box">
       <div className="bg">
         <img src="https://bpic.588ku.com/back_our/20210304/bg/7efeeecb5f885.png" alt="" />
       </div>

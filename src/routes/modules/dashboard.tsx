@@ -1,8 +1,7 @@
 import { LayoutIndex } from '../constant'
 import type { AppRouteModule } from '../type'
 import Dashboard from '@/page/dashboard'
-
-import { AppstoreOutlined } from '@ant-design/icons'
+import { ReactComponent as Qq } from '@/icons/svg/qq.svg'
 
 const homeRouter: AppRouteModule[] = [
   {
@@ -16,7 +15,7 @@ const homeRouter: AppRouteModule[] = [
         element: <Dashboard />,
         meta: {
           title: '首页',
-          icon: <AppstoreOutlined />
+          icon: <Qq className="menu_icon" />
         }
       }
     ]
