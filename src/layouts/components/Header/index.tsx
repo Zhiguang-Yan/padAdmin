@@ -3,6 +3,7 @@ import { Layout, Button } from 'antd'
 import { connect } from 'react-redux'
 import { updateCollapse } from '@/redux/modules/app/action'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import Logout from '@/components/Logout'
 
 const { Header } = Layout
 const LayoutHeader = (props) => {
@@ -15,6 +16,7 @@ const LayoutHeader = (props) => {
         icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={() => updateCollapse(!isCollapse)}
       />
+      <Logout />
     </Header>
   )
 }
