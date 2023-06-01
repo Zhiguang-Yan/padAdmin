@@ -32,7 +32,7 @@ const useTestChart = (options)=>{
 
     useEffect(()=>{
         myChart?.setOption(chartOption);
-    },[chartOption])
+    },[options])
 
     function chartResize (){
         debounce( ()=> {
