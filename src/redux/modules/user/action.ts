@@ -1,11 +1,14 @@
 import * as types from '@/redux/mutation-types'
 import { Dispatch } from 'react'
 import { loginApi, getUserInfoApi, logoutApi } from '@/api/user'
-import { setToken, removeToken } from '@/utils/auth'
+import { setToken, removeToken, getToken } from '@/utils/auth'
 
-export const login = () => {
+export const login = (username: string, password: string) => {
   return async (dispatch: Dispatch<DispatchProps>) => {
-    const { data } = await loginApi()
+    const { data } = await loginApi({
+      username,
+      password
+    })
     dispatch({
       type: types.SET_TOKEN,
       payload: data.token
@@ -16,7 +19,7 @@ export const login = () => {
 
 export const getInfo = () => {
   return async (dispatch: Dispatch<DispatchProps>) => {
-    const { data } = await getUserInfoApi()
+    const { data } = await getUserInfoApi(getToken())
     dispatch({
       type: types.SET_USERINFO,
       payload: data.username
@@ -36,6 +39,10 @@ export const logout = () => {
       payload: null
     })
     dispatch({
+      type: types.SET_TOKEN,
+      payload: null
+    })
+    dispatch({
       type: types.SET_ROLES,
       payload: []
     })
@@ -47,6 +54,10 @@ export const resetToken = () => {
   return (dispatch: Dispatch<DispatchProps>) => {
     dispatch({
       type: types.SET_USERINFO,
+      payload: null
+    })
+    dispatch({
+      type: types.SET_TOKEN,
       payload: null
     })
     dispatch({
