@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { useEcharts } from '@/hooks/useEcharts'
 import type { EChartsOption } from 'echarts'
-import * as echarts from 'echarts'
 
 interface PropsType {
   className?: string
