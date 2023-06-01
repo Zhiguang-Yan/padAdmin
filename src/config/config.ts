@@ -9,10 +9,25 @@ export const TABS_BLACK_LIST: string[] = [
 ]
 
 // * 首页地址（默认）
-export const HOME_URL: string = '/dashboard'
-export const WHITE_LIST: string[] = ['/login', '/404', '/403', '/500', '/dashboard']
+export const HOME_URL: string = '/layout/dashboard'
+export const WHITE_LIST: string[] = [
+  '/login',
+  '/404',
+  '/403',
+  '/500',
+  '/layout/dashboard',
+  '/layout/workbench'
+]
 
-export const WHITE_CODE: string[] = ['login', '404', '403', '500', 'dashboard', 'layout']
+export const WHITE_CODE: string[] = [
+  'login',
+  '404',
+  '403',
+  '500',
+  'dashboard',
+  'workbench',
+  'layout'
+]
 
 // * 高德地图key
 export const MAP_KEY: string = ''

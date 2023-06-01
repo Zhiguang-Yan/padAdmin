@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useEcharts } from '@/hooks/useEcharts'
 import type { EChartsOption } from 'echarts'
+import * as echarts from 'echarts'
 
 interface PropsType {
   className?: string
@@ -16,9 +17,9 @@ const BarChart: FC<PropsType> = (props) => {
         type: 'line'
       },
       formatter: (params) =>
-        `${params[0].name}<br/>${params[0].marker}${params[0].seriesName}：${Number(
-          (params[0].value.toFixed(4) / 10000).toFixed(2)
-        ).toLocaleString()} 万元`
+        `${params[0].name}<br/>${params[0].marker}${
+          params[0].seriesName
+        }：${params[0].value.toLocaleString()} 亿元`
     },
     grid: {
       bottom: 0,
@@ -26,7 +27,16 @@ const BarChart: FC<PropsType> = (props) => {
       right: 60,
       left: 50
     },
-    color: '#1890FF',
+    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+      {
+        offset: 0,
+        color: '#3ED473'
+      },
+      {
+        offset: 1,
+        color: '#399EFB'
+      }
+    ]),
     xAxis: {
       type: 'value',
       show: false
@@ -45,26 +55,7 @@ const BarChart: FC<PropsType> = (props) => {
         axisLine: {
           show: false
         },
-        data: ['富豪', '黄忠', '凯', '姜子牙', '刘备', '刘禅', '李信', '穷逼']
-      },
-      {
-        type: 'category',
-        inverse: true,
-        axisTick: 'none',
-        axisLine: {
-          show: false
-        },
-        show: true,
-        axisLabel: {
-          formatter: function (value) {
-            if (value >= 10000) {
-              return (value / 10000).toLocaleString() + '万'
-            } else {
-              return value.toLocaleString()
-            }
-          }
-        },
-        data: [990000, 860000, 740000, 650000, 580000, 470000, 360000, 250000]
+        data: ['南山区', '福田区', '罗湖区', '宝安区', '龙华区', '龙岗区']
       }
     ],
     series: [
@@ -72,10 +63,17 @@ const BarChart: FC<PropsType> = (props) => {
         name: '累计消费',
         type: 'bar',
         itemStyle: {
-          borderRadius: 15
+          borderRadius: 4
         },
-        barWidth: 10,
-        data: [990000, 860000, 740000, 650000, 580000, 470000, 360000, 250000]
+        barWidth: 25,
+        data: [650, 390, 374, 341, 302, 320],
+        label: {
+          show: true,
+          position: 'right',
+          color: '#399EFB',
+          fontSize: 14,
+          formatter: '{c}亿元'
+        }
       }
     ]
   }
@@ -95,7 +93,7 @@ const BarChart: FC<PropsType> = (props) => {
 
 BarChart.defaultProps = {
   className: '',
-  height: '200px',
+  height: '300px',
   width: '100%'
 }
 export default BarChart
