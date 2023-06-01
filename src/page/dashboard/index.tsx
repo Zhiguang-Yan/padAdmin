@@ -1,11 +1,9 @@
-import SvgIcon from '@/components/SvgIcon'
 import './index.scss'
-
+import Card from '@/components/Card'
 const Home = () => {
   return (
-    <div>
-      <SvgIcon name="weChat" />
-      <SvgIcon name="qq" />
+    <div className="home">
+      <Card />
     </div>
   )
 }

@@ -1,39 +1,43 @@
 const path = require('path')
+const resolve = (dir: string) => path.join(__dirname, dir)
 
-const svgConfig = {
-  test: /\.svg$/,
-  include: [path.resolve(__dirname, 'src/assets/svg')],
-  use: [
-    {
-      loader: 'svg-sprite-loader',
-      options: {
-        symbolId: 'icon-[name]'
-      }
-    },
-    {
-      loader: 'svgo-loader',
-      options: {
-        plugins: [
-          {
-            name: 'removeAttrs',
-            params: {
-              attrs: 'fill'
+const customRules = [
+  {
+    test: /\.svg$/,
+    include: resolve('src/assets/svg'),
+    type: 'javascript/auto',
+    use: [
+      {
+        loader: 'svg-sprite-loader',
+        options: {
+          symbolId: 'icon-[name]'
+        }
+      },
+      {
+        loader: 'svgo-loader',
+        options: {
+          plugins: [
+            {
+              name: 'removeAttrs',
+              params: {
+                attrs: 'fill'
+              }
             }
-          }
-        ]
+          ]
+        }
       }
-    }
-  ]
-}
-
+    ]
+  }
+]
 module.exports = {
   webpack: {
     // 配置路径别名
     alias: {
-      '@': path.join(__dirname, 'src')
+      '@': resolve('src')
     },
+    chainWebpack: {},
     configure: (webpackConfig) => {
-      webpackConfig.module.rules.push(svgConfig)
+      webpackConfig.module.rules = [...webpackConfig.module.rules]
       return webpackConfig
     }
   },

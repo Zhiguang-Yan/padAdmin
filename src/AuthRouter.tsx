@@ -17,9 +17,8 @@ const axiosCanceler = new AxiosCanceler()
  */
 const AuthRouter = (props) => {
   const { getInfo, children } = props
-  const [renderChild, setRenderChild] = useState(children)
+  const [renderChild, setRenderChild] = useState<any>()
   const { pathname } = useLocation()
-
   /**
    * 将路由数组扁平化为权限数组。
    * @param routes - 路由对象数组。
@@ -57,6 +56,7 @@ const AuthRouter = (props) => {
    */
   const handleRouteChange = () => {
     axiosCanceler.removeAllPending()
+    setRenderChild(children)
     if (!checkIsLoggedIn()) {
       if (WHITE_LIST.indexOf(pathname) === -1) {
         setRenderChild(<Navigate to={`/login?redirect=${pathname}`} replace />)
@@ -84,13 +84,11 @@ const AuthRouter = (props) => {
           message.error(e as string)
           setRenderChild(<Navigate to={`/login?redirect=${pathname}`} replace />)
         })
-      return
     }
-    setRenderChild(children)
   }
 
   useEffect(() => {
-    handleRouteChange()
+    pathname && handleRouteChange()
   }, [pathname])
 
   return renderChild
