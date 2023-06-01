@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { getInfo } from '@/redux/modules/user/action'
 import { useEffect, useState } from 'react'
 import { routes } from '@/routes/index'
-import { store } from '@/redux'
+import store from '@/redux'
 import type { AppRouteModule } from '@/routes/type'
 
 const axiosCanceler = new AxiosCanceler()
