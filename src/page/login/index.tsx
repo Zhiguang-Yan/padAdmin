@@ -1,18 +1,20 @@
 import { FC } from 'react'
 import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Form, Input, Space, message } from 'antd'
 import { login } from '@/redux/modules/user/action'
 import './index.scss'
 import { HOME_URL } from '@/config/config'
 
 const Login: FC = (props: any) => {
+  const { search } = useLocation()
+  const redirect = new URLSearchParams(search).get('redirect') || HOME_URL
   const { login } = props
   const navigate = useNavigate()
   const onFinish = (loginForm) => {
-    login()
+    login(loginForm.username, loginForm.password)
       .then(() => {
-        navigate(HOME_URL)
+        navigate(redirect)
       })
       .catch((error) => {
         console.error(error)

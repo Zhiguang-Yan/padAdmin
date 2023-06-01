@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation, Navigate } from 'react-router-dom'
 import { AxiosCanceler } from '@/utils/http/helper'
 import { HOME_URL, WHITE_LIST } from '@/config/config'
@@ -41,13 +42,7 @@ const AuthRouter = (props) => {
    * 检查是否已经登录。如果未登录，则需要先将用户重定向到登录页面以进行身份验证。
    * @returns 如果已登录，则返回 true；否则返回 false。
    */
-  const checkIsLoggedIn = (): boolean => {
-    if (!!store.getState().user.token) {
-      return true
-    } else {
-      return false
-    }
-  }
+  const checkIsLoggedIn = (): boolean => !!store.getState().user.token
 
   /**
    * 处理路由跳转事件。
@@ -59,7 +54,10 @@ const AuthRouter = (props) => {
     setRenderChild(children)
     if (!checkIsLoggedIn()) {
       if (WHITE_LIST.indexOf(pathname) === -1) {
-        setRenderChild(<Navigate to={`/login?redirect=${pathname}`} replace />)
+        if (pathname !== '/') {
+          return setRenderChild(<Navigate to={`/login?redirect=${pathname}`} replace />)
+        }
+        setRenderChild(<Navigate to={`/login`} />)
       }
       return
     }
@@ -78,7 +76,6 @@ const AuthRouter = (props) => {
             setRenderChild(<Navigate to="/403" />)
             return
           }
-          setRenderChild(children)
         })
         .catch((e) => {
           message.error(e as string)

@@ -1,34 +1,51 @@
-export const loginApi = (): Promise<any> => {
+export const loginApi = (params: { username: string; password: string }): Promise<any> => {
   return new Promise((resolve) => {
     resolve({
       data: {
-        token: 'fuck_token'
+        token: params.username === 'admin' ? 'admin' : 'roles'
       }
     })
   })
 }
 
-export const getUserInfoApi = (): Promise<any> => {
+export const getUserInfoApi = (cookie: string): Promise<any> => {
   return new Promise((resolve) => {
     resolve({
       data: {
         username: 'jack',
-        roles: [
-          'form',
-          'basicForm',
-          'dashboard',
-          'dynamicForm',
-          'menu',
-          'menu1',
-          'menu2',
-          'menu21',
-          'menu22',
-          'menu221',
-          'menu222',
-          'menu3',
-          'menu31',
-          'menu32'
-        ]
+        roles:
+          cookie === 'admin'
+            ? [
+                'form',
+                'basicForm',
+                'dashboard',
+                'dynamicForm',
+                'menu',
+                'menu1',
+                'menu2',
+                'menu21',
+                'menu22',
+                'menu221',
+                'menu222',
+                'menu3',
+                'menu31',
+                'menu32'
+              ]
+            : [
+                'form',
+                'basicForm',
+                'dashboard',
+                'menu',
+                'menu1',
+                'menu2',
+                'menu21',
+                'menu22',
+                'menu221',
+                'menu222',
+                'menu3',
+                'menu31',
+                'menu32'
+              ]
       }
     })
   })
