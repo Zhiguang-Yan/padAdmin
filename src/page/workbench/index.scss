@@ -1,0 +1,21 @@
+.blue_header {
+  background: linear-gradient(90deg, #60b2fb, #6485f6);
+}
+.font_color {
+  color: #fff;
+  fill: #fff !important;
+}
+.good_box {
+  display: flex;
+  & > div {
+    flex: 1;
+    text-align: center;
+    & > div {
+      margin: 15px 0;
+    }
+  }
+  .fw {
+    font-weight: bold;
+    font-size: 28px;
+  }
+}

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import './index.scss'
-import { ArrowRightOutlined } from '@ant-design/icons'
+import { ExportOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { logout } from '@/redux/modules/user/action'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ export const Logout = (props) => {
   return (
     <Button type="text" className="logout" onClick={handleLogout}>
       退出
-      <ArrowRightOutlined />
+      <ExportOutlined />
     </Button>
   )
 }
