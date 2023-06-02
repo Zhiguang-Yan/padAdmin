@@ -4,19 +4,25 @@ import { connect } from 'react-redux'
 import { updateCollapse } from '@/redux/modules/app/action'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import Logout from '@/components/Logout'
+import Breadcrumb from '@/components/Breadcrumb'
 
 const { Header } = Layout
 const LayoutHeader = (props) => {
   const { isCollapse, updateCollapse } = props
   return (
     <Header className="pad_header">
-      <Button
-        className="header_btn"
-        type="text"
-        icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={() => updateCollapse(!isCollapse)}
-      />
-      <Logout />
+      <div className="nav_left">
+        <Button
+          className="header_btn"
+          type="text"
+          icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => updateCollapse(!isCollapse)}
+        />
+        <Breadcrumb />
+      </div>
+      <div className="nav_right">
+        <Logout />
+      </div>
     </Header>
   )
 }

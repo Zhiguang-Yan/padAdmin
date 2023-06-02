@@ -1,6 +1,7 @@
 import { FC } from 'react'
+import { useEcharts } from '@/hooks/useEcharts'
 import type { EChartsOption } from 'echarts'
-import useTestChart from '@/hooks/useTestChart'
+import * as echarts from 'echarts'
 
 interface PropsType {
   className?: string
@@ -8,7 +9,7 @@ interface PropsType {
   height?: string
 }
 
-const TestChart: FC<PropsType> = (props) => {
+const LineChart: FC<PropsType> = (props) => {
   const { className, width, height } = props
   const options: EChartsOption = {
     xAxis: {
@@ -24,7 +25,10 @@ const TestChart: FC<PropsType> = (props) => {
     },
     yAxis: {
       boundaryGap: false,
-      type: 'value'
+      type: 'value',
+      splitLine: {
+        show: false
+      }
     },
     tooltip: {
       trigger: 'axis'
@@ -37,47 +41,34 @@ const TestChart: FC<PropsType> = (props) => {
     },
     series: [
       {
-        data: [1279, 2522, 3225, 4552, 5255, 1200, 4500, 6252, 1456, 1252, 1567, 8956],
-        name: '签单',
+        data: [1279, 1020, 3330, 512, 4463, 1200, 5000, 3000, 1456, 1252, 1567, 3000],
+        name: '销售额',
         type: 'line',
         symbolSize: 1,
         symbol: 'circle',
         smooth: true,
         showSymbol: false,
-        color: '#39C3D5',
+        color: '#73DDBF',
         lineStyle: {
-          width: 3,
-          shadowColor: 'rgba(252, 177, 17, 0)',
+          width: 5,
+          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+            {
+              offset: 0,
+              color: '#9effff'
+            },
+            {
+              offset: 1,
+              color: '#9E87FF'
+            }
+          ]),
+          shadowColor: 'rgba(158,135,255, 0.3)',
           shadowBlur: 10,
           shadowOffsetY: 20
-        },
-        areaStyle: {
-          color: '#39C3D5'
-        }
-      },
-      {
-        data: [2905, 4565, 1548, 5555, 555, 4514, 8874, 4512, 4854, 5888, 9666, 1244],
-        name: '回款',
-        type: 'line',
-        yAxisIndex: 0,
-        symbolSize: 1,
-        color: '#46A6FF',
-        symbol: 'circle',
-        showSymbol: false,
-        smooth: true,
-        lineStyle: {
-          width: 3,
-          shadowColor: 'rgba(252, 177, 17, 0)',
-          shadowBlur: 10,
-          shadowOffsetY: 20
-        },
-        areaStyle: {
-          color: '#46A6FF'
         }
       }
     ]
   }
-  const { chartRef } = useTestChart(options)
+  const { chartRef, setOption } = useEcharts(options)
 
   return (
     <div
@@ -91,10 +82,10 @@ const TestChart: FC<PropsType> = (props) => {
   )
 }
 
-TestChart.defaultProps = {
+LineChart.defaultProps = {
   className: '',
   height: '200px',
   width: '100%'
 }
 
-export default TestChart
+export default LineChart

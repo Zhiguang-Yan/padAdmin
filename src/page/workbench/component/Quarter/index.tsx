@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useEcharts } from '@/hooks/useEcharts'
 import type { EChartsOption } from 'echarts'
+import * as echarts from 'echarts'
 
 interface PropsType {
   className?: string
@@ -14,7 +15,7 @@ const LineChart: FC<PropsType> = (props) => {
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      data: ['一季度', '二季度', '三季度', '四季度'],
       splitLine: {
         show: true
       },
@@ -24,55 +25,71 @@ const LineChart: FC<PropsType> = (props) => {
     },
     yAxis: {
       boundaryGap: false,
-      type: 'value'
+      type: 'value',
+      splitLine: {
+        show: false
+      }
     },
     tooltip: {
       trigger: 'axis'
     },
     grid: {
-      bottom: 20,
-      top: 10,
-      right: 15,
-      left: 50
+      bottom: 80,
+      top: 30,
+      right: 50,
+      left: 60
     },
     series: [
       {
-        data: [1279, 2522, 3225, 4552, 5255, 1200, 4500, 6252, 1456, 1252, 1567, 8956],
-        name: '签单',
+        data: [1345, 2100, 1330, 2910],
+        name: '已完成订单',
         type: 'line',
         symbolSize: 1,
         symbol: 'circle',
         smooth: true,
         showSymbol: false,
-        color: '#39C3D5',
+        color: '#73DDBF',
         lineStyle: {
-          width: 3,
-          shadowColor: 'rgba(252, 177, 17, 0)',
+          width: 5,
+          color: new echarts.graphic.LinearGradient(1, 1, 0, 0, [
+            {
+              offset: 0,
+              color: '#73DD39'
+            },
+            {
+              offset: 1,
+              color: '#73DDFF'
+            }
+          ]),
+          shadowColor: 'rgba(115,221,255, 0.3)',
           shadowBlur: 10,
           shadowOffsetY: 20
-        },
-        areaStyle: {
-          color: '#39C3D5'
         }
       },
       {
-        data: [2905, 4565, 1548, 5555, 555, 4514, 8874, 4512, 4854, 5888, 9666, 1244],
-        name: '回款',
+        data: [1905, 1020, 3330, 512],
+        name: '计划完成订单',
         type: 'line',
-        yAxisIndex: 0,
         symbolSize: 1,
-        color: '#46A6FF',
         symbol: 'circle',
-        showSymbol: false,
         smooth: true,
+        showSymbol: false,
+        color: '#73DDBF',
         lineStyle: {
-          width: 3,
-          shadowColor: 'rgba(252, 177, 17, 0)',
+          width: 5,
+          color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            {
+              offset: 0,
+              color: '#fe9a'
+            },
+            {
+              offset: 1,
+              color: '#fe9a8b'
+            }
+          ]),
+          shadowColor: 'rgba(254,154,139, 0.3)',
           shadowBlur: 10,
           shadowOffsetY: 20
-        },
-        areaStyle: {
-          color: '#46A6FF'
         }
       }
     ]
@@ -93,7 +110,7 @@ const LineChart: FC<PropsType> = (props) => {
 
 LineChart.defaultProps = {
   className: '',
-  height: '200px',
+  height: '298px',
   width: '100%'
 }
 
