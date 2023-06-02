@@ -14,4 +14,9 @@
     -ms-border-radius: 0;
     -o-border-radius: 0;
   }
+  .nav_left {
+    & > div {
+      display: inline-block;
+    }
+  }
 }
