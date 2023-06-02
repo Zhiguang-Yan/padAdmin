@@ -34,10 +34,10 @@ const LineChart: FC<PropsType> = (props) => {
       trigger: 'axis'
     },
     grid: {
-      bottom: 20,
-      top: 10,
-      right: 15,
-      left: 50
+      bottom: 80,
+      top: 30,
+      right: 50,
+      left: 60
     },
     series: [
       {
@@ -110,7 +110,7 @@ const LineChart: FC<PropsType> = (props) => {
 
 LineChart.defaultProps = {
   className: '',
-  height: '200px',
+  height: '298px',
   width: '100%'
 }
 

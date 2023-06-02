@@ -1,7 +1,7 @@
 import { Row, Col } from 'antd'
 import { ReactComponent as Good } from '@/icons/svg/good.svg'
 import { ReactComponent as Target } from '@/icons/svg/target.svg'
-import { PayCircleOutlined } from '@ant-design/icons'
+import { PayCircleOutlined, BarsOutlined } from '@ant-design/icons'
 import './index.scss'
 import BarChart from './component/BarChart'
 import LineChart from './component/LineChart'
@@ -9,7 +9,7 @@ import Quarter from './component/Quarter'
 const Workbench = () => {
   return (
     <Row gutter={20}>
-      <Col span={6}>
+      <Col span={8}>
         <Row gutter={[0, 20]}>
           <Col span={24}>
             <div className="card font_color">
@@ -38,8 +38,8 @@ const Workbench = () => {
           <Col span={24}>
             <div className="card">
               <div className="header">
-                <Good />
-                <span>商品</span>
+                <BarsOutlined />
+                <span>订单</span>
               </div>
               <div className="content">
                 <div className="good_box">
@@ -53,12 +53,12 @@ const Workbench = () => {
                   </div>
                 </div>
               </div>
+              <Quarter />
             </div>
-            <Quarter />
           </Col>
         </Row>
       </Col>
-      <Col span={18}>
+      <Col span={16}>
         <Row gutter={[0, 20]}>
           <Col span={24}>
             <div className="card">
