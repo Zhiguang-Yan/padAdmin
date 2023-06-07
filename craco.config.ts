@@ -1,5 +1,7 @@
 const path = require('path')
 const resolve = (dir: string) => path.join(__dirname, dir)
+const CracoLessPlugin = require('craco-less')
+const { loaderByName } = require('@craco/craco')
 
 const customRules = [
   {
@@ -29,6 +31,7 @@ const customRules = [
     ]
   }
 ]
+const lessModuleRegex = /\.module\.less$/
 module.exports = {
   webpack: {
     // 配置路径别名
@@ -41,6 +44,31 @@ module.exports = {
       return webpackConfig
     }
   },
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        modifyLessModuleRule(lessModuleRule) {
+          lessModuleRule.test = lessModuleRegex
+          const cssLoader = lessModuleRule.use.find(loaderByName('css-loader'))
+          cssLoader.options.modules = {
+            localIdentName: '[local]_[hash:base64:5]'
+          }
+          return lessModuleRule
+        },
+        modifyLessRule(lessRule) {
+          lessRule.exclude = lessModuleRegex
+          return lessRule
+        },
+        lessLoaderOptions: {
+          lessOptions: {
+            modifyVars: {},
+            javascriptEnabled: true
+          }
+        }
+      }
+    }
+  ],
   devServer: {
     proxy: {
       '/api': {

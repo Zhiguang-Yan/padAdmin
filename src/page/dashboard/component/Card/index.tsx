@@ -1,6 +1,6 @@
 import { FC, ReactNode, RefAttributes } from 'react'
 import { ArrowUpOutlined } from '@ant-design/icons'
-import './index.scss'
+import styles from './index.module.less'
 
 interface PropsType {
   title: string | ReactNode
@@ -13,16 +13,16 @@ interface PropsType {
 const Card: FC<PropsType & RefAttributes<HTMLElement>> = (props) => {
   const { title, count, icon, percent, className } = props
   return (
-    <div className={`card_ ${className}`}>
-      <div className="title">{title}</div>
-      <div className="content">
-        <div className="count">{count}</div>
-        <div className="icon">{icon}</div>
+    <div className={`${styles.card} ${styles[className!]}`}>
+      <div>{title}</div>
+      <div className={styles.content}>
+        <div>{count}</div>
+        <div className={styles.icon}>{icon}</div>
       </div>
-      <div className="bottom">
+      <div className={styles.bottom}>
         <span>自上周以来</span>
-        <ArrowUpOutlined className="arrow" />
-        <span className="sub_title">{percent}%</span>
+        <ArrowUpOutlined className={styles.arrow} />
+        <span className={styles.sub_title}>{percent}%</span>
       </div>
     </div>
   )

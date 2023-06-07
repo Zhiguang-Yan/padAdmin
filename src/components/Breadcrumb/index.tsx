@@ -5,7 +5,7 @@ import { routes } from '@/routes'
 import { cloneDeep } from 'lodash'
 import type { AppRouteModule } from '@/routes/type'
 
-interface ItemType {
+interface BreadcrumbItem {
   href?: string
   title: string & ReactNode
 }
@@ -13,32 +13,27 @@ interface ItemType {
 const CBreadcrumb: FC = () => {
   const tempRoutes = cloneDeep(routes)
   const { pathname } = useLocation()
-
   const generatorBreadcrumb = (pathname: string, routes: AppRouteModule[]) => {
     return routes
       .filter((route) => pathname.includes(route.path))
-      .map((route) => {
-        return {
-          // href: route.path,
-          title: (
-            <>
-              {route.meta?.icon}
-              <span>{route.meta?.title}</span>
-            </>
-          ),
-          children:
-            route && route.children?.length
-              ? generatorBreadcrumb(pathname, route.children)
-              : undefined
-        }
-      })
+      .map((route) => ({
+        key: route.path,
+        // href: route.path,
+        title: (
+          <>
+            {route.meta?.icon}
+            <span>{route.meta?.title}</span>
+          </>
+        ),
+        children: route?.children?.length && generatorBreadcrumb(pathname, route.children)
+      }))
   }
   /**
    * 扁平化数组
    * @param items
    * @returns
    */
-  const flattenRoutes = (items): ItemType[] => {
+  const flattenRoutes = (items): BreadcrumbItem[] => {
     return items.reduce((acc, item) => {
       acc.push(item)
       if (Array.isArray(item.children) && item.children.length) {
@@ -47,14 +42,9 @@ const CBreadcrumb: FC = () => {
       return acc
     }, [])
   }
-  //
-  const items = flattenRoutes(generatorBreadcrumb(pathname, tempRoutes))
-
-  // console.log(items)
-
   return (
     <div>
-      <Breadcrumb items={items} />
+      <Breadcrumb items={flattenRoutes(generatorBreadcrumb(pathname, tempRoutes))} />
     </div>
   )
 }

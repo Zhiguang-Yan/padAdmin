@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactNode, Key, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import './index.scss'
+import './index.less'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import type { AppRouteModule } from '@/routes/type'
@@ -117,7 +117,7 @@ const LayoutMenu = (props) => {
 
 const mapStateToProps = (state: Store) => ({
   roles: state.user.roles,
-  theme: state.app.theme,
+  theme: state.app.themeConfig.theme,
   isCollapse: state.app.isCollapse
 })
 

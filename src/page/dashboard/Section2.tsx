@@ -14,22 +14,10 @@ import { ReactComponent as Rank } from '@/icons/svg/rank.svg'
 import BarChart from './component/BarChart'
 import LineChart from './component/LineChart'
 import PieChart from './component/PieChart'
-// import TestChart from './component/TestChart'
 
 const Section2: FC = () => {
   return (
     <>
-      {/* <Col span={6}>
-        <div className="card">
-          <div className="header">
-            <Trend />
-            <span>我是新的chart</span>
-          </div>
-          <div className="content">
-            <TestChart />
-          </div>
-        </div>
-      </Col> */}
       <Col span={12}>
         <div className="card">
           <div className="header">

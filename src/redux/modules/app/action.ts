@@ -10,7 +10,7 @@ export const setLanguage = (payload: string) => ({
   payload
 })
 
-export const setTheme = (payload: 'dark' | 'light') => ({
-  type: types.SET_THEME,
+export const setThemeConfig = (payload: object) => ({
+  type: types.SET_THEME_CONFIG,
   payload
 })

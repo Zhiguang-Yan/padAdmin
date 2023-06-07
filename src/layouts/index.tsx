@@ -1,32 +1,65 @@
-import { FC } from 'react'
 import { connect } from 'react-redux'
-import { Outlet } from 'react-router-dom'
-import { Layout } from 'antd'
+import { Outlet, useLocation } from 'react-router-dom'
+import { Layout, theme, FloatButton } from 'antd'
 import LayoutHeader from './components/Header'
 import LayoutFooter from './components/Footer'
 import LayoutMenu from './components/Menu'
-import './index.scss'
+import LayoutTabs from './components/Tabs'
+import LayoutSetting from './components/Setting'
+import { CSSTransition, SwitchTransition } from 'react-transition-group'
+import './index.less'
+import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
+import { useState } from 'react'
 
 const Layouts = (props) => {
   const { Sider, Content } = Layout
-  const { isCollapse } = props
+  const { isCollapse, themeConfig } = props
+  const [show, setShow] = useState(false)
+  const { pathname } = useLocation()
+  const {
+    token: { colorBgContainer, colorTextBase }
+  } = theme.useToken()
   return (
-    <section className="container">
-      <Sider collapsible collapsed={isCollapse} trigger={null}>
-        <LayoutMenu uniqueOpened />
-      </Sider>
-      <Layout>
-        <LayoutHeader />
-        <Content>
-          <Outlet />
-        </Content>
-        <LayoutFooter />
+    <section
+      className="container"
+      style={{
+        color: colorTextBase
+      }}
+    >
+      <Layout hasSider>
+        <Sider collapsible collapsed={isCollapse} theme={themeConfig.theme} trigger={null}>
+          <LayoutMenu uniqueOpened />
+        </Sider>
+        <Layout>
+          <LayoutHeader />
+          <LayoutTabs />
+          <Content
+            style={{
+              background: colorBgContainer
+            }}
+          >
+            <SwitchTransition>
+              <CSSTransition timeout={300} classNames="fade" key={pathname}>
+                <Outlet />
+              </CSSTransition>
+            </SwitchTransition>
+          </Content>
+          <LayoutFooter />
+        </Layout>
       </Layout>
+      <FloatButton
+        shape="square"
+        icon={<Setting className="menu_icon" />}
+        tooltip={<div>设置</div>}
+        onClick={() => setShow(true)}
+      />
+      <LayoutSetting open={show} onClose={() => setShow(false)} />
     </section>
   )
 }
 
 const mapStateToProps = (state: Store) => ({
-  isCollapse: state.app.isCollapse
+  isCollapse: state.app.isCollapse,
+  themeConfig: state.app.themeConfig
 })
 export default connect(mapStateToProps, null)(Layouts)

@@ -1,17 +1,27 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, theme } from 'antd'
 import { FC } from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import Router from './routes'
 import AuthRouter from './AuthRouter'
+import useTheme from './hooks/useTheme'
 
 const validateMessages = {
   required: '${label}是必填字段'
 }
 
-const App: FC = () => {
+const App: FC = (props: any) => {
+  const { themConfig } = props
+
+  useTheme(themConfig)
   return (
     <BrowserRouter>
-      <ConfigProvider form={{ validateMessages }}>
+      <ConfigProvider
+        form={{ validateMessages }}
+        theme={{
+          algorithm: themConfig.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm
+        }}
+      >
         <AuthRouter>
           <Router />
         </AuthRouter>
@@ -20,4 +30,10 @@ const App: FC = () => {
   )
 }
 
-export default App
+const mapStateToProps = (state: Store) => ({
+  themConfig: state.app.themeConfig
+})
+
+const mapDispatchToProps = {}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
