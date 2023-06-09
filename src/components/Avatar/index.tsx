@@ -1,9 +1,31 @@
-import { Button, Dropdown } from 'antd'
+import { Button, Dropdown, Modal } from 'antd'
 import type { MenuProps } from 'antd'
+import { connect } from 'react-redux'
 import { UserOutlined, LogoutOutlined, BarsOutlined } from '@ant-design/icons'
 import AvatarImg from '@/assets/images/avatar.png'
+import { logout } from '@/redux/modules/user/action'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-const Avatar = () => {
+const Avatar = (props) => {
+  const { logout } = props
+  const [modal, contextHolder] = Modal.useModal()
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const handleLogout = () => {
+    modal.confirm({
+      title: '提示',
+      centered: true,
+      content: '您确定要退出该账户',
+      okText: '确认',
+      cancelText: '取消',
+      onOk: async () => {
+        try {
+          await logout()
+          navigate(`/login?redirect=${pathname}`, { replace: true })
+        } catch (error) {}
+      }
+    })
+  }
   const items: MenuProps['items'] = [
     {
       key: 1,
@@ -24,29 +46,35 @@ const Avatar = () => {
     {
       key: 3,
       label: (
-        <div>
+        <div onClick={handleLogout}>
           <LogoutOutlined /> 退出登录
         </div>
       )
     }
   ]
   return (
-    <Dropdown menu={{ items }}>
-      <Button
-        type="text"
-        style={{
-          height: '100%',
-          borderRadius: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-        icon={<img height="24px" width="24px" src={AvatarImg} alt="" />}
-      >
-        <span>Serati Ma</span>
-      </Button>
-    </Dropdown>
+    <>
+      <Dropdown menu={{ items }}>
+        <Button
+          type="text"
+          style={{
+            height: '100%',
+            borderRadius: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          icon={<img height="24px" width="24px" src={AvatarImg} alt="" />}
+        >
+          <span>Serati Ma</span>
+        </Button>
+      </Dropdown>
+      {contextHolder}
+    </>
   )
 }
+const mapDispatchToProps = {
+  logout
+}
 
-export default Avatar
+export default connect(null, mapDispatchToProps)(Avatar)
