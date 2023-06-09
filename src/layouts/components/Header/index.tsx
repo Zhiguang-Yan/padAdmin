@@ -3,7 +3,8 @@ import { Layout, Button, theme } from 'antd'
 import { connect } from 'react-redux'
 import { updateCollapse } from '@/redux/modules/app/action'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
-import Logout from '@/components/Logout'
+import Avatar from '@/components/Avatar'
+import Language from '@/components/Language'
 import Breadcrumb from '@/components/Breadcrumb'
 
 const { Header } = Layout
@@ -24,7 +25,12 @@ const LayoutHeader = (props) => {
         <Breadcrumb />
       </div>
       <div className="nav_right">
-        <Logout />
+        <div className="nav_item">
+          <Avatar />
+        </div>
+        <div className="nav_item">
+          <Language />
+        </div>
       </div>
     </Header>
   )

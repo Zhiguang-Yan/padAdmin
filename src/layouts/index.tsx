@@ -30,11 +30,13 @@ const Layouts = (props) => {
       <Layout hasSider>
         <Sider
           collapsible
+          width={208}
+          collapsedWidth={48}
           collapsed={isCollapse}
           theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
           trigger={null}
         >
-          <Logo></Logo>
+          <Logo />
           <LayoutMenu uniqueOpened />
         </Sider>
         <Layout>
