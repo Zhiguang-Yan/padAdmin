@@ -5,11 +5,12 @@ export interface AppStore {
   language: string
   themeConfig: {
     primary: string
-    theme: 'dark' | 'light'
+    theme: 'dark' | 'light-menu' | 'dark-menu'
     weakOrGray: 'weak' | 'gray' | 'normal'
     breadcrumb: boolean
     tabs: boolean
     footer: boolean
+    borderRadius: string
   }
 }
 

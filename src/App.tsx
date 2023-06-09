@@ -19,7 +19,11 @@ const App: FC = (props: any) => {
       <ConfigProvider
         form={{ validateMessages }}
         theme={{
-          algorithm: themConfig.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm
+          algorithm: themConfig.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          token: {
+            colorPrimary: themConfig.primary,
+            borderRadius: themConfig.borderRadius
+          }
         }}
       >
         <AuthRouter>
@@ -34,6 +38,4 @@ const mapStateToProps = (state: Store) => ({
   themConfig: state.app.themeConfig
 })
 
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, null)(App)

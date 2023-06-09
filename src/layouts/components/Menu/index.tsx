@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactNode, Key, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import './index.less'
@@ -33,7 +32,7 @@ const getItem = (
 })
 
 const LayoutMenu = (props) => {
-  const { roles, theme, uniqueOpened } = props
+  const { roles, theme, uniqueOpened, isCollapse } = props
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -94,22 +93,27 @@ const LayoutMenu = (props) => {
     const keysFilter: string[] = latestOpenKey ? reversePath(latestOpenKey) : keys
     setOpenKeys(keysFilter)
   }
-
   useEffect(() => {
     setSelectedKeys([pathname])
-    setOpenKeys(reversePath(pathname))
-  }, [pathname])
+    if (!isCollapse) {
+      setOpenKeys(reversePath(pathname))
+    }
+  }, [isCollapse, pathname])
   return (
     <div className="menu">
       <Menu
         mode="inline"
         triggerSubMenuAction="hover"
-        theme={theme}
+        theme={theme.startsWith('dark') ? 'dark' : 'light'}
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         onOpenChange={uniqueOpened ? onOpenChange : (keys) => setOpenKeys(keys)}
         items={generateSide(generateMenu(routes, roles.concat(WHITE_CODE)))}
         onClick={clickMenu}
+        style={{
+          borderInlineEnd: 'none'
+        }}
+        {...props.attrs}
       />
     </div>
   )

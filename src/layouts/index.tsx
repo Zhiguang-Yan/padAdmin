@@ -6,6 +6,7 @@ import LayoutFooter from './components/Footer'
 import LayoutMenu from './components/Menu'
 import LayoutTabs from './components/Tabs'
 import LayoutSetting from './components/Setting'
+import Logo from './components/Logo'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import './index.less'
 import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
@@ -27,7 +28,13 @@ const Layouts = (props) => {
       }}
     >
       <Layout hasSider>
-        <Sider collapsible collapsed={isCollapse} theme={themeConfig.theme} trigger={null}>
+        <Sider
+          collapsible
+          collapsed={isCollapse}
+          theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
+          trigger={null}
+        >
+          <Logo></Logo>
           <LayoutMenu uniqueOpened />
         </Sider>
         <Layout>

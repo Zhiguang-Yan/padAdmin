@@ -2,14 +2,15 @@ import { AppStore } from '../../type'
 import produce from 'immer'
 import * as types from '@/redux/mutation-types'
 
-const initialState: AppStore = {
+export const initialState: AppStore = {
   isCollapse: false,
   language: 'en',
   themeConfig: {
     // 默认 primary 主题颜色
     primary: '#1890ff',
+    borderRadius: '4px',
     // 深色模式
-    theme: 'light',
+    theme: 'dark-menu',
     // 色弱模式(weak) || 灰色模式(gray)
     weakOrGray: 'normal',
     // 面包屑导航
