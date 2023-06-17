@@ -5,8 +5,9 @@ export interface AppStore {
   language: string
   themeConfig: {
     primary: string
-    theme: 'dark' | 'light-menu' | 'dark-menu'
+    theme: 'dark' | 'lightMenu' | 'darkMenu'
     weakOrGray: 'weak' | 'gray' | 'normal'
+    layout: 'siderLayout' | 'headerLayout' | 'mixLayout'
     breadcrumb: boolean
     tabs: boolean
     footer: boolean

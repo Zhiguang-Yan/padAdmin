@@ -20,12 +20,6 @@ const Setting: FC<{
   const {
     token: { colorTextBase }
   } = theme.useToken()
-  const themChange = (e) => {
-    setThemeConfig({
-      ...themeConfig,
-      theme: e.target.value
-    })
-  }
   const colorChange = (_, primary) => {
     setThemeConfig({
       ...themeConfig,
@@ -51,13 +45,21 @@ const Setting: FC<{
     >
       <div className={styles.item}>
         <div>整体风格</div>
-        <Radio.Group defaultValue={themeConfig.theme} onChange={themChange}>
-          <Radio value="light-menu">
+        <Radio.Group
+          value={themeConfig.theme}
+          onChange={(e) =>
+            setThemeConfig({
+              ...themeConfig,
+              theme: e.target.value
+            })
+          }
+        >
+          <Radio value="lightMenu">
             <Tooltip title="亮色菜单风格">
               <Style1 className={styles.icon} />
             </Tooltip>
           </Radio>
-          <Radio value="dark-menu">
+          <Radio value="darkMenu">
             <Tooltip title="暗色菜单风格">
               <Navigate1 className={styles.icon} />
             </Tooltip>
@@ -74,6 +76,7 @@ const Setting: FC<{
         <ColorPicker
           allowClear
           format="hex"
+          value={themeConfig.primary}
           onChange={colorChange}
           presets={[
             {
@@ -96,18 +99,26 @@ const Setting: FC<{
       </div>
       <div className={styles.item}>
         <div>布局</div>
-        <Radio.Group>
-          <Radio value={1}>
+        <Radio.Group
+          value={themeConfig.layout}
+          onChange={(e) =>
+            setThemeConfig({
+              ...themeConfig,
+              layout: e.target.value
+            })
+          }
+        >
+          <Radio value="siderLayout">
             <Tooltip title="侧边菜单布局">
               <Navigate1 className={styles.icon} />
             </Tooltip>
           </Radio>
-          <Radio value={2}>
+          <Radio value="headerLayout">
             <Tooltip title="顶部菜单布局">
               <Navigate2 className={styles.icon} />
             </Tooltip>
           </Radio>
-          <Radio value={3}>
+          <Radio value="mixLayout">
             <Tooltip title="混合菜单布局">
               <Navigate3 className={styles.icon} />
             </Tooltip>

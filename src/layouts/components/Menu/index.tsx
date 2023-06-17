@@ -32,7 +32,7 @@ const getItem = (
 })
 
 const LayoutMenu = (props) => {
-  const { roles, theme, uniqueOpened, isCollapse } = props
+  const { roles, themeConfig, uniqueOpened, isCollapse } = props
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -95,16 +95,16 @@ const LayoutMenu = (props) => {
   }
   useEffect(() => {
     setSelectedKeys([pathname])
-    if (!isCollapse) {
+    if (!isCollapse && themeConfig.layout !== 'headerLayout') {
       setOpenKeys(reversePath(pathname))
     }
-  }, [isCollapse, pathname])
+  }, [isCollapse, pathname, themeConfig])
   return (
     <div className="menu">
       <Menu
         mode="inline"
         triggerSubMenuAction="hover"
-        theme={theme.startsWith('dark') ? 'dark' : 'light'}
+        theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         onOpenChange={uniqueOpened ? onOpenChange : (keys) => setOpenKeys(keys)}
@@ -121,7 +121,7 @@ const LayoutMenu = (props) => {
 
 const mapStateToProps = (state: Store) => ({
   roles: state.user.roles,
-  theme: state.app.themeConfig.theme,
+  themeConfig: state.app.themeConfig,
   isCollapse: state.app.isCollapse
 })
 
