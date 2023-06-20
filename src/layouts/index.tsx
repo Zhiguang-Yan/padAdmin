@@ -1,21 +1,33 @@
 import { connect } from 'react-redux'
-
+import { FloatButton } from 'antd'
+import { useState } from 'react'
 import MixLayout from './components/MixLayout'
 import HeaderLayout from './components/HeaderLayout'
 import SiderLayout from './components/SiderLayout'
+import LayoutSetting from './components/Setting'
+import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
+import './index.less'
 
 const Layouts = (props) => {
   const { layout } = props
-  switch (layout) {
-    case 'siderLayout':
-      return <SiderLayout />
-    case 'headerLayout':
-      return <HeaderLayout />
-    case 'mixLayout':
-      return <MixLayout />
-    default:
-      return <SiderLayout />
+  const [show, setShow] = useState(false)
+  const layoutMap = {
+    siderLayout: <SiderLayout />,
+    headerLayout: <HeaderLayout />,
+    mixLayout: <MixLayout />
   }
+  return (
+    <>
+      {layoutMap[layout] || <SiderLayout />}
+      <FloatButton
+        shape="square"
+        icon={<Setting className="menu_icon" />}
+        tooltip={<div>设置</div>}
+        onClick={() => setShow(true)}
+      />
+      <LayoutSetting open={show} onClose={() => setShow(false)} />
+    </>
+  )
 }
 
 const mapStateToProps = (state: Store) => ({

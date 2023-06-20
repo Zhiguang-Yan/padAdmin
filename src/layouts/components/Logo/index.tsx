@@ -1,12 +1,11 @@
 import styles from './index.module.less'
 import { ReactComponent as LogoIcon } from '@/icons/svg/logo.svg'
 import { theme } from 'antd'
-import { connect } from 'react-redux'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HOME_URL } from '@/config/config'
 
-const Logo: FC<{ isCollapse: boolean }> = (props) => {
+const Logo: FC<{ isCollapse?: boolean }> = (props) => {
   const {
     token: { colorPrimary }
   } = theme.useToken()
@@ -28,8 +27,12 @@ const Logo: FC<{ isCollapse: boolean }> = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  isCollapse: state.app.isCollapse
-})
+Logo.defaultProps = {
+  isCollapse: false
+}
 
-export default connect(mapStateToProps, null)(Logo)
+// const mapStateToProps = (state: Store) => ({
+//   isCollapse: state.app.isCollapse
+// })
+
+export default Logo

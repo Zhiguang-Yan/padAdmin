@@ -9,7 +9,7 @@ export const initialState: AppStore = {
     // 默认 primary 主题颜色
     primary: '#1890ff',
     borderRadius: '4px',
-    layout: 'siderLayout',
+    layout: 'mixLayout',
     // 深色模式
     theme: 'lightMenu',
     // 色弱模式(weak) || 灰色模式(gray)

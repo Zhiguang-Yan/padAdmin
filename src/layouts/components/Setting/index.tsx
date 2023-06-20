@@ -28,7 +28,6 @@ const Setting: FC<{
   }
   const handleReset = () => {
     setThemeConfig(initialState.themeConfig)
-    onClose()
   }
   return (
     <Drawer
@@ -59,11 +58,13 @@ const Setting: FC<{
               <Style1 className={styles.icon} />
             </Tooltip>
           </Radio>
-          <Radio value="darkMenu">
-            <Tooltip title="暗色菜单风格">
-              <Navigate1 className={styles.icon} />
-            </Tooltip>
-          </Radio>
+          {themeConfig.layout !== 'mixLayout' && (
+            <Radio value="darkMenu">
+              <Tooltip title="暗色菜单风格">
+                <Navigate1 className={styles.icon} />
+              </Tooltip>
+            </Radio>
+          )}
           <Radio value="dark">
             <Tooltip title="暗色风格">
               <Style2 className={styles.icon} />

@@ -1,21 +1,16 @@
 import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Layout, theme, FloatButton } from 'antd'
+import { Layout, theme } from 'antd'
 import LayoutHeader from './Header'
 import LayoutFooter from './Footer'
 import LayoutMenu from './Menu'
 import LayoutTabs from './Tabs'
-import LayoutSetting from './Setting'
 import Logo from './Logo'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import './index.less'
-import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
-import { useState } from 'react'
 
 const SiderLayout = (props) => {
   const { Sider, Content } = Layout
   const { isCollapse, themeConfig } = props
-  const [show, setShow] = useState(false)
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
@@ -36,7 +31,7 @@ const SiderLayout = (props) => {
           theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
           trigger={null}
         >
-          <Logo />
+          <Logo isCollapse={isCollapse} />
           <LayoutMenu uniqueOpened />
         </Sider>
         <Layout>
@@ -56,13 +51,6 @@ const SiderLayout = (props) => {
           <LayoutFooter />
         </Layout>
       </Layout>
-      <FloatButton
-        shape="square"
-        icon={<Setting className="menu_icon" />}
-        tooltip={<div>设置</div>}
-        onClick={() => setShow(true)}
-      />
-      <LayoutSetting open={show} onClose={() => setShow(false)} />
     </section>
   )
 }

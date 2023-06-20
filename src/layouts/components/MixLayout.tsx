@@ -1,68 +1,66 @@
 import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Layout, theme, FloatButton } from 'antd'
-import LayoutHeader from './Header'
+import { Layout, theme } from 'antd'
+import { updateCollapse } from '@/redux/modules/app/action'
 import LayoutFooter from './Footer'
 import LayoutMenu from './Menu'
-import LayoutTabs from './Tabs'
-import LayoutSetting from './Setting'
 import Logo from './Logo'
+import Avatar from '@/components/Avatar'
+import Language from '@/components/Language'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import './index.less'
-import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
-import { useState } from 'react'
 
 const MixLayout = (props) => {
-  const { Sider, Content } = Layout
-  const { isCollapse, themeConfig } = props
-  const [show, setShow] = useState(false)
+  const { Sider, Content, Header } = Layout
+  const { isCollapse, themeConfig, updateCollapse } = props
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
   } = theme.useToken()
   return (
-    <section
-      className="container"
-      style={{
-        color: colorTextBase
-      }}
-    >
-      <Layout hasSider>
-        <Sider
-          collapsible
-          width={208}
-          collapsedWidth={48}
-          collapsed={isCollapse}
-          theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
-          trigger={null}
-        >
-          <Logo />
-          <LayoutMenu uniqueOpened />
-        </Sider>
-        <Layout>
-          <LayoutHeader />
-          <LayoutTabs />
-          <Content
-            style={{
-              background: colorBgContainer
-            }}
+    <section className="container">
+      <Layout>
+        <Header className="pad_header">
+          <div className="nav_left">
+            <Logo />
+          </div>
+          <div className="nav_right">
+            <div className="nav_item">
+              <Avatar />
+            </div>
+            <div className="nav_item">
+              <Language />
+            </div>
+          </div>
+        </Header>
+        <Layout hasSider>
+          <Sider
+            collapsible
+            width={208}
+            collapsedWidth={48}
+            collapsed={isCollapse}
+            theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
+            trigger={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onCollapse={(value) => updateCollapse(value)}
           >
-            <SwitchTransition>
-              <CSSTransition timeout={300} classNames="fade" key={pathname}>
-                <Outlet />
-              </CSSTransition>
-            </SwitchTransition>
-          </Content>
-          <LayoutFooter />
+            <LayoutMenu uniqueOpened />
+          </Sider>
+          <Layout>
+            <Content
+              style={{
+                background: colorBgContainer
+              }}
+            >
+              <SwitchTransition>
+                <CSSTransition timeout={300} classNames="fade" key={pathname}>
+                  <Outlet />
+                </CSSTransition>
+              </SwitchTransition>
+            </Content>
+            <LayoutFooter />
+          </Layout>
         </Layout>
       </Layout>
-      <FloatButton
-        shape="square"
-        icon={<Setting className="menu_icon" />}
-        tooltip={<div>设置</div>}
-        onClick={() => setShow(true)}
-      />
-      <LayoutSetting open={show} onClose={() => setShow(false)} />
     </section>
   )
 }
@@ -71,4 +69,9 @@ const mapStateToProps = (state: Store) => ({
   isCollapse: state.app.isCollapse,
   themeConfig: state.app.themeConfig
 })
-export default connect(mapStateToProps, null)(MixLayout)
+
+const mapDispatchToProps = {
+  updateCollapse
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MixLayout)

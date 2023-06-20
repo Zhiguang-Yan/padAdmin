@@ -1,13 +1,11 @@
 import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Layout, theme, FloatButton } from 'antd'
+import { Layout, theme } from 'antd'
 import LayoutFooter from './Footer'
 import LayoutTabs from './Tabs'
-import LayoutSetting from './Setting'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import './Header/index.less'
-import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
-import { useState } from 'react'
+
 import Logo from './Logo'
 import Avatar from '@/components/Avatar'
 import Language from '@/components/Language'
@@ -16,7 +14,7 @@ import LayoutMenu from './Menu'
 const HeaderLayout = (props) => {
   const { Content, Header } = Layout
   const { themeConfig } = props
-  const [show, setShow] = useState(false)
+
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
@@ -62,14 +60,6 @@ const HeaderLayout = (props) => {
         </Content>
         <LayoutFooter />
       </Layout>
-
-      <FloatButton
-        shape="square"
-        icon={<Setting className="menu_icon" />}
-        tooltip={<div>设置</div>}
-        onClick={() => setShow(true)}
-      />
-      <LayoutSetting open={show} onClose={() => setShow(false)} />
     </section>
   )
 }
