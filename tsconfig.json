@@ -20,7 +20,12 @@
     "paths": {
       "@/*": ["src/*"],
       "~/": ["types/*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": ["src", "types"],
   "exclude": ["node_modules", "dist", "**/*.js"]

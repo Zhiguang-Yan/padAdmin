@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react'
-import './index.scss'
+import './index.less'
 import mojs from '@mojs/core'
 
 const Heart: FC = () => {

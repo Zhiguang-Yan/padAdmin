@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Heart from '@/components/Heart'
-import './index.scss'
+import './index.less'
 const Card: FC = () => {
   return (
     <div className="card_box">

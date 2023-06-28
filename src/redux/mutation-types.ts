@@ -12,4 +12,4 @@ export const SET_TOKEN = 'SET_TOKEN'
 
 export const SET_USERINFO = 'SET_USERINFO'
 
-export const SET_THEME = 'SET_THEME'
+export const SET_THEME_CONFIG = 'SET_THEME_CONFIG'

@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ReactNode, Key, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import './index.scss'
+import './index.less'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
 import type { AppRouteModule } from '@/routes/type'
@@ -33,7 +32,7 @@ const getItem = (
 })
 
 const LayoutMenu = (props) => {
-  const { roles, theme, uniqueOpened } = props
+  const { roles, themeConfig, uniqueOpened, isCollapse } = props
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -94,22 +93,27 @@ const LayoutMenu = (props) => {
     const keysFilter: string[] = latestOpenKey ? reversePath(latestOpenKey) : keys
     setOpenKeys(keysFilter)
   }
-
   useEffect(() => {
     setSelectedKeys([pathname])
-    setOpenKeys(reversePath(pathname))
-  }, [pathname])
+    if (!isCollapse && themeConfig.layout !== 'headerLayout') {
+      setOpenKeys(reversePath(pathname))
+    }
+  }, [isCollapse, pathname, themeConfig])
   return (
     <div className="menu">
       <Menu
         mode="inline"
         triggerSubMenuAction="hover"
-        theme={theme}
+        theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
         openKeys={openKeys}
         selectedKeys={selectedKeys}
         onOpenChange={uniqueOpened ? onOpenChange : (keys) => setOpenKeys(keys)}
         items={generateSide(generateMenu(routes, roles.concat(WHITE_CODE)))}
         onClick={clickMenu}
+        style={{
+          borderInlineEnd: 'none'
+        }}
+        {...props.attrs}
       />
     </div>
   )
@@ -117,7 +121,7 @@ const LayoutMenu = (props) => {
 
 const mapStateToProps = (state: Store) => ({
   roles: state.user.roles,
-  theme: state.app.theme,
+  themeConfig: state.app.themeConfig,
   isCollapse: state.app.isCollapse
 })
 

@@ -8,6 +8,11 @@ import { Col } from 'antd'
 
 const Section1: FC = () => {
   const [curIndex, setCurIndex] = useState(0)
+  const styles = {
+    background: 'linear-gradient(90deg, #74bcff, #1890ff)',
+    color: '#fff'
+  }
+
   const colSpan = {
     xs: { span: 24 },
     sm: { span: 24 },

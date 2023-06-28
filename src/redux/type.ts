@@ -3,7 +3,16 @@ import { AppRouteModule } from '@/routes/type'
 export interface AppStore {
   isCollapse: boolean
   language: string
-  theme: 'dark' | 'light'
+  themeConfig: {
+    primary: string
+    theme: 'dark' | 'lightMenu' | 'darkMenu'
+    weakOrGray: 'weak' | 'gray' | 'normal'
+    layout: 'siderLayout' | 'headerLayout' | 'mixLayout'
+    breadcrumb: boolean
+    tabs: boolean
+    footer: boolean
+    borderRadius: string
+  }
 }
 
 export interface PermissionStore {

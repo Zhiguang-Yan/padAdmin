@@ -2,7 +2,7 @@ import { Row, Col } from 'antd'
 import { ReactComponent as Good } from '@/icons/svg/good.svg'
 import { ReactComponent as Target } from '@/icons/svg/target.svg'
 import { PayCircleOutlined, BarsOutlined } from '@ant-design/icons'
-import './index.scss'
+import styles from './index.module.less'
 import BarChart from './component/BarChart'
 import LineChart from './component/LineChart'
 import Quarter from './component/Quarter'
@@ -12,24 +12,24 @@ const Workbench = () => {
       <Col span={8}>
         <Row gutter={[0, 20]}>
           <Col span={24}>
-            <div className="card font_color">
-              <div className="header blue_header">
-                <Good className="font_color" />
+            <div className={`card ${styles.font_color}`}>
+              <div className={`header ${styles.blue_header}`}>
+                <Good className={styles.font_color} />
                 <span>商品</span>
               </div>
-              <div className="content blue_header">
-                <div className="good_box">
+              <div className={`content ${styles.blue_header}`}>
+                <div className={styles.good_box}>
                   <div>
                     <div>已售数量</div>
-                    <div className="fw">4,300</div>
+                    <div className={styles.fw}>4,300</div>
                   </div>
                   <div>
                     <div>待售数量</div>
-                    <div className="fw">4,300</div>
+                    <div className={styles.fw}>4,300</div>
                   </div>
                   <div>
                     <div>好评度</div>
-                    <div className="fw">99%</div>
+                    <div className={styles.fw}>99%</div>
                   </div>
                 </div>
               </div>
@@ -42,14 +42,14 @@ const Workbench = () => {
                 <span>订单</span>
               </div>
               <div className="content">
-                <div className="good_box">
+                <div className={styles.good_box}>
                   <div>
                     <div>已完成订单</div>
-                    <div className="fw">6,450</div>
+                    <div className={styles.fw}>6,450</div>
                   </div>
                   <div>
                     <div>计划完成订单</div>
-                    <div className="fw">10,750</div>
+                    <div className={styles.fw}>10,750</div>
                   </div>
                 </div>
               </div>
