@@ -30,9 +30,4 @@ const Logo: FC<{ isCollapse?: boolean }> = (props) => {
 Logo.defaultProps = {
   isCollapse: false
 }
-
-// const mapStateToProps = (state: Store) => ({
-//   isCollapse: state.app.isCollapse
-// })
-
 export default Logo

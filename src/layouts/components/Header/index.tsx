@@ -1,15 +1,17 @@
 import './index.less'
 import { Layout, Button, theme } from 'antd'
-import { connect } from 'react-redux'
-import { updateCollapse } from '@/redux/modules/app/action'
+import { updateCollapse, selectApp } from '@/store/festures/appSlice'
+import { useStoreDispatch, useStoreSelector } from '@/store'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import Avatar from '@/components/Avatar'
 import Language from '@/components/Language'
 import Breadcrumb from '@/components/Breadcrumb'
 
 const { Header } = Layout
-const LayoutHeader = (props) => {
-  const { isCollapse, updateCollapse } = props
+const LayoutHeader = () => {
+  const appState = useStoreSelector(selectApp)
+  const { isCollapse } = appState
+  const dispatch = useStoreDispatch()
   const {
     token: { colorBgContainer }
   } = theme.useToken()
@@ -20,7 +22,7 @@ const LayoutHeader = (props) => {
           className="header_btn"
           type="text"
           icon={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => updateCollapse(!isCollapse)}
+          onClick={() => dispatch(updateCollapse(!isCollapse))}
         />
         <Breadcrumb />
       </div>
@@ -36,12 +38,4 @@ const LayoutHeader = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  isCollapse: state.app.isCollapse
-})
-
-const mapDispatchToProps = {
-  updateCollapse
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutHeader)
+export default LayoutHeader

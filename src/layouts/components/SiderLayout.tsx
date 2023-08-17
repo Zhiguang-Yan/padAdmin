@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Layout, theme } from 'antd'
 import LayoutHeader from './Header'
@@ -7,10 +6,12 @@ import LayoutMenu from './Menu'
 import LayoutTabs from './Tabs'
 import Logo from './Logo'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-
-const SiderLayout = (props) => {
+import { selectApp } from '@/store/festures/appSlice'
+import { useStoreSelector } from '@/store'
+const SiderLayout = () => {
   const { Sider, Content } = Layout
-  const { isCollapse, themeConfig } = props
+  const appState = useStoreSelector(selectApp)
+  const { isCollapse, themeConfig } = appState
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
@@ -55,8 +56,4 @@ const SiderLayout = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  isCollapse: state.app.isCollapse,
-  themeConfig: state.app.themeConfig
-})
-export default connect(mapStateToProps, null)(SiderLayout)
+export default SiderLayout

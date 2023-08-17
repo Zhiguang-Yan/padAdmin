@@ -1,7 +1,8 @@
-import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Layout, theme } from 'antd'
-import { updateCollapse } from '@/redux/modules/app/action'
+import { updateCollapse } from '@/store/festures/appSlice'
+import { selectApp } from '@/store/festures/appSlice'
+import { useStoreSelector, useStoreDispatch } from '@/store'
 import LayoutFooter from './Footer'
 import LayoutMenu from './Menu'
 import Logo from './Logo'
@@ -12,11 +13,14 @@ import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 const MixLayout = (props) => {
   const { Sider, Content, Header } = Layout
-  const { isCollapse, themeConfig, updateCollapse } = props
+  const appState = useStoreSelector(selectApp)
+  const dispatch = useStoreDispatch()
+  const { themeConfig, isCollapse } = appState
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
   } = theme.useToken()
+  console.log(colorTextBase)
   return (
     <section className="container">
       <Layout>
@@ -41,7 +45,7 @@ const MixLayout = (props) => {
             collapsed={isCollapse}
             theme={themeConfig.theme.startsWith('dark') ? 'dark' : 'light'}
             trigger={isCollapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onCollapse={(value) => updateCollapse(value)}
+            onCollapse={(value) => dispatch(updateCollapse(value))}
           >
             <LayoutMenu uniqueOpened />
           </Sider>
@@ -65,13 +69,4 @@ const MixLayout = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  isCollapse: state.app.isCollapse,
-  themeConfig: state.app.themeConfig
-})
-
-const mapDispatchToProps = {
-  updateCollapse
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MixLayout)
+export default MixLayout

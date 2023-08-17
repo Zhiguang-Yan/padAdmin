@@ -1,16 +1,16 @@
 import { Button, Dropdown, Modal } from 'antd'
 import type { MenuProps } from 'antd'
-import { connect } from 'react-redux'
 import { UserOutlined, LogoutOutlined, BarsOutlined } from '@ant-design/icons'
 import AvatarImg from '@/assets/images/avatar.png'
-import { logout } from '@/redux/modules/user/action'
+import { logout } from '@/store/festures/userSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useStoreDispatch } from '@/store'
 
-const Avatar = (props) => {
-  const { logout } = props
+const Avatar = () => {
   const [modal, contextHolder] = Modal.useModal()
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const dispatch = useStoreDispatch()
   const handleLogout = () => {
     modal.confirm({
       title: '提示',
@@ -20,9 +20,11 @@ const Avatar = (props) => {
       cancelText: '取消',
       onOk: async () => {
         try {
-          await logout()
+          await dispatch(logout())
           navigate(`/login?redirect=${pathname}`, { replace: true })
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       }
     })
   }
@@ -73,8 +75,4 @@ const Avatar = (props) => {
     </>
   )
 }
-const mapDispatchToProps = {
-  logout
-}
-
-export default connect(null, mapDispatchToProps)(Avatar)
+export default Avatar

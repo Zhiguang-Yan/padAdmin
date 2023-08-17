@@ -1,27 +1,31 @@
 import { FC } from 'react'
-import { connect } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Form, Input, Space, message, theme } from 'antd'
-import { login } from '@/redux/modules/user/action'
+import { login } from '@/store/festures/userSlice'
 import styles from './index.module.less'
 import { HOME_URL } from '@/config/config'
+import { useStoreDispatch } from '@/store'
 
-const Login: FC = (props: any) => {
+const Login: FC = () => {
   const { search } = useLocation()
+  const dispatch = useStoreDispatch()
   const {
     token: { colorBgContainer }
   } = theme.useToken()
   const redirect = new URLSearchParams(search).get('redirect') || HOME_URL
-  const { login } = props
   const navigate = useNavigate()
-  const onFinish = (loginForm) => {
-    login(loginForm.username, loginForm.password)
-      .then(() => {
-        navigate(redirect)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+  const onFinish = async (loginForm) => {
+    try {
+      await dispatch(
+        login({
+          username: loginForm.username,
+          password: loginForm.password
+        })
+      )
+      navigate(redirect)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const onFinishFailed = (errorInfo) => {
@@ -72,9 +76,4 @@ const Login: FC = (props: any) => {
     </div>
   )
 }
-
-const mapDispatchToProps = {
-  login
-}
-
-export default connect(null, mapDispatchToProps)(Login)
+export default Login

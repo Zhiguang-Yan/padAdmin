@@ -1,33 +1,35 @@
-import { Drawer, ColorPicker, Button, Space, Radio, Tooltip, theme } from 'antd'
 import { FC } from 'react'
-import { connect } from 'react-redux'
 import styles from './index.module.less'
 import { ReactComponent as Style1 } from '@/icons/svg/style1.svg'
 import { ReactComponent as Style2 } from '@/icons/svg/style2.svg'
 import { ReactComponent as Navigate1 } from '@/icons/svg/navigate1.svg'
 import { ReactComponent as Navigate2 } from '@/icons/svg/navigate2.svg'
 import { ReactComponent as Navigate3 } from '@/icons/svg/navigate3.svg'
-import { setThemeConfig } from '@/redux/modules/app/action'
-import { initialState } from '@/redux/modules/app/reducer'
+import { Drawer, ColorPicker, Button, Space, Radio, Tooltip, theme } from 'antd'
+import { initialState, setThemeConfig, selectApp } from '@/store/festures/appSlice'
+import { useStoreDispatch, useStoreSelector } from '@/store'
 
 const Setting: FC<{
   open: boolean
   onClose: Function
-  themeConfig: any
-  setThemeConfig: any
 }> = (props) => {
-  const { open, onClose, themeConfig, setThemeConfig } = props
+  const { open, onClose } = props
+  const dispatch = useStoreDispatch()
+  const appState = useStoreSelector(selectApp)
+  const { themeConfig } = appState
   const {
     token: { colorTextBase }
   } = theme.useToken()
   const colorChange = (_, primary) => {
-    setThemeConfig({
-      ...themeConfig,
-      primary
-    })
+    dispatch(
+      setThemeConfig({
+        ...themeConfig,
+        primary
+      })
+    )
   }
   const handleReset = () => {
-    setThemeConfig(initialState.themeConfig)
+    dispatch(setThemeConfig(initialState.themeConfig))
   }
   return (
     <Drawer
@@ -47,10 +49,12 @@ const Setting: FC<{
         <Radio.Group
           value={themeConfig.theme}
           onChange={(e) =>
-            setThemeConfig({
-              ...themeConfig,
-              theme: e.target.value
-            })
+            dispatch(
+              setThemeConfig({
+                ...themeConfig,
+                theme: e.target.value
+              })
+            )
           }
         >
           <Radio value="lightMenu">
@@ -103,10 +107,12 @@ const Setting: FC<{
         <Radio.Group
           value={themeConfig.layout}
           onChange={(e) =>
-            setThemeConfig({
-              ...themeConfig,
-              layout: e.target.value
-            })
+            dispatch(
+              setThemeConfig({
+                ...themeConfig,
+                layout: e.target.value
+              })
+            )
           }
         >
           <Radio value="siderLayout">
@@ -140,12 +146,4 @@ const Setting: FC<{
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  themeConfig: state.app.themeConfig
-})
-
-const mapDispatchToProps = {
-  setThemeConfig
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Setting)
+export default Setting

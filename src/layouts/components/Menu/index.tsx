@@ -1,5 +1,4 @@
 import { ReactNode, Key, useState, useEffect } from 'react'
-import { connect } from 'react-redux'
 import './index.less'
 import { Menu } from 'antd'
 import type { MenuProps } from 'antd'
@@ -7,6 +6,9 @@ import type { AppRouteModule } from '@/routes/type'
 import { routes } from '@/routes'
 import { WHITE_CODE } from '@/config/config'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { selectApp } from '@/store/festures/appSlice'
+import { selectUser } from '@/store/festures/userSlice'
+import { useStoreSelector } from '@/store'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -32,7 +34,9 @@ const getItem = (
 })
 
 const LayoutMenu = (props) => {
-  const { roles, themeConfig, uniqueOpened, isCollapse } = props
+  const { uniqueOpened } = props
+  const { themeConfig, isCollapse } = useStoreSelector(selectApp)
+  const { roles } = useStoreSelector(selectUser)
   const { pathname } = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -119,11 +123,4 @@ const LayoutMenu = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  roles: state.user.roles,
-  themeConfig: state.app.themeConfig,
-  isCollapse: state.app.isCollapse
-})
-
-const mapDispatchToProps = {}
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutMenu)
+export default LayoutMenu

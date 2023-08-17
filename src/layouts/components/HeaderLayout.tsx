@@ -1,20 +1,20 @@
-import { connect } from 'react-redux'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Layout, theme } from 'antd'
 import LayoutFooter from './Footer'
 import LayoutTabs from './Tabs'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import './Header/index.less'
-
 import Logo from './Logo'
 import Avatar from '@/components/Avatar'
 import Language from '@/components/Language'
 import LayoutMenu from './Menu'
-
-const HeaderLayout = (props) => {
+import { selectApp } from '@/store/festures/appSlice'
+import { useStoreSelector } from '@/store'
+const HeaderLayout = () => {
   const { Content, Header } = Layout
-  const { themeConfig } = props
-
+  const appState = useStoreSelector(selectApp)
+  const { themeConfig } = appState
+  console.log(themeConfig)
   const { pathname } = useLocation()
   const {
     token: { colorBgContainer, colorTextBase }
@@ -64,7 +64,4 @@ const HeaderLayout = (props) => {
   )
 }
 
-const mapStateToProps = (state: Store) => ({
-  themeConfig: state.app.themeConfig
-})
-export default connect(mapStateToProps, null)(HeaderLayout)
+export default HeaderLayout
