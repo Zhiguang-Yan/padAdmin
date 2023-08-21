@@ -51,8 +51,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     resetToken(state) {
-      state = { ...initialState }
       removeToken()
+      state.token = getToken()
+      state.roles = []
+      state.userInfo.username = null
     }
   },
   extraReducers: (builder) => {
@@ -68,7 +70,9 @@ export const userSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         removeToken()
-        state = { ...initialState }
+        state.token = getToken()
+        state.roles = []
+        state.userInfo.username = null
       })
   }
 })

@@ -5,8 +5,7 @@ import { HOME_URL, WHITE_LIST } from '@/config/config'
 import { message } from 'antd'
 import { useEffect, useState } from 'react'
 import { routes } from '@/routes/index'
-import { selectUser } from '@/store/festures/userSlice'
-import { useStoreSelector, useStoreDispatch } from './store'
+import { store, useStoreDispatch } from './store'
 import { getUserInfo } from '@/store/festures/userSlice'
 import type { AppRouteModule } from '@/routes/type'
 
@@ -19,10 +18,9 @@ const axiosCanceler = new AxiosCanceler()
 const AuthRouter = (props) => {
   const { children } = props
   const [renderChild, setRenderChild] = useState<any>()
-  const userState = useStoreSelector(selectUser)
   const dispatch = useStoreDispatch()
-  const { token, roles } = userState
   const { pathname } = useLocation()
+
   /**
    * 将路由数组扁平化为权限数组。
    * @param routes - 路由对象数组。
@@ -45,7 +43,7 @@ const AuthRouter = (props) => {
    * 检查是否已经登录。如果未登录，则需要先将用户重定向到登录页面以进行身份验证。
    * @returns 如果已登录，则返回 true；否则返回 false。
    */
-  const checkIsLoggedIn = (): boolean => !!token
+  const checkIsLoggedIn = (): boolean => !!store.getState().user.token
 
   /**
    * 处理路由跳转事件。
@@ -68,10 +66,11 @@ const AuthRouter = (props) => {
       setRenderChild(<Navigate to={HOME_URL} />)
       return
     }
-    if (!roles.length) {
+
+    if (!store.getState().user.roles.length) {
       try {
         await dispatch(getUserInfo())
-        const routerList = flattenRoutes(routes, roles).concat(WHITE_LIST)
+        const routerList = flattenRoutes(routes, store.getState().user.roles).concat(WHITE_LIST)
         console.log('🌰------------------------------------路由表')
         console.table(routerList)
         console.log('🌰------------------------------------路由表')
