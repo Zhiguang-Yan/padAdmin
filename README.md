@@ -17,31 +17,17 @@
 
 ### 代码仓库 ⭐
 
-- Gitee：https://gitee.com/HalseySpicy/Geeker-Admin
-- GitHub：https://github.com/HalseySpicy/Geeker-Admin
+- Gitee：https://gitee.com/zhiguangyan/padAdmin.git
+- GitHub：https://github.com/zhiguangyan/padAdmin.git
 
 ### 项目截图 📷
 
-<!-- - 首页：
+- vue
 
-![home_light](https://i.imgtg.com/2023/04/13/8tl1j.png)
+  > ![dashboard](/assets/1.png) ![表格](/assets/2.png) ![组件](/assets/3.png)
 
-![home_dark](https://i.imgtg.com/2023/04/13/8tpfb.png) -->
-
-- 数据可视化
-
-  - vue ![dashboard](/assets/1.png)
-  - react ![dashboard](/assets/1.png)
-
-- 表格
-
-  - vue ![表格](/assets/2.png)
-  - react ![表格](/assets/2.png)
-
-- 组件
-
-  - vue ![组件](/assets/3.png)
-  - react ![表格](/assets/2.png)
+- react
+  > ![dashboard](/assets/4.png) ![dashboard1](/assets/5.png) ![表格](/assets/6.png) ![表格](/assets/7.png)
 
 ### 安装使用 📔
 
@@ -85,8 +71,8 @@
 如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式支持我：
 
 - Star、Fork、Watch 一键三连 🚀
-- 通过微信、支付宝一次性捐款 ❤
+- 通过微信、支付宝一次性捐款 ❤️
 
-|                                        微信                                        |                                       支付宝                                       |
-| :--------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
-| <img src="https://i.imgtg.com/2023/01/16/QRzBX.png" alt="Alipay QRcode" width=170> | <img src="https://i.imgtg.com/2023/01/16/QRFZt.png" alt="Wechat QRcode" width=170> |
+|                               微信                               |                            支付宝                            |
+| :--------------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="/assets/WeChatPlay.jpg" alt="Alipay QRcode" width=170> | <img src="/assets/Alipay.jpg" alt="Wechat QRcode" width=170> |
