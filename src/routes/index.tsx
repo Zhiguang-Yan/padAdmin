@@ -4,6 +4,11 @@ import { useRoutes, Navigate } from 'react-router-dom'
 import Login from '@/page/login/index'
 import { resolvePath } from '../utils/index'
 import { cloneDeep } from 'lodash'
+import homeRouter from './modules/dashboard'
+import formRouter from './modules/form'
+import menuRouter from './modules/menu'
+import errorRouter from './modules/error'
+import componentsRouter from './modules/components'
 
 // @ts-ignore
 const metaRouters = require.context('./modules/', true, /\.tsx$/)
@@ -14,6 +19,9 @@ export const routerArray: AppRouteModule[] = metaRouters
     (modules: AppRouteModule[], modulePath) => modules.concat(metaRouters(modulePath).default),
     []
   )
+  .sort((a, b) => a.routerIndex - b.routerIndex)
+
+console.log(routerArray)
 
 export const routes: AppRouteModule[] = resolvePath(
   cloneDeep([
@@ -26,7 +34,11 @@ export const routes: AppRouteModule[] = resolvePath(
         title: '登录页'
       }
     },
-    ...routerArray,
+    homeRouter,
+    formRouter,
+    menuRouter,
+    componentsRouter,
+    ...errorRouter,
     {
       path: '*',
       element: <Navigate to="/404" />

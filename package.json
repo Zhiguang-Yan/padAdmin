@@ -18,6 +18,8 @@
     "react-transition-group": "^4.4.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-react": "1.0.6",
     "@reduxjs/toolkit": "^1.9.5"
   },
   "devDependencies": {

@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
 export const getUserInfo = createAsyncThunk(
   `${namespace}/getUserInfo`,
   async (_, { getState }: any) => {
-    const { token } = getState
+    const { token } = getState().user
     const res = await getUserInfoApi(token)
     if (res.data) {
       return res.data

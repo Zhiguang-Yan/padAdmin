@@ -10,7 +10,6 @@ export interface RouteMeta {
 
 export interface AppRouteRecordRaw extends Omit<RouteObject, 'children'> {
   path: string
-  component?: string | React.ReactNode
   name?: string
   code?: string
   hidden?: boolean

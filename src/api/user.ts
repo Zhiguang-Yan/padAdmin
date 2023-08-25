@@ -29,7 +29,10 @@ export const getUserInfoApi = (cookie: string): Promise<any> => {
                 'menu222',
                 'menu3',
                 'menu31',
-                'menu32'
+                'menu32',
+                'components',
+                'cropper',
+                'wangEditor'
               ]
             : [
                 'form',
@@ -44,7 +47,10 @@ export const getUserInfoApi = (cookie: string): Promise<any> => {
                 'menu222',
                 'menu3',
                 'menu31',
-                'menu32'
+                'menu32',
+                'components',
+                'cropper',
+                'wangEditor'
               ]
       }
     })

@@ -10,9 +10,9 @@ export const initialState: Store['app'] = {
     // 默认 primary 主题颜色
     primary: '#1890ff',
     borderRadius: '4px',
-    layout: 'mixLayout',
+    layout: 'siderLayout',
     // 深色模式
-    theme: 'lightMenu',
+    theme: 'darkMenu',
     // 色弱模式(weak) || 灰色模式(gray)
     weakOrGray: 'normal',
     // 面包屑导航
