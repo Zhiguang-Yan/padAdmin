@@ -35,3 +35,7 @@ export const MAP_KEY: string = ''
 export const MAP_ROLE = {
   ADMIN: []
 }
+
+export const BASE_URL = process.env.REACT_APP_BASE_URL
+
+export const ASSETS_URL = process.env.REACT_APP_ASSETS_URL

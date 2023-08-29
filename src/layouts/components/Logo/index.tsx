@@ -3,7 +3,7 @@ import { ReactComponent as LogoIcon } from '@/icons/svg/logo.svg'
 import { theme } from 'antd'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HOME_URL } from '@/config/config'
+import { HOME_URL } from '@/config'
 
 const Logo: FC<{ isCollapse?: boolean }> = (props) => {
   const {

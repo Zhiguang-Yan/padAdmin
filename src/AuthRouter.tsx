@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLocation, Navigate } from 'react-router-dom'
 import { AxiosCanceler } from '@/utils/http/helper'
-import { HOME_URL, WHITE_LIST } from '@/config/config'
+import { HOME_URL, WHITE_LIST, ASSETS_URL } from '@/config'
 import { message } from 'antd'
 import { useEffect, useState } from 'react'
 import { routes } from '@/routes/index'
@@ -10,6 +10,7 @@ import { getUserInfo } from '@/store/festures/userSlice'
 import type { AppRouteModule } from '@/routes/type'
 
 const axiosCanceler = new AxiosCanceler()
+console.log(ASSETS_URL)
 
 /**
  * 路由守卫组件。组件内部会调用各种子函数进行身份验证和授权检查。

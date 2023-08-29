@@ -21,6 +21,7 @@
       "@/*": ["src/*"],
       "~/": ["types/*"]
     },
+    "types": ["node"],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"

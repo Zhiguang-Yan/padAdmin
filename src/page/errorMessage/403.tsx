@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Button, Result } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { HOME_URL } from '@/config/config'
+import { HOME_URL } from '@/config'
 
 const NotAuth: FC = () => {
   const navigate = useNavigate()
