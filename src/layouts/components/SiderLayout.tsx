@@ -6,8 +6,8 @@ import LayoutMenu from './Menu'
 import LayoutTabs from './Tabs'
 import Logo from './Logo'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import { selectApp } from '@/store/festures/appSlice'
-import { useStoreSelector } from '@/store'
+import { selectApp } from '@/redux/festures/appSlice'
+import { useStoreSelector } from '@/redux'
 const SiderLayout = () => {
   const { Sider, Content } = Layout
   const appState = useStoreSelector(selectApp)

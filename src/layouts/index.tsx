@@ -5,8 +5,8 @@ import HeaderLayout from './components/HeaderLayout'
 import SiderLayout from './components/SiderLayout'
 import LayoutSetting from './components/Setting'
 import { ReactComponent as Setting } from '@/icons/svg/setting.svg'
-import { selectApp } from '@/store/festures/appSlice'
-import { useStoreSelector } from '@/store'
+import { selectApp } from '@/redux/festures/appSlice'
+import { useStoreSelector } from '@/redux'
 import './index.less'
 
 const Layouts = () => {

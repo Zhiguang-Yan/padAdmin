@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import Router from './routes'
 import AuthRouter from './AuthRouter'
 import useTheme from './hooks/useTheme'
-import { selectApp } from '@/store/festures/appSlice'
-import { useStoreSelector } from '@/store'
+import { selectApp } from '@/redux/festures/appSlice'
+import { useStoreSelector } from '@/redux'
 const validateMessages = {
   // eslint-disable-next-line no-template-curly-in-string
   required: '${label}是必填字段'

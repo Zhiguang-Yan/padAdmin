@@ -6,8 +6,8 @@ import { ReactComponent as Navigate1 } from '@/icons/svg/navigate1.svg'
 import { ReactComponent as Navigate2 } from '@/icons/svg/navigate2.svg'
 import { ReactComponent as Navigate3 } from '@/icons/svg/navigate3.svg'
 import { Drawer, ColorPicker, Button, Space, Radio, Tooltip, theme } from 'antd'
-import { initialState, setThemeConfig, selectApp } from '@/store/festures/appSlice'
-import { useStoreDispatch, useStoreSelector } from '@/store'
+import { initialState, setThemeConfig, selectApp } from '@/redux/festures/appSlice'
+import { useStoreDispatch, useStoreSelector } from '@/redux'
 
 const Setting: FC<{
   open: boolean

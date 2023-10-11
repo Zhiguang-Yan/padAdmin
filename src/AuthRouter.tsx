@@ -5,8 +5,8 @@ import { HOME_URL, WHITE_LIST, ASSETS_URL } from '@/config'
 import { message } from 'antd'
 import { useEffect, useState } from 'react'
 import { routes } from '@/routes/index'
-import { store, useStoreDispatch } from './store'
-import { getUserInfo } from '@/store/festures/userSlice'
+import { store, useStoreDispatch } from './redux'
+import { getUserInfo } from '@/redux/festures/userSlice'
 import type { AppRouteModule } from '@/routes/type'
 
 const axiosCanceler = new AxiosCanceler()

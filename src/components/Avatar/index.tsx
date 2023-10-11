@@ -2,9 +2,9 @@ import { Button, Dropdown, Modal } from 'antd'
 import type { MenuProps } from 'antd'
 import { UserOutlined, LogoutOutlined, BarsOutlined } from '@ant-design/icons'
 import AvatarImg from '@/assets/images/avatar.png'
-import { logout } from '@/store/festures/userSlice'
+import { logout } from '@/redux/festures/userSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useStoreDispatch } from '@/store'
+import { useStoreDispatch } from '@/redux'
 
 const Avatar = () => {
   const [modal, contextHolder] = Modal.useModal()

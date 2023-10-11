@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button, Form, Input, Space, message, theme } from 'antd'
-import { login } from '@/store/festures/userSlice'
+import { login } from '@/redux/festures/userSlice'
 import styles from './index.module.less'
 import { HOME_URL } from '@/config'
-import { useStoreDispatch } from '@/store'
+import { useStoreDispatch } from '@/redux'
 
 const Login: FC = () => {
   const { search } = useLocation()

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { loginApi, getUserInfoApi, logoutApi } from '@/api/user'
 import { setToken, removeToken, getToken } from '@/utils/auth'
-import { RootState } from '@/store'
+import { RootState } from '@/redux'
 
 const namespace = 'user'
 export const initialState: Store['user'] = {

@@ -6,9 +6,9 @@ import type { AppRouteModule } from '@/routes/type'
 import { routes } from '@/routes'
 import { WHITE_CODE } from '@/config'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { selectApp } from '@/store/festures/appSlice'
-import { selectUser } from '@/store/festures/userSlice'
-import { useStoreSelector } from '@/store'
+import { selectApp } from '@/redux/festures/appSlice'
+import { selectUser } from '@/redux/festures/userSlice'
+import { useStoreSelector } from '@/redux'
 
 type MenuItem = Required<MenuProps>['items'][number]
 

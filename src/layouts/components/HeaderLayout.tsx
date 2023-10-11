@@ -8,8 +8,8 @@ import Logo from './Logo'
 import Avatar from '@/components/Avatar'
 import Language from '@/components/Language'
 import LayoutMenu from './Menu'
-import { selectApp } from '@/store/festures/appSlice'
-import { useStoreSelector } from '@/store'
+import { selectApp } from '@/redux/festures/appSlice'
+import { useStoreSelector } from '@/redux'
 const HeaderLayout = () => {
   const { Content, Header } = Layout
   const appState = useStoreSelector(selectApp)
