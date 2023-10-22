@@ -11,7 +11,7 @@ export interface AppStore {
     breadcrumb: boolean
     tabs: boolean
     footer: boolean
-    borderRadius: string
+    borderRadius: number
   }
 }
 

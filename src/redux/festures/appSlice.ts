@@ -9,7 +9,7 @@ export const initialState: Store['app'] = {
   themeConfig: {
     // 默认 primary 主题颜色
     primary: '#1890ff',
-    borderRadius: '4px',
+    borderRadius: 4,
     layout: 'siderLayout',
     // 深色模式
     theme: 'darkMenu',

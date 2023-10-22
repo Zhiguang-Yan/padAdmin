@@ -54,7 +54,7 @@ export const userSlice = createSlice({
       removeToken()
       state.token = getToken()
       state.roles = []
-      state.userInfo.username = null
+      state.userInfo!.username = null
     }
   },
   extraReducers: (builder) => {
@@ -65,14 +65,14 @@ export const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, { payload }) => {
         const { username, roles } = payload
-        state.userInfo.username = username
+        state.userInfo!.username = username
         state.roles = roles
       })
       .addCase(logout.fulfilled, (state) => {
         removeToken()
         state.token = getToken()
         state.roles = []
-        state.userInfo.username = null
+        state.userInfo!.username = null
       })
   }
 })

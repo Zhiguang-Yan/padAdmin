@@ -16,6 +16,7 @@ export interface AppRouteRecordRaw extends Omit<RouteObject, 'children'> {
   meta?: RouteMeta
   alwaysShow?: boolean
   children?: AppRouteRecordRaw[]
+  redirect?: ReactNode | string
 }
 
 export type AppRouteModule = AppRouteRecordRaw
