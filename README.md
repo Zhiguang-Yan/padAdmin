@@ -40,7 +40,7 @@
 - 安装依赖
 
 ```bash
-   cd vue-vben-admin
+   cd padAdmin
    yarn
 ```
 
