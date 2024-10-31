@@ -1,0 +1,1 @@
+import{_ as o,d as s,B as t,g as a,b as u,c as r,i as c,u as m}from"./index.1a78ec58.js";const i=s({setup(l){const e=t();return(p,_)=>{const n=a("pac-menu");return u(),r("div",null,[c(n,{mode:"horizontal",router:!1,"menu-list":m(e)},null,8,["menu-list"])])}}});var f=o(i,[["__file","D:/work/githubAdmin/padAdmin/src/views/components/menu.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+import{_ as n,g as t,b as o,c as r,i as s,F as c,k as a}from"./index.1a78ec58.js";const _={},i=a(" menu1-1 ");function d(m,u){const e=t("router-view");return o(),r(c,null,[i,s(e)],64)}var f=n(_,[["render",d],["__file","D:/work/githubAdmin/padAdmin/src/views/nested/menu1/menu1-1/index.vue"]]);export{f as default};

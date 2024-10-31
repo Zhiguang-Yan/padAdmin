@@ -1,0 +1,1 @@
+import{_ as a,d as r,r as s,g as c,b as l,c as p,i}from"./index.1a78ec58.js";const u=r({setup(_){const e=s();return(m,t)=>{const o=c("pac-rich");return l(),p("div",null,[i(o,{value:e.value,"onUpdate:value":t[0]||(t[0]=n=>e.value=n)},null,8,["value"])])}}});var d=a(u,[["__file","D:/work/githubAdmin/padAdmin/src/views/components/rich-text.vue"]]);export{d as default};

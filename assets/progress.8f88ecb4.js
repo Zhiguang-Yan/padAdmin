@@ -1,0 +1,1 @@
+import{_ as c,g as o,b as s,c as n,i as r}from"./index.1a78ec58.js";const t={};function a(p,i){const e=o("pac-progress");return s(),n("div",null,[r(e,{type:"circle",percentage:60}),r(e,{type:"circle",percentage:100,isAnimation:""})])}var l=c(t,[["render",a],["__file","D:/work/githubAdmin/padAdmin/src/views/components/progress.vue"]]);export{l as default};

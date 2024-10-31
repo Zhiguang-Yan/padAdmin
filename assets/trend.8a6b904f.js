@@ -1,0 +1,1 @@
+import{_ as n,g as o,b as c,c as r,i as t}from"./index.1a78ec58.js";const s={},a={class:"trend"};function _(d,p){const e=o("pac-trend");return c(),r("div",a,[t(e,{text:"\u8425\u6536\u989D",type:"up"}),t(e,{text:"\u9500\u552E\u989D",type:"dowm"})])}var m=n(s,[["render",_],["__file","D:/work/githubAdmin/padAdmin/src/views/components/trend.vue"]]);export{m as default};

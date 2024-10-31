@@ -1,1 +1,0 @@
-import{k as c,i as o,b as n,c as s,g as r}from"./index.0f3777f4.js";const t={};function a(p,_){const e=o("pac-progress");return n(),s("div",null,[r(e,{type:"circle",percentage:60}),r(e,{type:"circle",percentage:100,isAnimation:""})])}var l=c(t,[["render",a]]);export{l as default};

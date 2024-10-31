@@ -1,0 +1,1 @@
+import{_ as e,b as n,c as r}from"./index.1a78ec58.js";const c={};function o(i,t){return n(),r("div",null,"404")}var a=e(c,[["render",o],["__file","D:/work/githubAdmin/padAdmin/src/views/noFound/index.vue"]]);export{a as default};
