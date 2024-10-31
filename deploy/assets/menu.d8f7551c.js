@@ -1,0 +1,1 @@
+import{d as o,B as t,i as s,b as a,c as u,g as c,u as r}from"./index.915e7741.js";const _=o({setup(l){const e=t();return(m,p)=>{const n=s("pac-menu");return a(),u("div",null,[c(n,{mode:"horizontal",router:!1,"menu-list":r(e)},null,8,["menu-list"])])}}});export{_ as default};

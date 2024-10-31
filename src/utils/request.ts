@@ -9,6 +9,7 @@ const service: AxiosInstance = axios.create({
 })
 // 请求头拦截
 service.interceptors.request.use(
+  // @ts-ignore
   (config: AxiosRequestConfig) => {
     if (userStore.token) {
       // @ts-ignore
@@ -23,6 +24,7 @@ service.interceptors.request.use(
 )
 // 响应头拦截
 service.interceptors.response.use(
+  // @ts-ignore
   (response) => {
     console.log(response)
   },
