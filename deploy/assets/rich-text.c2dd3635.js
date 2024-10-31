@@ -1,1 +1,0 @@
-import{d as t,r as l,i as r,b as s,c,g as p}from"./index.915e7741.js";const v=t({setup(u){const e=l();return(m,o)=>{const a=r("pac-rich");return s(),c("div",null,[p(a,{value:e.value,"onUpdate:value":o[0]||(o[0]=n=>e.value=n)},null,8,["value"])])}}});export{v as default};

@@ -1,6 +1,6 @@
 import { AppRouteModule } from './types'
 import type { RouteRecordRaw } from 'vue-router'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import type { App } from 'vue'
 import Layout from '@/layout/index.vue'
 import { nested } from './modules/nested'
@@ -43,7 +43,7 @@ export const asyncRoutes: AppRouteModule[] = [
 
 const router = createRouter({
   routes: constantRoutes as unknown as RouteRecordRaw[],
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 

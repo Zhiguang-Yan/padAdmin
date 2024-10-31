@@ -8,10 +8,7 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 const { resolve } = require('path')
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const { VITE_PORT, VITE_APP_PUBLIC_PATH, VITE_POXY_URL } = loadEnv(
-    mode,
-    process.cwd()
-  )
+  const { VITE_PORT, VITE_APP_PUBLIC_PATH, VITE_POXY_URL } = loadEnv(mode, process.cwd())
   return {
     base: VITE_APP_PUBLIC_PATH,
     resolve: {
