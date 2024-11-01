@@ -18,7 +18,7 @@
 ### 代码仓库 ⭐
 
 - Gitee：https://gitee.com/zhiguangyan/padAdmin.git
-- GitHub：https://github.com/zhiguangyan/padAdmin.git
+- GitHub：https://github.com/Zhiguang-Yan/padAdmin
 
 ### 项目截图 📷
 
